@@ -31,15 +31,6 @@ namespace TalentCoach.Controllers {
 		public ActionResult<List<Competentie>> GetAll() {
 			return _repository.GetAll();
 		}
-		/// <summary>
-		///     Controleert of de sessiecode juist is
-		/// </summary>
-		/// <param name="code">De code van de sessie waarbij men moet aansluiten</param>
-		/// <returns>
-		/// Juiste code: Index View met als Model een IEnumerable<Groep>
-		///
-		/// Foute code: RedirectToAction Index
-		/// </returns>
 
 		/// <summary>
 		///     Geeft de gevonden competentie terug op basis van id

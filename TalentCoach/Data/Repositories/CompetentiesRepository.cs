@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using TalentCoach.Models;
@@ -15,7 +13,6 @@ namespace TalentCoach.Data.Repositories {
 		public CompetentiesRepository(ApplicationDbContext context) {
 			_context = context;
 			_competenties = _context.Competenties;
-			InitializeData();
 		}
 
 		public List<Competentie> GetAll() {
@@ -23,7 +20,8 @@ namespace TalentCoach.Data.Repositories {
 		}
 
 		public Competentie GetCompetentie(int id) {
-			return _competenties.Find(id);
+			return _competenties
+				.SingleOrDefault(c => c.Id == id);
 		}
 
 		public Competentie AddCompetentie(Competentie item) {
@@ -33,7 +31,7 @@ namespace TalentCoach.Data.Repositories {
 		}
 
 		public Competentie UpdateCompetentie(int id, Competentie item) {
-			Competentie competentie = _context.Competenties.Find(id);
+			Competentie competentie = _competenties.Find(id);
 			if (competentie == null) {
 				return null;
 			} else {
@@ -49,22 +47,13 @@ namespace TalentCoach.Data.Repositories {
 		}
 
 		public Competentie Delete(int id) {
-			Competentie competentie = _context.Competenties.Find(id);
+			Competentie competentie = _competenties.Find(id);
 			if (competentie == null) {
 				return null;
 			}
 			_competenties.Remove(competentie);
 			SaveChanges();
 			return competentie;
-		}
-
-		private void InitializeData() {
-			if (_competenties.Count() == 0) {
-				_competenties.Add(new Competentie("Houdt zich aan de richtlijnen voor hygiëne, veiligheid en ergonomie"));
-				_competenties.Add(new Competentie("Reinigt het gebruikte materieel en ontsmet indien nodig"));
-				_competenties.Add(new Competentie("Ruimt de gebruikte werkpost op na elke behandeling en reinigt deze"));
-				SaveChanges();
-			}
 		}
 
 		public void SaveChanges() {

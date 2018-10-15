@@ -27,13 +27,16 @@ namespace TalentCoach {
 		public void ConfigureServices(IServiceCollection services) {
 			services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("Competenties"));
 			services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
+			services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
+			services.AddTransient<TalentCoachDataInitializer>();
+
 			services
 				.AddMvc()
 				.SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, TalentCoachDataInitializer talentCoachDataInitializer) {
 			if (env.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
 			} else {
@@ -42,6 +45,8 @@ namespace TalentCoach {
 
 			app.UseHttpsRedirection();
 			app.UseMvc();
+
+			talentCoachDataInitializer.InitializeData();
 		}
 	}
 }
