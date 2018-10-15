@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace TalentCoach.Models.Domain {
 	public interface ICompetentiesRepository {
 		List<Competentie> GetAll();
-		ActionResult<Competentie> GetCompetentie(int id);
-		ActionResult<Competentie> AddCompetentie(Competentie item);
-		ActionResult<Competentie> UpdateCompetentie(int id, Competentie item);
-		ActionResult<Competentie> Delete(int id);
+		Competentie GetCompetentie(int id);
+		Competentie AddCompetentie(Competentie item);
+		Competentie UpdateCompetentie(int id, Competentie item);
+		Competentie Delete(int id);
 		void SaveChanges();
 	}
 }

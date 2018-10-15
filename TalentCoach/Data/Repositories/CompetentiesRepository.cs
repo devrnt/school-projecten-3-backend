@@ -9,6 +9,7 @@ using TalentCoach.Models.Domain;
 namespace TalentCoach.Data.Repositories {
 	public class CompetentiesRepository: ICompetentiesRepository {
 		private readonly ApplicationDbContext _context;
+
 		private readonly DbSet<Competentie> _competenties;
 
 		public CompetentiesRepository(ApplicationDbContext context) {
@@ -21,16 +22,17 @@ namespace TalentCoach.Data.Repositories {
 			return _competenties.ToList();
 		}
 
-		public ActionResult<Competentie> GetCompetentie(int id) {
-			return _context.Competenties.Find(id);
+		public Competentie GetCompetentie(int id) {
+			return _competenties.Find(id);
 		}
 
-		public ActionResult<Competentie> AddCompetentie(Competentie item) {
+		public Competentie AddCompetentie(Competentie item) {
 			_competenties.Add(item);
+			SaveChanges();
 			return item;
 		}
 
-		public ActionResult<Competentie> UpdateCompetentie(int id, Competentie item) {
+		public Competentie UpdateCompetentie(int id, Competentie item) {
 			Competentie competentie = _context.Competenties.Find(id);
 			if (competentie == null) {
 				return null;
@@ -41,16 +43,18 @@ namespace TalentCoach.Data.Repositories {
 				competentie.Omschrijving = item.Omschrijving;
 
 				_competenties.Update(competentie);
+				SaveChanges();
 			}
 			return competentie;
 		}
 
-		public ActionResult<Competentie> Delete(int id) {
+		public Competentie Delete(int id) {
 			Competentie competentie = _context.Competenties.Find(id);
 			if (competentie == null) {
 				return null;
 			}
 			_competenties.Remove(competentie);
+			SaveChanges();
 			return competentie;
 		}
 
