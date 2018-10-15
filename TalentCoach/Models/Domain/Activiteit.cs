@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace TalentCoach.Models {
 	public class Activiteit {
@@ -12,6 +10,12 @@ namespace TalentCoach.Models {
 		public bool Behaald {
 			get {
 				return Competenties.Any() && Competenties.All(competentie => competentie.Behaald);
+			}
+		}
+
+		public int AantalCompetenties {
+			get {
+				return Competenties.Count();
 			}
 		}
 		#endregion

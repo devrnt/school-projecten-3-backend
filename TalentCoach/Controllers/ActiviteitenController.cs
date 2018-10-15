@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
@@ -79,7 +75,7 @@ namespace TalentCoach.Controllers {
 		}
 
 		/// <summary>
-		///     Wijzigt het activiteit object in de databank
+		///     Verwijdert het activiteit object in de databank
 		/// </summary>
 		/// <param name="id">De id van de te verwijderen activiteit</param>
 		/// <returns>

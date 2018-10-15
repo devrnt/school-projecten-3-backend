@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using TalentCoach.Data;
-using TalentCoach.Data.Repositories;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
@@ -84,7 +79,7 @@ namespace TalentCoach.Controllers {
 		}
 
 		/// <summary>
-		///     Wijzigt het competentie object in de databank
+		///     Verwijdert het competentie object in de databank
 		/// </summary>
 		/// <param name="id">De id van de te verwijderen competentie</param>
 		/// <returns>

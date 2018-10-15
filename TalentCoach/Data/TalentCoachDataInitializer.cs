@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TalentCoach.Models;
+using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data {
 	public class TalentCoachDataInitializer {
@@ -44,6 +42,14 @@ namespace TalentCoach.Data {
 				var activiteiten = new List<Activiteit> { activiteit1, activiteit2 };
 
 				_context.Activiteiten.AddRange(activiteiten);
+				_context.SaveChanges();
+
+				// Richting
+				var richting = new Richting("Haarzorg");
+				richting.AddActiviteit(activiteit1);
+				richting.AddActiviteit(activiteit2);
+
+				_context.Add(richting);
 				_context.SaveChanges();
 			}
 		}
