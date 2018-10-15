@@ -25,19 +25,23 @@ namespace TalentCoach {
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
-            // Use SQL Database if in Azure, otherwise, use localhost
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
-            else
-                services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseInMemoryDatabase("Competenties"));
+			// Use SQL Database if in Azure, otherwise, use localhost
+			if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production") {
+				services.AddDbContext<ApplicationDbContext>(options =>
+					   options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
 
-            // Automatically perform database migration
-            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
-           
-            services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
+				// Automatically perform database migration
+				services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+
+			} else {
+				services.AddDbContext<ApplicationDbContext>(options =>
+					   options.UseInMemoryDatabase("Competenties"));
+			}
+
+			services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
 			services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
+			services.AddScoped<IRichtingenRepository, RichtingenRepository>();
+			services.AddScoped<IRichtingenRepository, RichtingenRepository>();
 			services.AddTransient<TalentCoachDataInitializer>();
 
 			services
