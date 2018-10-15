@@ -11,4 +11,5 @@ All endpoints do have the following http requests:
   
 ##### Url
 * https://localhost:44392/api/competenties
-* https://localhost:44392/api/activiteite
+* https://localhost:44392/api/activiteiten
+* https://localhost:44392/api/richtingen
