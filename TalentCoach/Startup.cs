@@ -25,8 +25,18 @@ namespace TalentCoach {
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
-			services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("Competenties"));
-			services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
+            // Use SQL Database if in Azure, otherwise, use localhost
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+            else
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseInMemoryDatabase("Competenties"));
+
+            // Automatically perform database migration
+            services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
+           
+            services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
 			services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
 			services.AddTransient<TalentCoachDataInitializer>();
 
