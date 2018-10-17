@@ -8,6 +8,8 @@ namespace TalentCoach.Data {
 		public DbSet<Activiteit> Activiteiten { get; set; }
 		public DbSet<Richting> Richtingen { get; set; }
 		public DbSet<Leerling> Leerlingen { get; set; }
+        public DbSet<Werkgever> Werkgevers { get; set; }
+        public DbSet<Werkaanbieding> Werkaanbiedingen { get; set; }
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
 		}
