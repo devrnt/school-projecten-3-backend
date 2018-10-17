@@ -7,7 +7,7 @@ using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories {
-	public class RichtingenRepository : IRichtingenRepository{
+	public class RichtingenRepository : IRichtingenRepository {
 		private readonly ApplicationDbContext _context;
 
 		private readonly DbSet<Richting> _richtingen;
@@ -21,6 +21,7 @@ namespace TalentCoach.Data.Repositories {
 			return _richtingen
 				.Include(r => r.Activiteiten)
 					.ThenInclude(a => a.Competenties)
+				.OrderBy(r => r.Id)
 				.ToList();
 		}
 
@@ -40,7 +41,7 @@ namespace TalentCoach.Data.Repositories {
 
 		public Richting UpdateRichting(int id, Richting item) {
 			Richting richting = _richtingen.Find(id);
-			if(richting == null) {
+			if (richting == null) {
 				return null;
 			} else {
 				richting.Naam = item.Naam;

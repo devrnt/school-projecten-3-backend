@@ -69,7 +69,7 @@ namespace TalentCoach.Controllers {
 		[HttpPut("{id}")]
 		public ActionResult<Richting> Update(int id, Richting item) {
 			var result = _repository.UpdateRichting(id, item);
-			return result ?? (ActionResult<Richting>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not found" } });
+			return result ?? (ActionResult<Richting>)NotFound(new Dictionary<string, string>() { { "message", $"richting with id: {id} not found" } });
 		}
 
 		/// <summary>

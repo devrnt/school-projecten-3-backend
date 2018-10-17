@@ -17,7 +17,8 @@ namespace TalentCoach.Data.Repositories {
 
 		public List<Activiteit> GetAll() {
 			return _activiteiten
-					.Include(act => act.Competenties)
+					.Include(a => a.Competenties)
+					.OrderBy(a => a.Id)
 					.ToList();
 		}
 

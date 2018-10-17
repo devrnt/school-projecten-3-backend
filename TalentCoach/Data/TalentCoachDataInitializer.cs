@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
@@ -50,6 +51,17 @@ namespace TalentCoach.Data {
 				richting.AddActiviteit(activiteit2);
 
 				_context.Add(richting);
+				_context.SaveChanges();
+
+				// Leerlingen
+				var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1994, 1, 1), Geslacht.Man, "sam.dhondt@school.be", "samdhondt");
+				var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
+				leerling1.Richting = richting;
+				leerling2.Richting = richting;
+
+				var leerlingen = new List<Leerling>() { leerling1, leerling2 };
+
+				_context.AddRange(leerlingen);
 				_context.SaveChanges();
 			}
 		}
