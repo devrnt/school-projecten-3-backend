@@ -13,3 +13,4 @@ All endpoints do have the following http requests:
 * https://localhost:44392/api/competenties
 * https://localhost:44392/api/activiteiten
 * https://localhost:44392/api/richtingen
+* https://localhost:44392/api/leerlingen
