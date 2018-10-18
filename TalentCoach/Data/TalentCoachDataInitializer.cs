@@ -53,7 +53,7 @@ namespace TalentCoach.Data {
 				_context.Add(richting);
 				_context.SaveChanges();
 
-				// Leerlingen
+                // Leerlingen
 				var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1994, 1, 1), Geslacht.Man, "sam.dhondt@school.be", "samdhondt");
 				var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
 				leerling1.Richting = richting;
@@ -67,11 +67,11 @@ namespace TalentCoach.Data {
                 //Werkaanbiedingen
                 var activiteitenVoorWerkaanbieding1 = new List<Activiteit>();
                 activiteitenVoorWerkaanbieding1.Add(activiteit1);
-                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1, DateTime.Today, new DateTime().Date.AddMonths(3), activiteitenVoorWerkaanbieding1);
+                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1);
 
                 var activiteitenVoorWerkaanbieding2 = new List<Activiteit>();
                 activiteitenVoorWerkaanbieding2.Add(activiteit2);
-                var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2, DateTime.Today, new DateTime().Date.AddMonths(4), activiteitenVoorWerkaanbieding2);
+                var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
 
                 var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
 
@@ -81,11 +81,12 @@ namespace TalentCoach.Data {
                 //Werkgevers
                 var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
                 werkaanbiedingenVoorWerkgever1.Add(werkaanbieding1);
-                var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746, werkaanbiedingenVoorWerkgever1);
+                var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746);
 
                 var werkaanbiedingenVoorWerkgever2 = new List<Werkaanbieding>();
                 werkaanbiedingenVoorWerkgever2.Add(werkaanbieding2);
-                var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197, werkaanbiedingenVoorWerkgever2);
+                var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197);
+
 
                 var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
 

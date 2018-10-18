@@ -31,13 +31,13 @@ namespace TalentCoach.Data.Repositories {
             return wa;
         }
 
-        public IEnumerable<Werkaanbieding> GetAll() => _werkaanbiedingen
-                .Include(wa => wa.Projecten)
+        public List<Werkaanbieding> GetAll() => _werkaanbiedingen
+                //.Include(w => w.Projecten)
                 .OrderBy(wa => wa.Id)
                 .ToList();
 
         public Werkaanbieding GetWerkaanbieding(int id) => _werkaanbiedingen
-                .Include(w => w.Projecten)
+                //.Include(w => w.Projecten)
                 .FirstOrDefault(w => w.Id == id);
 
         public void SaveChanges() {
@@ -51,8 +51,6 @@ namespace TalentCoach.Data.Repositories {
             else {
                 wa.AantalPlaatsen = werkaanbieding.AantalPlaatsen;
                 wa.AantalPlaatsenIngevuld = werkaanbieding.AantalPlaatsenIngevuld;
-                wa.BeginStage = werkaanbieding.BeginStage;
-                wa.EindeStage = werkaanbieding.EindeStage;
                 wa.Omschrijving = werkaanbieding.Omschrijving;
                 wa.Projecten = werkaanbieding.Projecten;
                 SaveChanges();

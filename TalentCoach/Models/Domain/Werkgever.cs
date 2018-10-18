@@ -15,12 +15,11 @@ namespace TalentCoach.Models.Domain {
         #endregion
 
         #region === Constructor ===
-        public Werkgever(string naam, string werkplaats, string email, int telefoonNummer, List<Werkaanbieding> werkaanbiedingen) {
+        public Werkgever(string naam, string werkplaats, string email, int telefoonNummer) {
             Naam = naam;
             Werkplaats = werkplaats;
             Email = email;
             TelefoonNummer = telefoonNummer;
-            Werkaanbiedingen = werkaanbiedingen;
         }
         #endregion
 

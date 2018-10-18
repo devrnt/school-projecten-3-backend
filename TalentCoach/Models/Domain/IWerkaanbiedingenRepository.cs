@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TalentCoach.Models.Domain {
     public interface IWerkaanbiedingenRepository {
-        IEnumerable<Werkaanbieding> GetAll();
+        List<Werkaanbieding> GetAll();
         Werkaanbieding GetWerkaanbieding(int id);
         Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding);
         Werkaanbieding UpdateWerkaanbieding(int id, Werkaanbieding werkaanbieding);
