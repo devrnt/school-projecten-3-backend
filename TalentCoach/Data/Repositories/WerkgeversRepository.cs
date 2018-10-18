@@ -34,12 +34,14 @@ namespace TalentCoach.Data.Repositories {
         public List<Werkgever> GetAll() => _werkgevers
                 .Include(w => w.Werkaanbiedingen)
                     .ThenInclude(wa => wa.Projecten)
+                        .ThenInclude(p => p.Competenties)
                 .OrderBy(w => w.Naam)
                 .ToList();
 
         public Werkgever GetWerkgever(int id) => _werkgevers
                 .Include(w => w.Werkaanbiedingen)
                     .ThenInclude(wa => wa.Projecten)
+                        .ThenInclude(p => p.Competenties)
                 .FirstOrDefault(w => w.Id == id);
 
         public void SaveChanges() {

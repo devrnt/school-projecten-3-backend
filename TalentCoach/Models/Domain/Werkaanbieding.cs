@@ -18,6 +18,7 @@ namespace TalentCoach.Models.Domain {
             Omschrijving = omschrijving;
             AantalPlaatsen = aantalPlaatsen;
             AantalPlaatsenIngevuld = aantalPlaatsenIngevuld;
+            Projecten = new List<Activiteit>();
         }
         #endregion
 
