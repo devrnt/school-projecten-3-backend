@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TalentCoach.Models.Domain {
-    public class Werkaanbieding {
+namespace TalentCoach.Models.Domain
+{
+    public class Werkaanbieding
+    {
         #region === Properties ===
         public int Id { get; set; }
         public string Omschrijving { get; set; }
         public int AantalPlaatsen { get; set; }
+        public List<String> Tags { get; set; }
         public List<Activiteit> Projecten { get; set; }
         public int AantalPlaatsenIngevuld { get; set; }
         #endregion
 
         #region === Constructor ===
-        public Werkaanbieding(string omschrijving, int aantalPlaatsen, int aantalPlaatsenIngevuld = 0) {
+        public Werkaanbieding(string omschrijving, int aantalPlaatsen, int aantalPlaatsenIngevuld = 0, List<string> tags)
+        {
             Omschrijving = omschrijving;
             AantalPlaatsen = aantalPlaatsen;
             AantalPlaatsenIngevuld = aantalPlaatsenIngevuld;
             Projecten = new List<Activiteit>();
+            Tags = tags;
         }
         #endregion
 
