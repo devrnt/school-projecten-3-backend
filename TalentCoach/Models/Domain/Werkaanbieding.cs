@@ -11,19 +11,19 @@ namespace TalentCoach.Models.Domain
         public int Id { get; set; }
         public string Omschrijving { get; set; }
         public int AantalPlaatsen { get; set; }
-        public List<String> Tags { get; set; }
+        //public List<String> Tags { get; set; }
         public List<Activiteit> Projecten { get; set; }
         public int AantalPlaatsenIngevuld { get; set; }
         #endregion
 
         #region === Constructor ===
-        public Werkaanbieding(string omschrijving, int aantalPlaatsen, int aantalPlaatsenIngevuld = 0, List<string> tags)
+        public Werkaanbieding(string omschrijving, int aantalPlaatsen, int aantalPlaatsenIngevuld = 0)
         {
             Omschrijving = omschrijving;
             AantalPlaatsen = aantalPlaatsen;
             AantalPlaatsenIngevuld = aantalPlaatsenIngevuld;
             Projecten = new List<Activiteit>();
-            Tags = tags;
+            //Tags = new List<string>();
         }
         #endregion
 

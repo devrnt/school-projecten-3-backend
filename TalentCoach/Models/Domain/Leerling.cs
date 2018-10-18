@@ -13,7 +13,7 @@ namespace TalentCoach.Models.Domain
         public Geslacht Geslacht { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public List<string> Interesses { get; set; }
+        //public List<string> Interesses { get; set; }
         public Richting Richting { get; set; }
         public Werkaanbieding HuidigeWerkaanbieding { get; set; }
         public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
@@ -34,7 +34,7 @@ namespace TalentCoach.Models.Domain
         }
 
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, List<string> interesses) :
-        this(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password)
+        this(naam, voornaam, geboorteDatum, geslacht, email, password)
         {
             Naam = naam;
             Voornaam = voornaam;
@@ -44,7 +44,7 @@ namespace TalentCoach.Models.Domain
             Password = password;
             Aangemaakt = DateTime.Now;
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
-            Interesses = interesses
+            //Interesses = interesses;
         }
     }
 }
