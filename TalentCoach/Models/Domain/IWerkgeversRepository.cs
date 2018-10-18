@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TalentCoach.Models.Domain {
     public interface IWerkgeversRepository {
-        IEnumerable<Werkgever> GetAll();
+        List<Werkgever> GetAll();
         Werkgever GetWerkgever(int id);
         Werkgever AddWerkgever(Werkgever werkgever);
         Werkgever UpdateWerkgever(int id, Werkgever werkgever);

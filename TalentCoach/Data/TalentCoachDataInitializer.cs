@@ -63,6 +63,34 @@ namespace TalentCoach.Data {
 
 				_context.AddRange(leerlingen);
 				_context.SaveChanges();
+
+                //Werkaanbiedingen
+                var activiteitenVoorWerkaanbieding1 = new List<Activiteit>();
+                activiteitenVoorWerkaanbieding1.Add(activiteit1);
+                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1, DateTime.Today, new DateTime().Date.AddMonths(3), activiteitenVoorWerkaanbieding1);
+
+                var activiteitenVoorWerkaanbieding2 = new List<Activiteit>();
+                activiteitenVoorWerkaanbieding2.Add(activiteit2);
+                var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2, DateTime.Today, new DateTime().Date.AddMonths(4), activiteitenVoorWerkaanbieding2);
+
+                var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
+
+                _context.AddRange(werkaanbiedingen);
+                _context.SaveChanges();
+
+                //Werkgevers
+                var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
+                werkaanbiedingenVoorWerkgever1.Add(werkaanbieding1);
+                var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746, werkaanbiedingenVoorWerkgever1);
+
+                var werkaanbiedingenVoorWerkgever2 = new List<Werkaanbieding>();
+                werkaanbiedingenVoorWerkgever2.Add(werkaanbieding2);
+                var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197, werkaanbiedingenVoorWerkgever2);
+
+                var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
+
+                _context.AddRange(werkgevers);
+                _context.SaveChanges();
 			}
 		}
 	}

@@ -31,7 +31,7 @@ namespace TalentCoach.Data.Repositories {
                 
         }
 
-        public IEnumerable<Werkgever> GetAll() => _werkgevers
+        public List<Werkgever> GetAll() => _werkgevers
                 .Include(w => w.Werkaanbiedingen)
                     .ThenInclude(wa => wa.Projecten)
                 .OrderBy(w => w.Naam)
