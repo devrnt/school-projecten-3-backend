@@ -31,20 +31,12 @@ namespace TalentCoach
         public void ConfigureServices(IServiceCollection services)
         {
             // Use SQL Database if in Azure, otherwise, use localhost
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-            {
+            
                 services.AddDbContext<ApplicationDbContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+                       options.UseSqlServer("Server=tcp:TalentCoachServer.database.windows.net,1433;Database=coreDB;User ID=adminuser;Password=ThisIsAP@ssw0rd;Encrypt=true;Connection Timeout=30"));
 
-                // Automatically perform database migration
-                services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
-
-            }
-            else
-            {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                       options.UseInMemoryDatabase("Competenties"));
-            }
+			// Automatically perform database migration
+			services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 
             services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
             services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
