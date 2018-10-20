@@ -31,9 +31,9 @@ namespace TalentCoach
         public void ConfigureServices(IServiceCollection services)
         {
             // Use SQL Database if in Azure, otherwise, use localhost
-            
+           var connectionString = @"Server=localhost;Database=TalentCoach;User Id=sa;Password=NietZoIdeaal11;";
                 services.AddDbContext<ApplicationDbContext>(options =>
-                       options.UseSqlServer("Server=tcp:TalentCoachServer.database.windows.net,1433;Database=coreDB;User ID=adminuser;Password=ThisIsAP@ssw0rd;Encrypt=true;Connection Timeout=30"));
+                       options.UseSqlServer(connectionString));
 
 			// Automatically perform database migration
 			services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
