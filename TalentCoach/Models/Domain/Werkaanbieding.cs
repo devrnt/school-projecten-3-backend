@@ -9,6 +9,7 @@ namespace TalentCoach.Models.Domain
     {
         #region === Properties ===
         public int Id { get; set; }
+        public Werkgever Werkgever { get; set; }
         public string Omschrijving { get; set; }
         public int AantalPlaatsen { get; set; }
         public string Tags { get; set; }

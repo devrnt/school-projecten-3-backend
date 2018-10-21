@@ -109,6 +109,7 @@ namespace TalentCoach.Tests.Controllers {
 			Assert.IsType<NotFoundObjectResult>(result);
 		}
 
+        [Fact]
 		public void Update_RightId_ReturnsUpdatedLeerling() {
 			Leerling newLeerling = new Leerling(
 			"Haleydt",
