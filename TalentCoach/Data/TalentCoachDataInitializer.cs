@@ -70,17 +70,13 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-                //Werkaanbiedingen
+                //Werkaanbiedingen en werkgevers
                 var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1) { Tags = "teamwork" };
                 werkaanbieding1.AddProject(activiteit1);
 
                 var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
                 werkaanbieding2.AddProject(activiteit2);
 
-                var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
-
-                _context.AddRange(werkaanbiedingen);
-                _context.SaveChanges();
 
                 //Werkgevers
                 var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
@@ -93,7 +89,10 @@ namespace TalentCoach.Data
                 var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197);
                 werkgever2.AddWerkaanbieding(werkaanbieding2);
 
+                werkaanbieding1.Werkgever = werkgever1;
+                werkaanbieding2.Werkgever = werkgever2;
 
+                var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
                 var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
 
                 _context.AddRange(werkgevers);
