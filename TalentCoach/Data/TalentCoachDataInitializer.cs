@@ -77,8 +77,6 @@ namespace TalentCoach.Data
                 var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
                 werkaanbieding2.AddProject(activiteit2);
 
-
-                //Werkgevers
                 var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
                 werkaanbiedingenVoorWerkgever1.Add(werkaanbieding1);
                 var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746);
@@ -95,6 +93,7 @@ namespace TalentCoach.Data
                 var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
                 var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
 
+                _context.AddRange(werkaanbiedingen);
                 _context.AddRange(werkgevers);
                 _context.SaveChanges();
             }
