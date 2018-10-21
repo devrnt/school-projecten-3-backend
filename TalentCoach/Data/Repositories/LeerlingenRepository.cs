@@ -29,6 +29,8 @@ namespace TalentCoach.Data.Repositories {
 
 		public Leerling GetLeerling(int id) {
 			return _leerlingen
+                .Include(l => l.HuidigeWerkaanbieding)
+                .Include(l => l.BewaardeWerkaanbiedingen)
 				.Include(l => l.Richting)
 					.ThenInclude(r => r.Activiteiten)
 					.ThenInclude(a => a.Competenties)
