@@ -57,6 +57,8 @@ namespace TalentCoach.Data.Repositories {
 				leerling.Geslacht = item.Geslacht;
 				leerling.Email = item.Email;
 				leerling.Password = item.Password;
+                leerling.HuidigeWerkaanbieding = item.HuidigeWerkaanbieding;
+                leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
 				_leerlingen.Update(leerling);
 				SaveChanges();
 			}
