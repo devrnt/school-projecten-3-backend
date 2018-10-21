@@ -82,8 +82,8 @@ namespace TalentCoach.Data
                 // Werkaanbiedingen
                 var werkaanbiedingen = new List<Werkaanbieding>
                 {
-                    new Werkaanbieding("Loodgieter op een boot", 1) { Tags = "teamwork", Werkgever = werkgevers[0] },
-                    new Werkaanbieding("Stage in kapsalon Dina", 2) { Werkgever = werkgevers[0] }
+                    new Werkaanbieding("Loodgieter op een boot") { Tags = "teamwork", Werkgever = werkgevers[0] },
+                    new Werkaanbieding("Stage in kapsalon Dina") { Werkgever = werkgevers[0] }
                 };
 
                 werkaanbiedingen[0].AddProject(activiteit1);

@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Models\Mappers\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="Models\Mappers\" />
   </ItemGroup>
 
   <ItemGroup>

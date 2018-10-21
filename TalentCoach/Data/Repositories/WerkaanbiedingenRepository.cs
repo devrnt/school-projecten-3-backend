@@ -5,25 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using TalentCoach.Models.Domain;
 
-namespace TalentCoach.Data.Repositories {
-    public class WerkaanbiedingenRepository : IWerkaanbiedingenRepository {
+namespace TalentCoach.Data.Repositories
+{
+    public class WerkaanbiedingenRepository : IWerkaanbiedingenRepository
+    {
 
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Werkaanbieding> _werkaanbiedingen;
 
-        public WerkaanbiedingenRepository(ApplicationDbContext context) {
+        public WerkaanbiedingenRepository(ApplicationDbContext context)
+        {
             _context = context;
             _werkaanbiedingen = context.Werkaanbiedingen;
         }
-        public Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding) {
+        public Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding)
+        {
             _werkaanbiedingen.Add(aanbieding);
             SaveChanges();
             return aanbieding;
         }
 
-        public Werkaanbieding Delete(int id) {
+        public Werkaanbieding Delete(int id)
+        {
             Werkaanbieding wa = _werkaanbiedingen.FirstOrDefault(w => w.Id == id);
-            if (wa == null) {
+            if (wa == null)
+            {
                 return null;
             }
             _werkaanbiedingen.Remove(wa);
@@ -44,17 +50,18 @@ namespace TalentCoach.Data.Repositories {
                 .Include(w => w.Werkgever)
                 .FirstOrDefault(w => w.Id == id);
 
-        public void SaveChanges() {
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
 
-        public Werkaanbieding UpdateWerkaanbieding(int id, Werkaanbieding werkaanbieding) {
+        public Werkaanbieding UpdateWerkaanbieding(int id, Werkaanbieding werkaanbieding)
+        {
             Werkaanbieding wa = _werkaanbiedingen.FirstOrDefault(w => w.Id == id);
             if (wa == null)
                 return null;
-            else {
-                wa.AantalPlaatsen = werkaanbieding.AantalPlaatsen;
-                wa.AantalPlaatsenIngevuld = werkaanbieding.AantalPlaatsenIngevuld;
+            else
+            {
                 wa.Omschrijving = werkaanbieding.Omschrijving;
                 wa.Projecten = werkaanbieding.Projecten;
                 SaveChanges();
