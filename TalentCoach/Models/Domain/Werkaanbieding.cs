@@ -11,7 +11,7 @@ namespace TalentCoach.Models.Domain
         public int Id { get; set; }
         public string Omschrijving { get; set; }
         public int AantalPlaatsen { get; set; }
-        //public List<String> Tags { get; set; }
+        public string Tags { get; set; }
         public List<Activiteit> Projecten { get; set; }
         public int AantalPlaatsenIngevuld { get; set; }
         #endregion
@@ -23,7 +23,6 @@ namespace TalentCoach.Models.Domain
             AantalPlaatsen = aantalPlaatsen;
             AantalPlaatsenIngevuld = aantalPlaatsenIngevuld;
             Projecten = new List<Activiteit>();
-            //Tags = new List<string>();
         }
         #endregion
 

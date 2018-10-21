@@ -60,7 +60,7 @@ namespace TalentCoach.Data
 
                 // Leerlingen
                 var interesses = new List<string> { "teamwork", "boekhouden" };
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt", interesses);
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
@@ -71,7 +71,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 //Werkaanbiedingen
-                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1); //   { Tags = new List<string> { "teamwork" } };
+                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1) { Tags = "teamwork" };
                 werkaanbieding1.AddProject(activiteit1);
 
                 var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
