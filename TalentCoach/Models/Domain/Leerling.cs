@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace TalentCoach.Models.Domain
@@ -46,5 +47,8 @@ namespace TalentCoach.Models.Domain
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
             Interesses = interesses;
         }
+
+        [JsonConstructor]
+        public Leerling(bool thisIsForJson) { }
     }
 }

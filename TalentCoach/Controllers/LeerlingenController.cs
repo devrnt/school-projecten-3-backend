@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Controllers {
@@ -67,8 +68,9 @@ namespace TalentCoach.Controllers {
 		/// </returns>	
 		// PUT api/leerlingen/1
 		[HttpPut("{id}")]
-		public ActionResult<Leerling> Update(int id, Leerling item) {
-			var result = _repository.UpdateLeerling(id, item);
+		public ActionResult<Leerling> Update(int id, string json) {
+            var leerling = JsonConvert.DeserializeObject<Leerling>(json);
+			var result = _repository.UpdateLeerling(id, leerling);
 			return result ?? (ActionResult<Leerling>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {id} not found" } });
 		}
 
