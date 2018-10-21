@@ -70,31 +70,27 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-                //Werkaanbiedingen en werkgevers
-                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1) { Tags = "teamwork" };
-                werkaanbieding1.AddProject(activiteit1);
+                // Werkgevers
+                var werkgevers = new List<Werkgever>
+                {
+                    new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746),
+                    new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197)
+                };
+                _context.AddRange(werkgevers);
+                _context.SaveChanges();
 
-                var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
-                werkaanbieding2.AddProject(activiteit2);
+                // Werkaanbiedingen
+                var werkaanbiedingen = new List<Werkaanbieding>
+                {
+                    new Werkaanbieding("Loodgieter op een boot", 1) { Tags = "teamwork", Werkgever = werkgevers[0] },
+                    new Werkaanbieding("Stage in kapsalon Dina", 2) { Werkgever = werkgevers[0] }
+                };
 
-                var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
-                werkaanbiedingenVoorWerkgever1.Add(werkaanbieding1);
-                var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746);
-                werkgever1.AddWerkaanbieding(werkaanbieding1);
+                werkaanbiedingen[0].AddProject(activiteit1);
+                werkaanbiedingen[1].AddProject(activiteit2);
 
-                var werkaanbiedingenVoorWerkgever2 = new List<Werkaanbieding>();
-                werkaanbiedingenVoorWerkgever2.Add(werkaanbieding2);
-                var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197);
-                werkgever2.AddWerkaanbieding(werkaanbieding2);
-
-                werkaanbieding1.Werkgever = werkgever1;
-                werkaanbieding2.Werkgever = werkgever2;
-
-                var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
-                var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
 
                 _context.AddRange(werkaanbiedingen);
-                _context.AddRange(werkgevers);
                 _context.SaveChanges();
             }
         }

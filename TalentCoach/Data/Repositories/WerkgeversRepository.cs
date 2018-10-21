@@ -32,16 +32,11 @@ namespace TalentCoach.Data.Repositories {
         }
 
         public List<Werkgever> GetAll() => _werkgevers
-                .Include(w => w.Werkaanbiedingen)
-                    .ThenInclude(wa => wa.Projecten)
-                        .ThenInclude(p => p.Competenties)
                 .OrderBy(w => w.Naam)
                 .ToList();
 
         public Werkgever GetWerkgever(int id) => _werkgevers
-                .Include(w => w.Werkaanbiedingen)
-                    .ThenInclude(wa => wa.Projecten)
-                        .ThenInclude(p => p.Competenties)
+  
                 .FirstOrDefault(w => w.Id == id);
 
         public void SaveChanges() {
@@ -55,7 +50,6 @@ namespace TalentCoach.Data.Repositories {
             else {
                 wg.Naam = werkgever.Naam;
                 wg.TelefoonNummer = werkgever.TelefoonNummer;
-                wg.Werkaanbiedingen = werkgever.Werkaanbiedingen;
                 wg.Werkplaats = werkgever.Werkplaats;
                 wg.Email = werkgever.Email;
                 _werkgevers.Update(wg);
