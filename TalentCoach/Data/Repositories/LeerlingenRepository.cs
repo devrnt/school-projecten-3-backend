@@ -30,8 +30,10 @@ namespace TalentCoach.Data.Repositories {
 		public Leerling GetLeerling(int id) {
 			return _leerlingen
                 .Include(l => l.HuidigeWerkaanbieding)
+                    .ThenInclude(wa => wa.Werkgever)
                 .Include(l => l.BewaardeWerkaanbiedingen)
-				.Include(l => l.Richting)
+                    .ThenInclude(wa => wa.Werkgever)
+                .Include(l => l.Richting)
 					.ThenInclude(r => r.Activiteiten)
 					.ThenInclude(a => a.Competenties)
 				.Include(l => l.Competenties)
