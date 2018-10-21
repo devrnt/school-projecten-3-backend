@@ -11,7 +11,6 @@ namespace TalentCoach.Models.Domain {
         public string Werkplaats { get; set; }
         public string Email { get; set; }
         public int TelefoonNummer { get; set; }
-        public List<Werkaanbieding> Werkaanbiedingen { get; set; }
         #endregion
 
         #region === Constructor ===
@@ -20,14 +19,7 @@ namespace TalentCoach.Models.Domain {
             Werkplaats = werkplaats;
             Email = email;
             TelefoonNummer = telefoonNummer;
-            Werkaanbiedingen = new List<Werkaanbieding>();
         }
-        #endregion
-
-        #region === Methods ===
-        public void AddWerkaanbieding(Werkaanbieding werkaanbieding) => this.Werkaanbiedingen.Add(werkaanbieding);
-
-        public void RemoveWerkaanbieding(Werkaanbieding werkaanbieding) => Werkaanbiedingen.Remove(werkaanbieding);
         #endregion
 
     }

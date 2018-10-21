@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace TalentCoach.Models.Domain
@@ -13,7 +14,7 @@ namespace TalentCoach.Models.Domain
         public Geslacht Geslacht { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        //public List<string> Interesses { get; set; }
+        public string Interesses { get; set; }
         public Richting Richting { get; set; }
         public Werkaanbieding HuidigeWerkaanbieding { get; set; }
         public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
@@ -33,7 +34,7 @@ namespace TalentCoach.Models.Domain
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
         }
 
-        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, List<string> interesses) :
+        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, string interesses) :
         this(naam, voornaam, geboorteDatum, geslacht, email, password)
         {
             Naam = naam;
@@ -44,7 +45,10 @@ namespace TalentCoach.Models.Domain
             Password = password;
             Aangemaakt = DateTime.Now;
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
-            //Interesses = interesses;
+            Interesses = interesses;
         }
+
+        [JsonConstructor]
+        public Leerling(bool thisIsForJson) { }
     }
 }

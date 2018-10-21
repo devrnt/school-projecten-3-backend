@@ -30,11 +30,12 @@ namespace TalentCoach
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = @"Server=localhost;Database=TalentCoach;User Id=sa;Password=NietZoIdeaal11;";
             // Use SQL Database if in Azure, otherwise, use localhost
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("MyDbConnection")));
+                                                            options.UseSqlServer(connectionString));
 
                 // Automatically perform database migration
                 services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();

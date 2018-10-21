@@ -47,6 +47,22 @@ namespace TalentCoach.Controllers
         }
 
         /// <summary>
+        ///     Geeft een werkaanbieding terug die in zijn tags 1 van de meegegeven interesses bevat
+        /// </summary>
+        /// <param name="interesses">Interesses van de leerling</param>
+        /// <returns>
+        ///     Een werkaanbieding
+        /// </returns>
+        // GET api/werkaanbiedingen/interesseString
+        [HttpGet("{interesses}", Name = "GetWerkaanbiedingByInteresses")]
+        public ActionResult<Werkaanbieding> GetWerkaanbiedingByInteresses(string interesses)
+        {
+            var interessesList = interesses.Split(" ").ToList();
+            var result = _repository.GetAll().FirstOrDefault(wa => interessesList.Any(i => i == wa.Tags));
+            return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"Werkaanbieding with tags: {interesses} not found" } });
+        }
+
+        /// <summary>
         ///     Maakt een nieuwe werkaanbieding
         /// </summary>
         /// <param name="item">Werkaanbieding object voor in de databank op te slaan</param>

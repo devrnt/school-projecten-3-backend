@@ -60,7 +60,7 @@ namespace TalentCoach.Data
 
                 // Leerlingen
                 var interesses = new List<string> { "teamwork", "boekhouden" };
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt", interesses);
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
@@ -70,33 +70,27 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-                //Werkaanbiedingen
-                var werkaanbieding1 = new Werkaanbieding("Loodgieter op een boot", 1); //   { Tags = new List<string> { "teamwork" } };
-                werkaanbieding1.AddProject(activiteit1);
-
-                var werkaanbieding2 = new Werkaanbieding("Stage in kapsalon Dina", 2);
-                werkaanbieding2.AddProject(activiteit2);
-
-                var werkaanbiedingen = new List<Werkaanbieding> { werkaanbieding1, werkaanbieding2 };
-
-                _context.AddRange(werkaanbiedingen);
+                // Werkgevers
+                var werkgevers = new List<Werkgever>
+                {
+                    new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746),
+                    new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197)
+                };
+                _context.AddRange(werkgevers);
                 _context.SaveChanges();
 
-                //Werkgevers
-                var werkaanbiedingenVoorWerkgever1 = new List<Werkaanbieding>();
-                werkaanbiedingenVoorWerkgever1.Add(werkaanbieding1);
-                var werkgever1 = new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746);
-                werkgever1.AddWerkaanbieding(werkaanbieding1);
+                // Werkaanbiedingen
+                var werkaanbiedingen = new List<Werkaanbieding>
+                {
+                    new Werkaanbieding("Loodgieter op een boot") { Tags = "teamwork", Werkgever = werkgevers[0] },
+                    new Werkaanbieding("Stage in kapsalon Dina") { Werkgever = werkgevers[0] }
+                };
 
-                var werkaanbiedingenVoorWerkgever2 = new List<Werkaanbieding>();
-                werkaanbiedingenVoorWerkgever2.Add(werkaanbieding2);
-                var werkgever2 = new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197);
-                werkgever2.AddWerkaanbieding(werkaanbieding2);
+                werkaanbiedingen[0].AddProject(activiteit1);
+                werkaanbiedingen[1].AddProject(activiteit2);
 
 
-                var werkgevers = new List<Werkgever> { werkgever1, werkgever2 };
-
-                _context.AddRange(werkgevers);
+                _context.AddRange(werkaanbiedingen);
                 _context.SaveChanges();
             }
         }

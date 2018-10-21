@@ -29,7 +29,11 @@ namespace TalentCoach.Data.Repositories {
 
 		public Leerling GetLeerling(int id) {
 			return _leerlingen
-				.Include(l => l.Richting)
+                .Include(l => l.HuidigeWerkaanbieding)
+                    .ThenInclude(wa => wa.Werkgever)
+                .Include(l => l.BewaardeWerkaanbiedingen)
+                    .ThenInclude(wa => wa.Werkgever)
+                .Include(l => l.Richting)
 					.ThenInclude(r => r.Activiteiten)
 					.ThenInclude(a => a.Competenties)
 				.Include(l => l.Competenties)
@@ -57,6 +61,8 @@ namespace TalentCoach.Data.Repositories {
 				leerling.Geslacht = item.Geslacht;
 				leerling.Email = item.Email;
 				leerling.Password = item.Password;
+                leerling.HuidigeWerkaanbieding = item.HuidigeWerkaanbieding;
+                leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
 				_leerlingen.Update(leerling);
 				SaveChanges();
 			}

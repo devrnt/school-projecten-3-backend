@@ -12,8 +12,9 @@ namespace TalentCoach.Data {
         public DbSet<Werkaanbieding> Werkaanbiedingen { get; set; }
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
+            
 		}
 
-		public DbSet<TalentCoach.Models.Domain.Richting> Richting { get; set; }
+        public DbSet<TalentCoach.Models.Domain.Richting> Richting { get; set; }
 	}
 }
