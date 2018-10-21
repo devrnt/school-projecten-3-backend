@@ -54,6 +54,7 @@ namespace TalentCoach
             services.AddScoped<ILeerlingenRepository, LeerlingenRepository>();
             services.AddScoped<IWerkaanbiedingenRepository, WerkaanbiedingenRepository>();
             services.AddScoped<IWerkgeversRepository, WerkgeversRepository>();
+			services.AddScoped<IWerkspreukenRepository, WerkspreukenRepository>();
 
             services.AddTransient<TalentCoachDataInitializer>();
 

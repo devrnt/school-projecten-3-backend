@@ -8,10 +8,14 @@ projecten3-1819-backend-groep-11-ideaalduaal created by GitHub Classroom
 
 #### Endpoints
 All endpoints do have the following http requests: 
-  * Get (GetAll, GetById), Post, Put, Delete 
   
 ##### Url
 * https://localhost:44392/api/competenties
 * https://localhost:44392/api/activiteiten
 * https://localhost:44392/api/richtingen
 * https://localhost:44392/api/leerlingen
+* https://localhost:44392/api/werkaanbiedingen
+* https://localhost:44392/api/werkgevers
+* https://localhost:44392/api/werkspreuken
+
+

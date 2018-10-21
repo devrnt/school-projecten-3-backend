@@ -10,6 +10,7 @@ namespace TalentCoach.Data {
 		public DbSet<Leerling> Leerlingen { get; set; }
         public DbSet<Werkgever> Werkgevers { get; set; }
         public DbSet<Werkaanbieding> Werkaanbiedingen { get; set; }
+		public DbSet<Werkspreuk> Werkspreuken { get; set; }
 
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
             
