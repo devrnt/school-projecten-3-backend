@@ -96,31 +96,31 @@ namespace TalentCoach.Tests.Controllers {
 		#endregion
 
 		#region === Update == 
-		[Fact]
-		public void Update_WrongId_ReturnsNotFoundResult() {
-			Leerling newLeerling = new Leerling(
-			"Haleydt",
-			"Renaat",
-			new DateTime(1994, 2, 2),
-			Geslacht.Man,
-			"renaat.Haleydt@school.be",
-			"renaathaleydt");
-			var result = _controller.Update(93393939, newLeerling);
-			Assert.IsType<NotFoundObjectResult>(result);
-		}
+		//[Fact]
+		//public void Update_WrongId_ReturnsNotFoundResult() {
+		//	Leerling newLeerling = new Leerling(
+		//	"Haleydt",
+		//	"Renaat",
+		//	new DateTime(1994, 2, 2),
+		//	Geslacht.Man,
+		//	"renaat.Haleydt@school.be",
+		//	"renaathaleydt");
+		//	var result = _controller.Update(93393939, newLeerling);
+		//	Assert.IsType<NotFoundObjectResult>(result);
+		//}
 
-        [Fact]
-		public void Update_RightId_ReturnsUpdatedLeerling() {
-			Leerling newLeerling = new Leerling(
-			"Haleydt",
-			"Renaat",
-			new DateTime(1994, 2, 2),
-			Geslacht.Man,
-			"renaat.Haleydt@school.be",
-			"renaathaleydt");
-			var result = _controller.Update(1, newLeerling);
-			Assert.Equal("Renaat", result.Value.Voornaam);
-		}
+  //      [Fact]
+		//public void Update_RightId_ReturnsUpdatedLeerling() {
+		//	Leerling newLeerling = new Leerling(
+		//	"Haleydt",
+		//	"Renaat",
+		//	new DateTime(1994, 2, 2),
+		//	Geslacht.Man,
+		//	"renaat.Haleydt@school.be",
+		//	"renaathaleydt");
+		//	var result = _controller.Update(1, newLeerling);
+		//	Assert.Equal("Renaat", result.Value.Voornaam);
+		//}
 
 		#endregion
 
