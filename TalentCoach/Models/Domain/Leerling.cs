@@ -18,6 +18,7 @@ namespace TalentCoach.Models.Domain
         public Richting Richting { get; set; }
         public Werkaanbieding HuidigeWerkaanbieding { get; set; }
         public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
+        public List<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
         public List<Activiteit> Competenties { get; set; }
         public List<Activiteit> Projecten { get; set; }
         // TODO: Add wergever and stage
@@ -32,6 +33,7 @@ namespace TalentCoach.Models.Domain
             Password = password;
             Aangemaakt = DateTime.Now;
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
+            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
         }
 
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, string interesses) :
@@ -45,6 +47,7 @@ namespace TalentCoach.Models.Domain
             Password = password;
             Aangemaakt = DateTime.Now;
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
+            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
             Interesses = interesses;
         }
 
