@@ -5,30 +5,35 @@ using System.Linq;
 using System.Threading.Tasks;
 using TalentCoach.Models.Domain;
 
-namespace TalentCoach.Data.Repositories {
-    public class WerkgeversRepository : IWerkgeversRepository {
+namespace TalentCoach.Data.Repositories
+{
+    public class WerkgeversRepository : IWerkgeversRepository
+    {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Werkgever> _werkgevers;
 
-        public WerkgeversRepository(ApplicationDbContext context) {
+        public WerkgeversRepository(ApplicationDbContext context)
+        {
             _context = context;
             _werkgevers = context.Werkgevers;
         }
 
-        public Werkgever AddWerkgever(Werkgever werkgever) {
+        public Werkgever AddWerkgever(Werkgever werkgever)
+        {
             _werkgevers.Add(werkgever);
             SaveChanges();
             return werkgever;
         }
 
-        public Werkgever Delete(int id) {
+        public Werkgever Delete(int id)
+        {
             Werkgever wg = _werkgevers.FirstOrDefault(w => w.Id == id);
             if (wg == null)
                 return null;
             _werkgevers.Remove(wg);
             SaveChanges();
             return wg;
-                
+
         }
 
         public List<Werkgever> GetAll() => _werkgevers
@@ -36,18 +41,21 @@ namespace TalentCoach.Data.Repositories {
                 .ToList();
 
         public Werkgever GetWerkgever(int id) => _werkgevers
-  
+
                 .FirstOrDefault(w => w.Id == id);
 
-        public void SaveChanges() {
+        public void SaveChanges()
+        {
             _context.SaveChanges();
         }
 
-        public Werkgever UpdateWerkgever(int id, Werkgever werkgever) {
+        public Werkgever UpdateWerkgever(int id, Werkgever werkgever)
+        {
             Werkgever wg = _werkgevers.FirstOrDefault(w => w.Id == id);
             if (wg == null)
                 return null;
-            else {
+            else
+            {
                 wg.Naam = werkgever.Naam;
                 wg.TelefoonNummer = werkgever.TelefoonNummer;
                 wg.Werkplaats = werkgever.Werkplaats;

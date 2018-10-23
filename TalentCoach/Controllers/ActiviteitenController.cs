@@ -3,13 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
-namespace TalentCoach.Controllers {
+namespace TalentCoach.Controllers
+{
     [Route("api/[controller]")]
     [ApiController]
-    public class ActiviteitenController : ControllerBase {
+    public class ActiviteitenController : ControllerBase
+    {
         private readonly IActiviteitenRepository _repository;
 
-        public ActiviteitenController(IActiviteitenRepository repository) {
+        public ActiviteitenController(IActiviteitenRepository repository)
+        {
             _repository = repository;
         }
 
@@ -21,7 +24,8 @@ namespace TalentCoach.Controllers {
         /// </returns>		
         // GET api/activiteiten
         [HttpGet]
-        public ActionResult<List<Activiteit>> GetAll() {
+        public ActionResult<List<Activiteit>> GetAll()
+        {
             return _repository.GetAll();
         }
 
@@ -36,7 +40,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // GET api/activiteiten/1
         [HttpGet("{id}", Name = "GetActiviteit")]
-        public ActionResult<Activiteit> GetById(int id) {
+        public ActionResult<Activiteit> GetById(int id)
+        {
 
             var result = _repository.GetActiviteit(id);
             return result ?? (ActionResult<Activiteit>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
@@ -51,7 +56,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // POST api/activiteiten
         [HttpPost]
-        public IActionResult Create(Activiteit item) {
+        public IActionResult Create(Activiteit item)
+        {
             var result = _repository.AddActiviteit(item);
             var id = item.Id;
             return CreatedAtRoute("GetActiviteit", new { id = item.Id }, item);
@@ -69,7 +75,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // PUT api/activieiten/1
         [HttpPut("{id}")]
-        public ActionResult<Activiteit> Update(int id, Activiteit item) {
+        public ActionResult<Activiteit> Update(int id, Activiteit item)
+        {
             var result = _repository.UpdateActiviteit(id, item);
             return result ?? (ActionResult<Activiteit>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
         }
@@ -85,7 +92,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // DELETE api/activiteiten
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) {
+        public IActionResult Delete(int id)
+        {
             var result = _repository.Delete(id);
             return result == null ? NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } }) : (IActionResult)NoContent();
         }

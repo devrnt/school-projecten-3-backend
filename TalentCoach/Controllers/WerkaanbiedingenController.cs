@@ -14,7 +14,8 @@ namespace TalentCoach.Controllers
     {
         private readonly IWerkaanbiedingenRepository _repository;
 
-        public WerkaanbiedingenController(IWerkaanbiedingenRepository repo) {
+        public WerkaanbiedingenController(IWerkaanbiedingenRepository repo)
+        {
             _repository = repo;
         }
 
@@ -26,7 +27,8 @@ namespace TalentCoach.Controllers
         /// </returns>		
         // GET api/werkaanbiedingen
         [HttpGet]
-        public ActionResult<List<Werkaanbieding>> GetAll() {
+        public ActionResult<List<Werkaanbieding>> GetAll()
+        {
             return _repository.GetAll();
         }
 
@@ -41,7 +43,8 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // GET api/werkaanbiedingen/1
         [HttpGet("{id}", Name = "GetWerkaanbieding")]
-        public ActionResult<Werkaanbieding> GetById(int id) {
+        public ActionResult<Werkaanbieding> GetById(int id)
+        {
             var result = _repository.GetWerkaanbieding(id);
             return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"Werkaanbieding with id: {id} not found" } });
         }
@@ -71,7 +74,8 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // POST api/werkaanbiedingen
         [HttpPost]
-        public IActionResult Create(Werkaanbieding wa) {
+        public IActionResult Create(Werkaanbieding wa)
+        {
             var result = _repository.AddWerkaanbieding(wa);
             var id = wa.Id;
             return CreatedAtRoute("GetWerkaanbieding", new { id = wa.Id }, wa);
@@ -89,7 +93,8 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // PUT api/werkaanbiedingen/1
         [HttpPut("{id}")]
-        public ActionResult<Werkaanbieding> Update(int id, Werkaanbieding wa) {
+        public ActionResult<Werkaanbieding> Update(int id, Werkaanbieding wa)
+        {
             var result = _repository.UpdateWerkaanbieding(id, wa);
             return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {id} not found" } });
         }
@@ -105,7 +110,8 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // DELETE api/werkaanbiedingen
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) {
+        public IActionResult Delete(int id)
+        {
             var result = _repository.Delete(id);
             return result == null ? NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {id} not found" } }) : (IActionResult)NoContent();
         }

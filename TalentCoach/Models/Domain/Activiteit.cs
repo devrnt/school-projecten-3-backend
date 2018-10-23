@@ -1,41 +1,50 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace TalentCoach.Models {
-	public class Activiteit {
-		#region === Properties ===
-		public int Id { get; set; }
-		public string Omschrijving { get; set; }
-		public List<Competentie> Competenties { get; set; }
-		public bool Behaald {
-			get {
-				return Competenties.Any() && Competenties.All(competentie => competentie.Behaald);
-			}
-		}
+namespace TalentCoach.Models
+{
+    public class Activiteit
+    {
+        #region === Properties ===
+        public int Id { get; set; }
+        public string Omschrijving { get; set; }
+        public List<Competentie> Competenties { get; set; }
+        public bool Behaald
+        {
+            get
+            {
+                return Competenties.Any() && Competenties.All(competentie => competentie.Behaald);
+            }
+        }
 
-		public int AantalCompetenties {
-			get {
-				return Competenties.Count();
-			}
-		}
-		#endregion
+        public int AantalCompetenties
+        {
+            get
+            {
+                return Competenties.Count();
+            }
+        }
+        #endregion
 
-		#region === Constructor ===
+        #region === Constructor ===
 
-		public Activiteit(string omschrijving) {
-			Omschrijving = omschrijving;
-			Competenties = new List<Competentie>();
-		}
-		#endregion
+        public Activiteit(string omschrijving)
+        {
+            Omschrijving = omschrijving;
+            Competenties = new List<Competentie>();
+        }
+        #endregion
 
-		#region === Methods === 
-		public void AddCompetentie(Competentie competentie) {
-			Competenties.Add(competentie);
-		}
+        #region === Methods === 
+        public void AddCompetentie(Competentie competentie)
+        {
+            Competenties.Add(competentie);
+        }
 
-		public void RemoveCompetentie(Competentie competentie) {
-			Competenties.Remove(competentie);
-		}
-		#endregion
-	}
+        public void RemoveCompetentie(Competentie competentie)
+        {
+            Competenties.Remove(competentie);
+        }
+        #endregion
+    }
 }

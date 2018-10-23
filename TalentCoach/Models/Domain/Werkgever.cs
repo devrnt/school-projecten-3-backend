@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TalentCoach.Models.Domain {
-    public class Werkgever {
+namespace TalentCoach.Models.Domain
+{
+    public class Werkgever
+    {
         #region === Properties ===
         public int Id { get; set; }
         public string Naam { get; set; }
@@ -14,7 +16,8 @@ namespace TalentCoach.Models.Domain {
         #endregion
 
         #region === Constructor ===
-        public Werkgever(string naam, string werkplaats, string email, int telefoonNummer) {
+        public Werkgever(string naam, string werkplaats, string email, int telefoonNummer)
+        {
             Naam = naam;
             Werkplaats = werkplaats;
             Email = email;

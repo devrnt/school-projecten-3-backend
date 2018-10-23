@@ -6,13 +6,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TalentCoach.Models.Domain;
 
-namespace TalentCoach.Controllers {
+namespace TalentCoach.Controllers
+{
     [Route("api/[controller]")]
     [ApiController]
-    public class WerkgeversController : ControllerBase {
+    public class WerkgeversController : ControllerBase
+    {
         private readonly IWerkgeversRepository _repository;
 
-        public WerkgeversController(IWerkgeversRepository repository) {
+        public WerkgeversController(IWerkgeversRepository repository)
+        {
             _repository = repository;
         }
 
@@ -37,7 +40,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // GET api/werkgevers/1
         [HttpGet("{id}", Name = "GetWerkgever")]
-        public ActionResult<Werkgever> GetById(int id) {
+        public ActionResult<Werkgever> GetById(int id)
+        {
             var result = _repository.GetWerkgever(id);
             return result ?? (ActionResult<Werkgever>)NotFound(new Dictionary<string, string>() { { "message", $"werkgever with id: {id} not found" } });
         }
@@ -51,7 +55,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // POST api/werkgevers
         [HttpPost]
-        public IActionResult Create(Werkgever wg) {
+        public IActionResult Create(Werkgever wg)
+        {
             var result = _repository.AddWerkgever(wg);
             var id = wg.Id;
             return CreatedAtRoute("GetWerkgever", new { id = wg.Id }, wg);
@@ -69,7 +74,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // PUT api/werkgevers/1
         [HttpPut("{id}")]
-        public ActionResult<Werkgever> Update(int id, Werkgever wg) {
+        public ActionResult<Werkgever> Update(int id, Werkgever wg)
+        {
             var result = _repository.UpdateWerkgever(id, wg);
             return result ?? (ActionResult<Werkgever>)NotFound(new Dictionary<string, string>() { { "message", $"werkgever with id: {id} not found" } });
         }
@@ -85,7 +91,8 @@ namespace TalentCoach.Controllers {
         /// </returns>	
         // DELETE api/werkgevers
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id) {
+        public IActionResult Delete(int id)
+        {
             var result = _repository.Delete(id);
             return result == null ? NotFound(new Dictionary<string, string>() { { "message", $"werkgever with id: {id} not found" } }) : (IActionResult)NoContent();
         }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TalentCoach.Models.Domain {
-    public interface IWerkaanbiedingenRepository {
+namespace TalentCoach.Models.Domain
+{
+    public interface IWerkaanbiedingenRepository
+    {
         List<Werkaanbieding> GetAll();
         Werkaanbieding GetWerkaanbieding(int id);
         Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding);
