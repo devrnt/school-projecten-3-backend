@@ -22,8 +22,6 @@ namespace TalentCoach.Data.Repositories
             // will need change lmao
             return _leerlingen
                 .Include(l => l.Richting)
-                    .ThenInclude(r => r.Activiteiten)
-                    .ThenInclude(a => a.Competenties)
                 .Include(l => l.Competenties)
                 .Include(l => l.Projecten)
                     .ThenInclude(p => p.Competenties)
