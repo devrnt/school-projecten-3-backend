@@ -20,23 +20,25 @@ namespace TalentCoach.Data.Repositories
         public List<Leerling> GetAll()
         {
             // will need change lmao
+            // enkel Richting nodig?
             return _leerlingen
                 .Include(l => l.Richting)
                 .Include(l => l.Competenties)
                 .Include(l => l.Projecten)
-                    .ThenInclude(p => p.Competenties)
+                .ThenInclude(p => p.Competenties)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
 
         public Leerling GetLeerling(int id)
         {
-            return _leerlingen
+            var leerling = _leerlingen
                 .Include(l => l.HuidigeWerkaanbieding)
-                    .ThenInclude(wa => wa.Werkgever)
-                .Include(l => l.BewaardeWerkaanbiedingen)
-                    .ThenInclude(wa => wa.Werkgever)
-                .Include(l => l.VerwijderdeWerkaanbiedingen)
+                    .ThenInclude(hw => hw.Werkaanbieding)
+                        .ThenInclude(wa => wa.Werkgever)
+                .Include(l => l.GereageerdeWerkaanbiedingen)
+                    .ThenInclude(bw => bw.Werkaanbieding)
+                        .ThenInclude(wa => wa.Werkgever)
                 .Include(l => l.Richting)
                     .ThenInclude(r => r.Activiteiten)
                     .ThenInclude(a => a.Competenties)
@@ -44,6 +46,11 @@ namespace TalentCoach.Data.Repositories
                 .Include(l => l.Projecten)
                     .ThenInclude(p => p.Competenties)
                 .SingleOrDefault(l => l.Id == id);
+
+            leerling.BewaardeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen.Where(lw => lw.Like == Like.Yes).Select(lw => lw.Werkaanbieding).ToList();
+            leerling.VerwijderdeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen.Where(lw => lw.Like == Like.No).Select(lw => lw.Werkaanbieding).ToList();
+
+            return leerling;
         }
 
         public Leerling AddLeerling(Leerling item)
@@ -57,12 +64,12 @@ namespace TalentCoach.Data.Repositories
         {
             // this method only update leerling specifications 
             // NOT: Richting, competenties, projecten
-            Leerling leerling = _leerlingen.Find(id);
-            if (leerling == null)
-            {
-                return null;
-            }
-            else
+            var leerling = _leerlingen.Find(id);
+
+            item.BewaardeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.Yes); return true; });
+            item.VerwijderdeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.No); return true; });
+
+            if (leerling != null)
             {
                 leerling.Naam = item.Naam;
                 leerling.Voornaam = item.Voornaam;
@@ -71,17 +78,17 @@ namespace TalentCoach.Data.Repositories
                 leerling.Email = item.Email;
                 leerling.Password = item.Password;
                 leerling.HuidigeWerkaanbieding = item.HuidigeWerkaanbieding;
-                leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
-                leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
+                leerling.GereageerdeWerkaanbiedingen = item.GereageerdeWerkaanbiedingen;
                 _leerlingen.Update(leerling);
                 SaveChanges();
             }
+
             return leerling;
         }
 
         public Leerling Delete(int id)
         {
-            Leerling leerling = _leerlingen.Find(id);
+            var leerling = _leerlingen.Find(id);
             if (leerling == null)
             {
                 return null;
