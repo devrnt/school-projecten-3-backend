@@ -74,6 +74,7 @@ namespace TalentCoach.Data
                     new Werkaanbieding("Loodgieter op een boot") { Tags = "zelfstandig arbeider loodgieter", Werkgever = werkgevers[0] },
                     new Werkaanbieding("Stage in kapsalon Dina") { Tags = "teamwork bediende kapper", Werkgever = werkgevers[1] },
                     new Werkaanbieding("Assistent boekhouder") { Tags = "zelfstandig bediende boekhouden", Werkgever = werkgevers[2] },
+                    new Werkaanbieding("Baggerwerk") { Tags = "teamwork bagger", Werkgever = werkgevers[0] },
                     new Werkaanbieding("Administratief bediende") { Tags = "zelfstandig administratief bediende", Werkgever = werkgevers[2] }
                 };
 
@@ -87,6 +88,7 @@ namespace TalentCoach.Data
                 // Leerlingen
                 var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
+                leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;

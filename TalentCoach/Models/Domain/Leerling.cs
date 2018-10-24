@@ -16,7 +16,6 @@ namespace TalentCoach.Models.Domain
         public string Password { get; set; }
         public string Interesses { get; set; }
         public Richting Richting { get; set; }
-        public LeerlingWerkaanbieding HuidigeWerkaanbieding { get; set; }
         public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
         public List<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
         [JsonIgnore]

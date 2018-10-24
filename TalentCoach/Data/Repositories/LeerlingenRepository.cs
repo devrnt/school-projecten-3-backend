@@ -33,9 +33,6 @@ namespace TalentCoach.Data.Repositories
         public Leerling GetLeerling(int id)
         {
             var leerling = _leerlingen
-                .Include(l => l.HuidigeWerkaanbieding)
-                    .ThenInclude(hw => hw.Werkaanbieding)
-                        .ThenInclude(wa => wa.Werkgever)
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
@@ -65,20 +62,32 @@ namespace TalentCoach.Data.Repositories
             // this method only update leerling specifications 
             // NOT: Richting, competenties, projecten
             var leerling = GetLeerling(id);
-
-            item.BewaardeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.Yes); return true; });
-            item.VerwijderdeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.No); return true; });
-
             if (leerling != null)
             {
+                // 'maps' Bewaarde- and VerwijderdeWerkaanbiedingen to GereageerdeWerkaanbiedingen
+                foreach (var wa in item.BewaardeWerkaanbiedingen)
+                {
+                    item.AddGereageerdeWerkaanbieding(wa, Like.Yes);
+                }
+
+                foreach (var wa in item.VerwijderdeWerkaanbiedingen)
+                {
+                    item.AddGereageerdeWerkaanbieding(wa, Like.No);
+                }
+
+
                 leerling.Naam = item.Naam;
                 leerling.Voornaam = item.Voornaam;
                 leerling.GeboorteDatum = item.GeboorteDatum;
                 leerling.Geslacht = item.Geslacht;
                 leerling.Email = item.Email;
                 leerling.Password = item.Password;
-                leerling.HuidigeWerkaanbieding = item.HuidigeWerkaanbieding;
-                leerling.GereageerdeWerkaanbiedingen.Union(item.GereageerdeWerkaanbiedingen);
+                leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
+                leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
+                leerling.GereageerdeWerkaanbiedingen.Clear();
+                _leerlingen.Update(leerling);
+                SaveChanges();
+                leerling.GereageerdeWerkaanbiedingen = item.GereageerdeWerkaanbiedingen;
                 _leerlingen.Update(leerling);
                 SaveChanges();
             }
@@ -91,10 +100,10 @@ namespace TalentCoach.Data.Repositories
             var leerling = _leerlingen.Find(id);
             if (leerling == null)
             {
-                return null;
+                _leerlingen.Remove(leerling);
+                SaveChanges();
             }
-            _leerlingen.Remove(leerling);
-            SaveChanges();
+
             return leerling;
         }
 
