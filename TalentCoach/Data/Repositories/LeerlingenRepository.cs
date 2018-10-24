@@ -64,7 +64,7 @@ namespace TalentCoach.Data.Repositories
         {
             // this method only update leerling specifications 
             // NOT: Richting, competenties, projecten
-            var leerling = _leerlingen.Find(id);
+            var leerling = GetLeerling(id);
 
             item.BewaardeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.Yes); return true; });
             item.VerwijderdeWerkaanbiedingen.All(wa => { item.AddGereageerdeWerkaanbieding(wa, Like.No); return true; });
@@ -78,7 +78,7 @@ namespace TalentCoach.Data.Repositories
                 leerling.Email = item.Email;
                 leerling.Password = item.Password;
                 leerling.HuidigeWerkaanbieding = item.HuidigeWerkaanbieding;
-                leerling.GereageerdeWerkaanbiedingen = item.GereageerdeWerkaanbiedingen;
+                leerling.GereageerdeWerkaanbiedingen.Union(item.GereageerdeWerkaanbiedingen);
                 _leerlingen.Update(leerling);
                 SaveChanges();
             }

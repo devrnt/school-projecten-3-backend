@@ -28,5 +28,6 @@ namespace TalentCoach.Models.Domain
 
         public void RemoveProject(Activiteit project) => Projecten.Remove(project);
         #endregion
+
     }
 }
