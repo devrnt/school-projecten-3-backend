@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TalentCoach.Models.Domain;
@@ -76,7 +77,15 @@ namespace TalentCoach.Controllers
         [HttpPut("{id}")]
         public ActionResult<Leerling> Update(int id, Leerling leerling)
         {
-            var result = _repository.UpdateLeerling(id, leerling);
+            ActionResult<Leerling> result = null;
+            try
+            {
+                result = _repository.UpdateLeerling(id, leerling);
+            }
+            catch (Exception e)
+            {
+                result = (ActionResult<Leerling>)NotFound(new Dictionary<string, string>() { { "message", $"exception: {e.Message} {e.StackTrace}" } });
+            }
             return result ?? (ActionResult<Leerling>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {id} not found" } });
         }
 

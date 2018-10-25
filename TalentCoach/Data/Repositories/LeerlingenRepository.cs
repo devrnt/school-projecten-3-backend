@@ -8,6 +8,7 @@ namespace TalentCoach.Data.Repositories
     public class LeerlingenRepository : ILeerlingenRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly WerkaanbiedingenRepository _werkaanbiedingenRepository;
 
         private readonly DbSet<Leerling> _leerlingen;
 
@@ -15,6 +16,7 @@ namespace TalentCoach.Data.Repositories
         {
             _context = context;
             _leerlingen = _context.Leerlingen;
+            _werkaanbiedingenRepository = new WerkaanbiedingenRepository(context);
         }
 
         public List<Leerling> GetAll()
@@ -74,12 +76,12 @@ namespace TalentCoach.Data.Repositories
                 // 'maps' Bewaarde- and VerwijderdeWerkaanbiedingen to GereageerdeWerkaanbiedingen
                 foreach (var wa in item.BewaardeWerkaanbiedingen)
                 {
-                    item.AddGereageerdeWerkaanbieding(wa, Like.Yes);
+                    item.AddGereageerdeWerkaanbieding(_werkaanbiedingenRepository.GetWerkaanbieding(wa.Id), Like.Yes);
                 }
 
                 foreach (var wa in item.VerwijderdeWerkaanbiedingen)
                 {
-                    item.AddGereageerdeWerkaanbieding(wa, Like.No);
+                    item.AddGereageerdeWerkaanbieding(_werkaanbiedingenRepository.GetWerkaanbieding(wa.Id), Like.No);
                 }
 
 
