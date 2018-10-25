@@ -16,14 +16,15 @@ namespace TalentCoach.Models.Domain
         public string Password { get; set; }
         public string Interesses { get; set; }
         public Richting Richting { get; set; }
-        public Werkaanbieding HuidigeWerkaanbieding { get; set; }
         public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
         public List<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
+        [JsonIgnore]
+        public List<LeerlingWerkaanbieding> GereageerdeWerkaanbiedingen { get; set; }
         public List<Activiteit> Competenties { get; set; }
         public List<Activiteit> Projecten { get; set; }
         // TODO: Add wergever and stage
 
-        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password)
+        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password) : this()
         {
             Naam = naam;
             Voornaam = voornaam;
@@ -32,26 +33,27 @@ namespace TalentCoach.Models.Domain
             Email = email;
             Password = password;
             Aangemaakt = DateTime.Now;
-            BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
-            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
         }
 
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, string interesses) :
         this(naam, voornaam, geboorteDatum, geslacht, email, password)
         {
-            Naam = naam;
-            Voornaam = voornaam;
-            GeboorteDatum = geboorteDatum;
-            Geslacht = geslacht;
-            Email = email;
-            Password = password;
-            Aangemaakt = DateTime.Now;
-            BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
-            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
             Interesses = interesses;
         }
 
         [JsonConstructor]
-        public Leerling(bool thisIsForJson) { }
+        public Leerling()
+        {
+            GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
+            BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
+            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
+        }
+
+        public void AddGereageerdeWerkaanbieding(Werkaanbieding werkaanbieding, Like like)
+        {
+            GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
+
+        }
+
     }
 }

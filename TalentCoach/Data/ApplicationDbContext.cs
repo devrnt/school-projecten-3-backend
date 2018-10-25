@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
+using TalentCoach.Models.Mappers;
 
 namespace TalentCoach.Data
 {
@@ -19,6 +20,13 @@ namespace TalentCoach.Data
 
         }
 
-        public DbSet<TalentCoach.Models.Domain.Richting> Richting { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new LeerlingWerkaanbiedingConfiguration());
+            modelBuilder.ApplyConfiguration(new LeerlingConfiguration());
+        }
+
+        public DbSet<Richting> Richting { get; set; }
     }
 }

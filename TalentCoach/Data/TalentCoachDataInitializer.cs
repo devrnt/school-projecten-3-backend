@@ -58,23 +58,12 @@ namespace TalentCoach.Data
                 _context.Add(richting);
                 _context.SaveChanges();
 
-                // Leerlingen
-                var interesses = new List<string> { "teamwork", "boekhouden" };
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
-                var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
-                leerling1.Richting = richting;
-                leerling2.Richting = richting;
-
-                var leerlingen = new List<Leerling>() { leerling1, leerling2 };
-
-                _context.AddRange(leerlingen);
-                _context.SaveChanges();
-
                 // Werkgevers
                 var werkgevers = new List<Werkgever>
                 {
                     new Werkgever("Jan De Nul", "Zeestraat 2, 9300 Aalst", "jan@denul.be", 053305746),
-                    new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197)
+                    new Werkgever("Kapsalon Dina", "Dorp 15, 9200 Gent", "dina@kapsalon.be", 0476345197),
+                    new Werkgever("Dunder Mifflin", "Scranton, PA", "dundermifflin@theoffice.com", 04987602)
                 };
                 _context.AddRange(werkgevers);
                 _context.SaveChanges();
@@ -82,8 +71,11 @@ namespace TalentCoach.Data
                 // Werkaanbiedingen
                 var werkaanbiedingen = new List<Werkaanbieding>
                 {
-                    new Werkaanbieding("Loodgieter op een boot") { Tags = "teamwork", Werkgever = werkgevers[0] },
-                    new Werkaanbieding("Stage in kapsalon Dina") { Werkgever = werkgevers[0] }
+                    new Werkaanbieding("Loodgieter op een boot") { Tags = "zelfstandig arbeider loodgieter", Werkgever = werkgevers[0] },
+                    new Werkaanbieding("Stage in kapsalon Dina") { Tags = "teamwork bediende kapper", Werkgever = werkgevers[1] },
+                    new Werkaanbieding("Assistent boekhouder") { Tags = "zelfstandig bediende boekhouden", Werkgever = werkgevers[2] },
+                    new Werkaanbieding("Baggerwerk") { Tags = "teamwork bagger", Werkgever = werkgevers[0] },
+                    new Werkaanbieding("Administratief bediende") { Tags = "zelfstandig administratief bediende", Werkgever = werkgevers[2] }
                 };
 
                 werkaanbiedingen[0].AddProject(activiteit1);
@@ -91,6 +83,19 @@ namespace TalentCoach.Data
 
 
                 _context.AddRange(werkaanbiedingen);
+                _context.SaveChanges();
+
+                // Leerlingen
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
+                leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
+                leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
+                var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
+                leerling1.Richting = richting;
+                leerling2.Richting = richting;
+
+                var leerlingen = new List<Leerling>() { leerling1, leerling2 };
+
+                _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
 
