@@ -44,8 +44,15 @@ namespace TalentCoach.Data.Repositories
                     .ThenInclude(p => p.Competenties)
                 .SingleOrDefault(l => l.Id == id);
 
-            leerling.BewaardeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen.Where(lw => lw.Like == Like.Yes).Select(lw => lw.Werkaanbieding).ToList();
-            leerling.VerwijderdeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen.Where(lw => lw.Like == Like.No).Select(lw => lw.Werkaanbieding).ToList();
+            if (leerling != null)
+            {
+                leerling.BewaardeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen
+                    .Where(lw => lw.Like == Like.Yes)
+                    .Select(lw => lw.Werkaanbieding).ToList();
+                leerling.VerwijderdeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen
+                    .Where(lw => lw.Like == Like.No)
+                    .Select(lw => lw.Werkaanbieding).ToList();
+            }
 
             return leerling;
         }
