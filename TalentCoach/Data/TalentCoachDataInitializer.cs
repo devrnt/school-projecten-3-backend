@@ -96,8 +96,8 @@ namespace TalentCoach.Data
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
-                        new Werkspreuk(1, "Eerste week is altijd moeilijk. Toch succes"),
-                new Werkspreuk(2, "De tweede week is van start, blijven volhouden!")
+                        new Werkspreuk(1, "Alle begin is moeilijk ook op school, maar ga ervoor! Hard werken wordt beloond."),
+                new Werkspreuk(2, "De eerste week zit er al op, de volgende kan alleen maar beter!")
             };
 
                 _context.AddRange(werkspreuken);
