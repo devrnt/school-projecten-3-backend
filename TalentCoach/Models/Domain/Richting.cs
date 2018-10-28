@@ -8,6 +8,8 @@ namespace TalentCoach.Models.Domain
         public int Id { get; set; }
         public string Naam { get; set; }
         public List<Activiteit> Activiteiten { get; set; }
+        public string Kleur{get; set;}
+        public string Icon { get; set; }
         public int AantalCompetenties
         {
             get
