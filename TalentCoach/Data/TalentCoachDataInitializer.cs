@@ -111,8 +111,8 @@ namespace TalentCoach.Data
                 // Algemene Info
                 var algemenInfo = new List<AlgemeneInfo>
                 {
-                    new AlgemeneInfo("Ik ben ziek, wat nu", "Bij ziekte gelieve de werkgever te contacteren (zie gegevens hieronder)Afwezigheid moet op voorhand verwittigd worden. Is dit door omstandiheden niet mogelijk geef zo snel mogelijk een seintje."),
-                    new AlgemeneInfo("Ik kan niet tijdig aanwezig zijn, wat nu?", "Geef zo rap als mogelijk een seintje aan je werkgever. Probeer volgende keer iets vroeger te vertrekken."),
+                    new AlgemeneInfo("Ik ben ziek, wat nu", "Bij ziekte gelieve de werkgever te contacteren. \nAfwezigheid moet op voorhand verwittigd worden. Is dit door omstandiheden niet mogelijk geef zo snel mogelijk een seintje."),
+                    new AlgemeneInfo("Ik kan niet tijdig aanwezig zijn, wat nu?", "Geef zo rap als mogelijk een seintje aan je werkgever.\nProbeer volgende keer iets vroeger te vertrekken."),
                     new AlgemeneInfo("Ik voel me niet goed op men werk", "Contacteer uw persoonlijke stagebegeleider of probeer een gesprek te regelen met je stageleider.")
                 };
 
