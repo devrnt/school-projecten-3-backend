@@ -103,9 +103,20 @@ namespace TalentCoach.Data
                 var werkspreuken = new List<Werkspreuk> {
                         new Werkspreuk(1, "Alle begin is moeilijk ook op school, maar ga ervoor! Hard werken wordt beloond."),
                 new Werkspreuk(2, "De eerste week zit er al op, de volgende kan alleen maar beter!")
-            };
+                };
 
                 _context.AddRange(werkspreuken);
+                _context.SaveChanges();
+
+                // Algemene Info
+                var algemenInfo = new List<AlgemeneInfo>
+                {
+                    new AlgemeneInfo("Ik ben ziek, wat nu", "Bij ziekte gelieve de werkgever te contacteren (zie gegevens hieronder)Afwezigheid moet op voorhand verwittigd worden. Is dit door omstandiheden niet mogelijk geef zo snel mogelijk een seintje."),
+                    new AlgemeneInfo("Ik kan niet tijdig aanwezig zijn, wat nu?", "Geef zo rap als mogelijk een seintje aan je werkgever. Probeer volgende keer iets vroeger te vertrekken."),
+                    new AlgemeneInfo("Ik voel me niet goed op men werk", "Contacteer uw persoonlijke stagebegeleider of probeer een gesprek te regelen met je stageleider.")
+                };
+
+                _context.AddRange(algemenInfo);
                 _context.SaveChanges();
 
             }

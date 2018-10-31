@@ -60,6 +60,7 @@ namespace TalentCoach
             services.AddScoped<IWerkaanbiedingenRepository, WerkaanbiedingenRepository>();
             services.AddScoped<IWerkgeversRepository, WerkgeversRepository>();
             services.AddScoped<IWerkspreukenRepository, WerkspreukenRepository>();
+            services.AddScoped<IAlgemeneInfoRepository, AlgemeneInfoRepository>();
 
             services.AddTransient<TalentCoachDataInitializer>();
 
