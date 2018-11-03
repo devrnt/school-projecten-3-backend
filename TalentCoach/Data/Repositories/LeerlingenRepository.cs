@@ -32,6 +32,32 @@ namespace TalentCoach.Data.Repositories
                 .ToList();
         }
 
+        public List<Leerling> GetAll_Web()
+        {
+            // In web willen we geen userdata: passwoord, username, etc
+            var leerlingen = _leerlingen.Select(l => new Leerling()
+            {
+                Id = l.Id,
+                Naam = l.Naam,
+                Voornaam = l.Voornaam,
+                Geslacht = l.Geslacht,
+                Email = l.Email,
+                Richting = new Richting(){ Naam = l.Richting.Naam, Id = l.Richting.Id },
+                Competenties = l.Competenties,
+                Projecten = l.Projecten,
+                Werkgever = l.Werkgever!=null? new Werkgever(){Naam = l.Werkgever.Naam, Id = l.Werkgever.Id}: null
+            });
+            return leerlingen
+                
+                .Include(l => l.Richting)
+                .Include(l => l.Competenties)
+                    .ThenInclude(a => a.Competenties)
+                .Include(l => l.Projecten)
+                .ThenInclude(p => p.Competenties)
+                .OrderBy(l => l.Id)
+                .ToList();
+        }
+
         public Leerling GetLeerling(int id)
         {
             var leerling = _leerlingen
