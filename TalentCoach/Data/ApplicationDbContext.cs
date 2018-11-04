@@ -15,6 +15,7 @@ namespace TalentCoach.Data
         public DbSet<Werkaanbieding> Werkaanbiedingen { get; set; }
         public DbSet<Werkspreuk> Werkspreuken { get; set; }
         public DbSet<AlgemeneInfo> AlgemeneInfo { get; set; }
+        public DbSet<Gebruiker> Gebruikers { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
