@@ -20,9 +20,10 @@ namespace TalentCoach
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                   .UseKestrel()
-                .UseContentRoot(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
+                .UseKestrel()
                 .UseIISIntegration()
+                //.UseContentRoot(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location))
+
                 .UseStartup<Startup>();
     }
 }
