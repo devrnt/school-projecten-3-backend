@@ -98,7 +98,9 @@ namespace TalentCoach
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    // Volgende lijn definieert de speling op het vervallen van de token
+                    // ClockSkew = TimeSpan.Zero --> Direct na het vervallen van token --> Unauthorized
                 };
             });
             #endregion
