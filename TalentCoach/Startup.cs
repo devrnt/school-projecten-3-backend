@@ -114,6 +114,7 @@ namespace TalentCoach
             services.AddScoped<IWerkspreukenRepository, WerkspreukenRepository>();
             services.AddScoped<IAlgemeneInfoRepository, AlgemeneInfoRepository>();
             services.AddScoped<IGebruikersRepository, GebruikersRepository>();
+            services.AddScoped<IRepository<SpecifiekeInfo>, SpecifiekeInfoRepository>();
 
             services.AddTransient<TalentCoachDataInitializer>();
 

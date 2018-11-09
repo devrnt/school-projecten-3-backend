@@ -119,6 +119,19 @@ namespace TalentCoach.Data
                 _context.AddRange(algemenInfo);
                 _context.SaveChanges();
 
+                // Specifieke Info
+                var specifiekeInfo = new List<SpecifiekeInfo>
+                {
+                    new SpecifiekeInfo("Contactgegevens", "Vlaanderenstraat 15\n9000 Gent", werkgevers[0]),
+                    new SpecifiekeInfo("Verlofregeling", "Minstens 2 weken op voorhand aanvragen", werkgevers[0]),
+                    new SpecifiekeInfo("Specifieke regels voor werkkledij", "Werkschoenen ten alle tijden dragen\nVeiligheidshelm verplicht", werkgevers[0]),
+                    new SpecifiekeInfo("Contactgegevens", "Lokerenveldstaat 21\n9300 Aalst", werkgevers[1]),
+                    new SpecifiekeInfo("Begeleiders", "Jan Peeters\nKaren Dupont\nJef Schoenaerts", werkgevers[1])
+                };
+
+                _context.AddRange(specifiekeInfo);
+                _context.SaveChanges();
+
             }
         }
     }
