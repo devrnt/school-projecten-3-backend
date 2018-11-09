@@ -8,11 +8,15 @@ namespace TalentCoach.Models.Domain
         public string Omschrijving { get; set; }
         public Werkgever Werkgever { get; set; }
 
-        public SpecifiekeInfo(string titel, string omschrijving, Werkgever werkgever)
+        public SpecifiekeInfo(string titel, string omschrijving)
         {
             Titel = titel;
             Omschrijving = omschrijving;
-            Werkgever = werkgever;
+        }
+
+        protected SpecifiekeInfo()
+        {
+
         }
     }
 }

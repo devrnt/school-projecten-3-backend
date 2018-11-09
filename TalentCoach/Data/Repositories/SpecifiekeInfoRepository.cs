@@ -29,7 +29,7 @@ namespace TalentCoach.Data.Repositories
 
         public List<SpecifiekeInfo> GetAll()
         {
-            return _specifiekeInfos.ToList();
+            return _specifiekeInfos.Include(si => si.Werkgever).ToList();
         }
 
         public SpecifiekeInfo GetById(int id)
