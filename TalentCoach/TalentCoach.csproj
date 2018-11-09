@@ -20,5 +20,7 @@
 
   <ItemGroup>
     <Compile Remove="Models\Mappers\WerkgeverConfiguration.cs" />
+    <Compile Remove="Models\Domain\AlgemeneInfo %28copy%29.cs" />
+    <Compile Remove="Models\Domain\AlgemeneInfo %28copy%29.cs" />
   </ItemGroup>
 </Project>

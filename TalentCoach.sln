@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TalentCoach", "TalentCoach\TalentCoach.csproj", "{49FAB75F-0555-4F5A-A2E4-1A4688B94F6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentCoach", "TalentCoach\TalentCoach.csproj", "{49FAB75F-0555-4F5A-A2E4-1A4688B94F6F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TalentCoach.Tests", "TalentCoach.Tests\TalentCoach.Tests.csproj", "{8857B7D1-E70B-448E-B27D-24C754CAB974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalentCoach.Tests", "TalentCoach.Tests\TalentCoach.Tests.csproj", "{8857B7D1-E70B-448E-B27D-24C754CAB974}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E34B4162-95D8-4B58-BBEF-9FA6247CF725}"
 	ProjectSection(SolutionItems) = preProject
