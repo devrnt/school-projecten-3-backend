@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using TalentCoach.Controllers;
+using TalentCoach.Data.Repositories;
+using TalentCoach.Dtos;
 using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
@@ -132,6 +135,28 @@ namespace TalentCoach.Data
                 _context.AddRange(specifiekeInfo);
                 _context.SaveChanges();
 
+                // Gebruikers
+                var gebruiker1 = new Gebruiker()
+                {
+                    Gebruikersnaam = "JonasDeVrient",
+                    Naam = "De Vrient",
+                    Voornaam = "Jonas",
+                };
+                const string gebruiker1wachtwoord = "jonasjonas";
+
+
+                var gebruiker2 = new Gebruiker()
+                {
+                    Gebruikersnaam = "BrunoStroobants",
+                    Naam = "Stroobants",
+                    Voornaam = "Bruno",
+
+                };
+                const string gebruiker2wachtwoord = "brunobruno";
+               
+                var gebruikersRepo = new GebruikersRepository(_context);
+                gebruikersRepo.CreateGebruiker(gebruiker1, gebruiker1wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruiker2, gebruiker2wachtwoord);
             }
         }
     }
