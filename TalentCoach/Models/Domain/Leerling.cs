@@ -47,12 +47,17 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
             VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
+            Competenties = new List<Activiteit>();
         }
 
         public void AddGereageerdeWerkaanbieding(Werkaanbieding werkaanbieding, Like like)
         {
             GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
 
+        }
+
+        public void AddCompetentieLeerling(Activiteit activiteit){
+            Competenties.Add(activiteit);
         }
 
     }
