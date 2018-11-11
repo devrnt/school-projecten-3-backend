@@ -83,7 +83,7 @@ namespace TalentCoach.Data
                 activiteit1.AddCompetentie(competentie3);
                 activiteit1.AddCompetentie(competentie4);
 
-                var activiteit2 = new Activiteit("Neemt deel aan de organisatie van het kapsalon");
+                var activiteit2 = new Activiteit("Neemt deel aan de organisatie van het kapsalon","2e graad", "10/05/2018");
                 activiteit2.AddCompetentie(competentie5);
                 activiteit2.AddCompetentie(competentie6);
                 activiteit2.AddCompetentie(competentie7);
@@ -95,7 +95,7 @@ namespace TalentCoach.Data
                 activiteit3.AddCompetentie(competentie11);
                 activiteit3.AddCompetentie(competentie12);
 
-                var activiteit4 = new Activiteit("Volgt de klant op");
+                var activiteit4 = new Activiteit("Volgt de klant op","1e graad", "03/02/2017");
                 activiteit4.AddCompetentie(competentie13);
                 activiteit4.AddCompetentie(competentie14);
                 activiteit4.AddCompetentie(competentie15);
@@ -105,7 +105,7 @@ namespace TalentCoach.Data
                 activiteit5.AddCompetentie(competentie17);
                 activiteit5.AddCompetentie(competentie18);
 
-                var activiteit6 = new Activiteit("Vormt het haar blijvend om (krullen, ontkrullen)");
+                var activiteit6 = new Activiteit("Vormt het haar blijvend om (krullen, ontkrullen)","3e graad","29/10/2018");
                 activiteit6.AddCompetentie(competentie19);
                 activiteit6.AddCompetentie(competentie20);
                 activiteit6.AddCompetentie(competentie21);
@@ -122,7 +122,7 @@ namespace TalentCoach.Data
                 activiteit7.AddCompetentie(competentie30);
                 activiteit7.AddCompetentie(competentie31);
 
-                var activiteit8 = new Activiteit("Ontkleurt het haar (volledig of haarlokken)");
+                var activiteit8 = new Activiteit("Ontkleurt het haar (volledig of haarlokken)","2e graad","12/06/2016");
                 activiteit8.AddCompetentie(competentie32);
                 activiteit8.AddCompetentie(competentie33);
                 activiteit8.AddCompetentie(competentie34);
