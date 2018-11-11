@@ -30,7 +30,7 @@ namespace TalentCoach.Models
 
         #region === Constructor ===
 
-        public Activiteit(string omschrijving)
+        public Activiteit(string omschrijving, string graad)
         {
             Omschrijving = omschrijving;
             Competenties = new List<Competentie>();

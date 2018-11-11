@@ -77,7 +77,7 @@ namespace TalentCoach.Data
 
 
                 // Activiteit
-                var activiteit1 = new Activiteit("Ruimt de werkpost op en maakt hem schoon");
+                var activiteit1 = new Activiteit("Ruimt de werkpost op en maakt hem schoon","1e graad");
                 activiteit1.AddCompetentie(competentie1);
                 activiteit1.AddCompetentie(competentie2);
                 activiteit1.AddCompetentie(competentie3);
@@ -89,7 +89,7 @@ namespace TalentCoach.Data
                 activiteit2.AddCompetentie(competentie7);
                 activiteit2.AddCompetentie(competentie8);
 
-                var activiteit3 = new Activiteit("Legt een afspraak vast met de klant");
+                var activiteit3 = new Activiteit("Legt een afspraak vast met de klant","3e graad");
                 activiteit3.AddCompetentie(competentie9);
                 activiteit3.AddCompetentie(competentie10);
                 activiteit3.AddCompetentie(competentie11);
@@ -100,7 +100,7 @@ namespace TalentCoach.Data
                 activiteit4.AddCompetentie(competentie14);
                 activiteit4.AddCompetentie(competentie15);
 
-                var activiteit5 = new Activiteit("Past shampoos en specifieke haarverzorging toe");
+                var activiteit5 = new Activiteit("Past shampoos en specifieke haarverzorging toe","2e graad");
                 activiteit5.AddCompetentie(competentie16);
                 activiteit5.AddCompetentie(competentie17);
                 activiteit5.AddCompetentie(competentie18);
@@ -115,7 +115,7 @@ namespace TalentCoach.Data
                 activiteit6.AddCompetentie(competentie25);
                 activiteit6.AddCompetentie(competentie26);
 
-                var activiteit7 = new Activiteit("Kleurt het haar (volledig of haarlokken)");
+                var activiteit7 = new Activiteit("Kleurt het haar (volledig of haarlokken)","1e graad");
                 activiteit7.AddCompetentie(competentie27);
                 activiteit7.AddCompetentie(competentie28);
                 activiteit7.AddCompetentie(competentie29);
@@ -129,7 +129,7 @@ namespace TalentCoach.Data
                 activiteit8.AddCompetentie(competentie35);
                 activiteit8.AddCompetentie(competentie36);
 
-                var activiteit9 = new Activiteit("Voert een gelegenheidskapsel uit");
+                var activiteit9 = new Activiteit("Voert een gelegenheidskapsel uit","2e graad");
                 activiteit9.AddCompetentie(competentie37);
                 activiteit9.AddCompetentie(competentie38);
                 activiteit9.AddCompetentie(competentie39);
