@@ -30,10 +30,18 @@ namespace TalentCoach.Models
 
         #region === Constructor ===
 
+    
+        public Activiteit(string omschrijving)
+        {
+            Omschrijving = omschrijving;
+            Competenties = new List<Competentie>();
+        }
+
         public Activiteit(string omschrijving, string graad)
         {
             Omschrijving = omschrijving;
             Competenties = new List<Competentie>();
+            Graad = graad;
         }
 
         public Activiteit(string omschrijving, string graad, string behaaldOp):this(omschrijving)
