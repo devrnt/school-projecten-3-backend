@@ -16,6 +16,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using TalentCoach.Data;
 using TalentCoach.Data.Repositories;
 using TalentCoach.Models.Domain;
+using Microsoft.AspNetCore.Http;
 
 namespace TalentCoach
 {
@@ -47,10 +48,16 @@ namespace TalentCoach
                 services.AddDbContext<ApplicationDbContext>(options =>
                        options.UseInMemoryDatabase("Competenties"));
             }
+           
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Talent Coach API", Version = "v1" });
-            }); 
+            });
+
+            services.AddHttpsRedirection(option =>
+            {
+                option.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            });
 
             services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
             services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
