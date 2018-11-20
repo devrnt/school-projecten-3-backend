@@ -54,9 +54,11 @@ namespace TalentCoach
                 c.SwaggerDoc("v1", new Info { Title = "Talent Coach API", Version = "v1" });
             });
 
+
             services.AddHttpsRedirection(option =>
             {
                 option.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+                option.HttpsPort = 5001;
             });
 
             services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
