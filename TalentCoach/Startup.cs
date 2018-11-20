@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -51,12 +50,6 @@ namespace TalentCoach
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Talent Coach API", Version = "v1" });
-            });
-
-            services.AddHttpsRedirection(option =>
-            {
-                option.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-                option.HttpsPort = 5001;
             });
 
             services.AddCors();
