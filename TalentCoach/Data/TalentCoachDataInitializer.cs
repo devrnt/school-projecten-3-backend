@@ -34,7 +34,7 @@ namespace TalentCoach.Data
                 var competentie7 = new Competentie("Reinigt het gebruikte materieel en ontsmet indien nodig");
                 var competentie8 = new Competentie("Sorteert afval volgens de richtlijnen");
 
-                var competentie9 =  new Competentie("Staat de klant te woord aan de telefoon of aan de receptie");
+                var competentie9 = new Competentie("Staat de klant te woord aan de telefoon of aan de receptie");
                 var competentie10 = new Competentie("Schat de tijdsduur van de gewenste behandeling in");
                 var competentie11 = new Competentie("Gebruikt informatie- en communicatietechnologie");
                 var competentie12 = new Competentie("Maakt een afspraak met de klant en legt deze vast in de agenda");
@@ -77,35 +77,35 @@ namespace TalentCoach.Data
 
 
                 // Activiteit
-                var activiteit1 = new Activiteit("Ruimt de werkpost op en maakt hem schoon","1e graad");
+                var activiteit1 = new Activiteit("Ruimt de werkpost op en maakt hem schoon", "1e graad");
                 activiteit1.AddCompetentie(competentie1);
                 activiteit1.AddCompetentie(competentie2);
                 activiteit1.AddCompetentie(competentie3);
                 activiteit1.AddCompetentie(competentie4);
 
-                var activiteit2 = new Activiteit("Neemt deel aan de organisatie van het kapsalon","2e graad", "10/05/2018");
+                var activiteit2 = new Activiteit("Neemt deel aan de organisatie van het kapsalon", "2e graad", "10/05/2018");
                 activiteit2.AddCompetentie(competentie5);
                 activiteit2.AddCompetentie(competentie6);
                 activiteit2.AddCompetentie(competentie7);
                 activiteit2.AddCompetentie(competentie8);
 
-                var activiteit3 = new Activiteit("Legt een afspraak vast met de klant","3e graad");
+                var activiteit3 = new Activiteit("Legt een afspraak vast met de klant", "3e graad");
                 activiteit3.AddCompetentie(competentie9);
                 activiteit3.AddCompetentie(competentie10);
                 activiteit3.AddCompetentie(competentie11);
                 activiteit3.AddCompetentie(competentie12);
 
-                var activiteit4 = new Activiteit("Volgt de klant op","1e graad", "03/02/2017");
+                var activiteit4 = new Activiteit("Volgt de klant op", "1e graad", "03/02/2017");
                 activiteit4.AddCompetentie(competentie13);
                 activiteit4.AddCompetentie(competentie14);
                 activiteit4.AddCompetentie(competentie15);
 
-                var activiteit5 = new Activiteit("Past shampoos en specifieke haarverzorging toe","2e graad");
+                var activiteit5 = new Activiteit("Past shampoos en specifieke haarverzorging toe", "2e graad");
                 activiteit5.AddCompetentie(competentie16);
                 activiteit5.AddCompetentie(competentie17);
                 activiteit5.AddCompetentie(competentie18);
 
-                var activiteit6 = new Activiteit("Vormt het haar blijvend om (krullen, ontkrullen)","3e graad","29/10/2018");
+                var activiteit6 = new Activiteit("Vormt het haar blijvend om (krullen, ontkrullen)", "3e graad", "29/10/2018");
                 activiteit6.AddCompetentie(competentie19);
                 activiteit6.AddCompetentie(competentie20);
                 activiteit6.AddCompetentie(competentie21);
@@ -115,21 +115,21 @@ namespace TalentCoach.Data
                 activiteit6.AddCompetentie(competentie25);
                 activiteit6.AddCompetentie(competentie26);
 
-                var activiteit7 = new Activiteit("Kleurt het haar (volledig of haarlokken)","1e graad");
+                var activiteit7 = new Activiteit("Kleurt het haar (volledig of haarlokken)", "1e graad");
                 activiteit7.AddCompetentie(competentie27);
                 activiteit7.AddCompetentie(competentie28);
                 activiteit7.AddCompetentie(competentie29);
                 activiteit7.AddCompetentie(competentie30);
                 activiteit7.AddCompetentie(competentie31);
 
-                var activiteit8 = new Activiteit("Ontkleurt het haar (volledig of haarlokken)","2e graad","12/06/2016");
+                var activiteit8 = new Activiteit("Ontkleurt het haar (volledig of haarlokken)", "2e graad", "12/06/2016");
                 activiteit8.AddCompetentie(competentie32);
                 activiteit8.AddCompetentie(competentie33);
                 activiteit8.AddCompetentie(competentie34);
                 activiteit8.AddCompetentie(competentie35);
                 activiteit8.AddCompetentie(competentie36);
 
-                var activiteit9 = new Activiteit("Voert een gelegenheidskapsel uit","2e graad");
+                var activiteit9 = new Activiteit("Voert een gelegenheidskapsel uit", "2e graad");
                 activiteit9.AddCompetentie(competentie37);
                 activiteit9.AddCompetentie(competentie38);
                 activiteit9.AddCompetentie(competentie39);
@@ -179,8 +179,8 @@ namespace TalentCoach.Data
                     new Werkaanbieding("Administratief bediende") { Tags = "zelfstandig administratief bediende", Werkgever = werkgevers[2] }
                 };
 
-                werkaanbiedingen[0].AddProject(activiteit1);
-                werkaanbiedingen[1].AddProject(activiteit2);
+                //werkaanbiedingen[0].AddProject(activiteit1);
+                //werkaanbiedingen[1].AddProject(activiteit2);
 
 
                 _context.AddRange(werkaanbiedingen);
@@ -255,7 +255,7 @@ namespace TalentCoach.Data
 
                 };
                 const string gebruiker2wachtwoord = "brunobruno";
-               
+
                 var gebruikersRepo = new GebruikersRepository(_context);
                 gebruikersRepo.CreateGebruiker(gebruiker1, gebruiker1wachtwoord);
                 gebruikersRepo.CreateGebruiker(gebruiker2, gebruiker2wachtwoord);
