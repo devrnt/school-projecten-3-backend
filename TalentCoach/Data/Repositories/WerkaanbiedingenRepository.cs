@@ -30,7 +30,7 @@ namespace TalentCoach.Data.Repositories
 
         public Werkaanbieding Delete(int id)
         {
-            Werkaanbieding wa = _werkaanbiedingen.FirstOrDefault(w => w.Id == id);
+            var wa = _werkaanbiedingen.Include(eenWerkaanbieding => eenWerkaanbieding.Werkgever).FirstOrDefault(w => w.Id == id);
             if (wa == null)
             {
                 return null;
