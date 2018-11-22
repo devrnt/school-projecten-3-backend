@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TalentCoach.Models.Domain
 {
-    public class LeerlingDeelCompetenties
+    public class LeerlingHoofdCompetentie
     {
         public int Id
         {

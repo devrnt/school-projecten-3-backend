@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TalentCoach.Models.Domain
 {
-    public interface ICompetentiesRepository
+    public interface IDeelCompetentiesRepository
     {
         List<DeelCompetentie> GetAll();
         DeelCompetentie GetCompetentie(int id);

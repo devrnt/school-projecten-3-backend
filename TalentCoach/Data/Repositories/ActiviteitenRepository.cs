@@ -6,7 +6,7 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
 {
-    public class ActiviteitenRepository : IActiviteitenRepository
+    public class ActiviteitenRepository : IHoofdCompetentieRepository
     {
         private readonly ApplicationDbContext _context;
 

@@ -9,9 +9,9 @@ namespace TalentCoach.Controllers
     [ApiController]
     public class ActiviteitenController : ControllerBase
     {
-        private readonly IActiviteitenRepository _repository;
+        private readonly IHoofdCompetentieRepository _repository;
 
-        public ActiviteitenController(IActiviteitenRepository repository)
+        public ActiviteitenController(IHoofdCompetentieRepository repository)
         {
             _repository = repository;
         }
