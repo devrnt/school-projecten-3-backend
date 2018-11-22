@@ -10,7 +10,7 @@ namespace TalentCoach.Data.Repositories
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly DbSet<Activiteit> _activiteiten;
+        private readonly DbSet<HoofdCompetentie> _activiteiten;
 
         public ActiviteitenRepository(ApplicationDbContext context)
         {
@@ -18,7 +18,7 @@ namespace TalentCoach.Data.Repositories
             _activiteiten = _context.Activiteiten;
         }
 
-        public List<Activiteit> GetAll()
+        public List<HoofdCompetentie> GetAll()
         {
             return _activiteiten
                     .Include(a => a.Competenties)
@@ -26,23 +26,23 @@ namespace TalentCoach.Data.Repositories
                     .ToList();
         }
 
-        public Activiteit GetActiviteit(int id)
+        public HoofdCompetentie GetActiviteit(int id)
         {
             return _activiteiten
                 .Include(a => a.Competenties)
                 .SingleOrDefault(a => a.Id == id);
         }
 
-        public Activiteit AddActiviteit(Activiteit item)
+        public HoofdCompetentie AddActiviteit(HoofdCompetentie item)
         {
             _activiteiten.Add(item);
             SaveChanges();
             return item;
         }
 
-        public Activiteit Delete(int id)
+        public HoofdCompetentie Delete(int id)
         {
-            Activiteit activiteit = _activiteiten.Find(id);
+            HoofdCompetentie activiteit = _activiteiten.Find(id);
             if (activiteit == null)
             {
                 return null;
@@ -57,9 +57,9 @@ namespace TalentCoach.Data.Repositories
             _context.SaveChanges();
         }
 
-        public Activiteit UpdateActiviteit(int id, Activiteit item)
+        public HoofdCompetentie UpdateActiviteit(int id, HoofdCompetentie item)
         {
-            Activiteit activiteit = _activiteiten.Find(id);
+            HoofdCompetentie activiteit = _activiteiten.Find(id);
             if (activiteit == null)
             {
                 return null;

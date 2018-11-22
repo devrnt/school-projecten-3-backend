@@ -20,8 +20,8 @@ namespace TalentCoach.Models.Domain
         public List<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
         [JsonIgnore]
         public List<LeerlingWerkaanbieding> GereageerdeWerkaanbiedingen { get; set; }
-        public List<Activiteit> Competenties { get; set; }
-        public List<Activiteit> Projecten { get; set; }
+        public List<HoofdCompetentie> Competenties { get; set; }
+        public List<HoofdCompetentie> Projecten { get; set; }
         // TODO: Add wergever and stage
         public Werkgever Werkgever { get; set;}
 
@@ -48,7 +48,7 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
             VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
-            Competenties = new List<Activiteit>();
+            Competenties = new List<HoofdCompetentie>();
         }
 
         public void AddGereageerdeWerkaanbieding(Werkaanbieding werkaanbieding, Like like)
@@ -57,7 +57,7 @@ namespace TalentCoach.Models.Domain
 
         }
 
-        public void AddCompetentieLeerling(Activiteit activiteit){
+        public void AddCompetentieLeerling(HoofdCompetentie activiteit){
             Competenties.Add(activiteit);
         }
 

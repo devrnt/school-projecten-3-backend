@@ -26,7 +26,7 @@ namespace TalentCoach.Controllers
         ///		Lijst van competenties
         /// </returns>		
         [HttpGet]
-        public ActionResult<List<Competentie>> GetAll()
+        public ActionResult<List<DeelCompetentie>> GetAll()
         {
             return _repository.GetAll();
         }
@@ -42,11 +42,11 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // GET api/competenties/1
         [HttpGet("{id}", Name = "GetCompetentie")]
-        public ActionResult<Competentie> GetById(int id)
+        public ActionResult<DeelCompetentie> GetById(int id)
         {
 
             var result = _repository.GetCompetentie(id);
-            return result ?? (ActionResult<Competentie>)NotFound(new Dictionary<string, string>() { { "message", $"competentie with id: {id} not Found" } });
+            return result ?? (ActionResult<DeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"competentie with id: {id} not Found" } });
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // POST api/competenties
         [HttpPost]
-        public IActionResult Create(Competentie item)
+        public IActionResult Create(DeelCompetentie item)
         {
             var result = _repository.AddCompetentie(item);
             var id = item.Id;
@@ -79,10 +79,10 @@ namespace TalentCoach.Controllers
         // we should use HttpPatch
         // PUT api/competenties/1
         [HttpPut("{id}")]
-        public ActionResult<Competentie> Update(int id, Competentie item)
+        public ActionResult<DeelCompetentie> Update(int id, DeelCompetentie item)
         {
             var result = _repository.UpdateCompetentie(id, item);
-            return result ?? (ActionResult<Competentie>)NotFound(new Dictionary<string, string>() { { "message", $"competentie with id: {id} not Found" } });
+            return result ?? (ActionResult<DeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"competentie with id: {id} not Found" } });
         }
 
         /// <summary>

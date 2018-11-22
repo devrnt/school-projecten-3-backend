@@ -7,8 +7,8 @@ namespace TalentCoach.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Competentie> Competenties { get; set; }
-        public DbSet<Activiteit> Activiteiten { get; set; }
+        public DbSet<DeelCompetentie> Competenties { get; set; }
+        public DbSet<HoofdCompetentie> Activiteiten { get; set; }
         public DbSet<Richting> Richtingen { get; set; }
         public DbSet<Leerling> Leerlingen { get; set; }
         public DbSet<Werkgever> Werkgevers { get; set; }

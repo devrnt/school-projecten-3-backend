@@ -7,11 +7,11 @@ namespace TalentCoach.Models.Domain
 {
     public interface IActiviteitenRepository
     {
-        List<Activiteit> GetAll();
-        Activiteit GetActiviteit(int id);
-        Activiteit AddActiviteit(Activiteit item);
-        Activiteit UpdateActiviteit(int id, Activiteit item);
-        Activiteit Delete(int id);
+        List<HoofdCompetentie> GetAll();
+        HoofdCompetentie GetActiviteit(int id);
+        HoofdCompetentie AddActiviteit(HoofdCompetentie item);
+        HoofdCompetentie UpdateActiviteit(int id, HoofdCompetentie item);
+        HoofdCompetentie Delete(int id);
         void SaveChanges();
     }
 }
