@@ -17,6 +17,7 @@ using TalentCoach.Data;
 using TalentCoach.Data.Repositories;
 using TalentCoach.Helpers;
 using TalentCoach.Models.Domain;
+using Microsoft.AspNetCore.Http;
 
 namespace TalentCoach
 {
@@ -46,7 +47,7 @@ namespace TalentCoach
                 services.AddDbContext<ApplicationDbContext>(options =>
                        options.UseInMemoryDatabase("TalentCoachInMemory"));
             }
-
+          
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Talent Coach API", Version = "v1" });

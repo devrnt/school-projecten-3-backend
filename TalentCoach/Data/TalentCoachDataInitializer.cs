@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg");
+                var richting = new Richting("Haarzorg", "scissors","red");
                 richting.AddActiviteit(activiteit1);
                 richting.AddActiviteit(activiteit2);
                 richting.AddActiviteit(activiteit3);

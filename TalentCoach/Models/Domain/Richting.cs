@@ -22,10 +22,17 @@ namespace TalentCoach.Models.Domain
         #endregion
 
         #region === Constructor ===
-        public Richting(string naam)
+        public Richting(string naam,string icon,string kleur)
         {
             Naam = naam;
+            Icon = icon;
+            Kleur = kleur;
             Activiteiten = new List<Activiteit>();
+        }
+
+        public Richting()
+        {
+
         }
         #endregion
 

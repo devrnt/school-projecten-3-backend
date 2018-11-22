@@ -23,6 +23,7 @@ namespace TalentCoach.Models.Domain
         public List<Activiteit> Competenties { get; set; }
         public List<Activiteit> Projecten { get; set; }
         // TODO: Add wergever and stage
+        public Werkgever Werkgever { get; set;}
 
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password) : this()
         {

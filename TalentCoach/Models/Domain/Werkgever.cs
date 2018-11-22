@@ -23,6 +23,11 @@ namespace TalentCoach.Models.Domain
             Email = email;
             TelefoonNummer = telefoonNummer;
         }
+
+        public Werkgever()
+        {
+
+        }
         #endregion
 
     }
