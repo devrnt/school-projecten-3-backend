@@ -31,13 +31,14 @@ namespace TalentCoach.Data.Repositories
         public Werkaanbieding Delete(int id)
         {
             var wa = _werkaanbiedingen.Include(eenWerkaanbieding => eenWerkaanbieding.Werkgever).FirstOrDefault(w => w.Id == id);
+            var waCopy = new Werkaanbieding(wa.Omschrijving) { Id = wa.Id, Tags = wa.Tags, Werkgever = wa.Werkgever };
             if (wa == null)
             {
                 return null;
             }
             _werkaanbiedingen.Remove(wa);
             SaveChanges();
-            return wa;
+            return waCopy;
         }
 
         public List<Werkaanbieding> GetAll() => _werkaanbiedingen

@@ -110,10 +110,10 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // DELETE api/werkaanbiedingen
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public ActionResult<Werkaanbieding> Delete(int id)
         {
             var result = _repository.Delete(id);
-            return result == null ? NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {id} not found" } }) : (IActionResult)NoContent();
+            return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {id} not found" } });
         }
     }
 }
