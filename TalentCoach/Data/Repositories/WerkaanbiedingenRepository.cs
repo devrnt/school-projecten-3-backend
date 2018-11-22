@@ -60,15 +60,15 @@ namespace TalentCoach.Data.Repositories
 
         public Werkaanbieding UpdateWerkaanbieding(int id, Werkaanbieding werkaanbieding)
         {
-            Werkaanbieding wa = _werkaanbiedingen.FirstOrDefault(w => w.Id == id);
+            var wa = _werkaanbiedingen.Include(eenWerkaanbieding => eenWerkaanbieding.Werkgever).FirstOrDefault(w => w.Id == id);
             if (wa == null)
                 return null;
-            else
-            {
-                wa.Omschrijving = werkaanbieding.Omschrijving;
-                //wa.Projecten = werkaanbieding.Projecten;
-                SaveChanges();
-            }
+
+            wa.Omschrijving = werkaanbieding.Omschrijving;
+            wa.Tags = werkaanbieding.Tags;
+            //wa.Projecten = werkaanbieding.Projecten;
+            SaveChanges();
+
             return wa;
         }
     }
