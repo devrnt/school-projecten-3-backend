@@ -55,6 +55,7 @@ namespace TalentCoach.Data.Repositories
             else
             {
                 richting.Naam = item.Naam;
+                richting.Activiteiten = item.Activiteiten;
                 _richtingen.Update(richting);
                 SaveChanges();
             }

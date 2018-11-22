@@ -5,19 +5,22 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Folder Include="Models\Mappers\" />
     <Folder Include="wwwroot\" />
-    <Folder Include="Models\Mappers\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Models\Mappers\WerkgeverConfiguration.cs" />
+    <Compile Remove="Models\Domain\AlgemeneInfo %28copy%29.cs" />
+    <Compile Remove="Models\Domain\AlgemeneInfo %28copy%29.cs" />
   </ItemGroup>
 </Project>

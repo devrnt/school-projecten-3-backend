@@ -8,6 +8,8 @@ namespace TalentCoach.Models
         #region === Properties ===
         public int Id { get; set; }
         public string Omschrijving { get; set; }
+        public string Graad { get; set; }
+        public string BehaaldOp { get; set; }             
         public List<Competentie> Competenties { get; set; }
         public bool Behaald
         {
@@ -28,10 +30,24 @@ namespace TalentCoach.Models
 
         #region === Constructor ===
 
+    
         public Activiteit(string omschrijving)
         {
             Omschrijving = omschrijving;
             Competenties = new List<Competentie>();
+        }
+
+        public Activiteit(string omschrijving, string graad)
+        {
+            Omschrijving = omschrijving;
+            Competenties = new List<Competentie>();
+            Graad = graad;
+        }
+
+        public Activiteit(string omschrijving, string graad, string behaaldOp):this(omschrijving)
+        {
+            Graad = graad;
+            BehaaldOp = behaaldOp;
         }
         #endregion
 

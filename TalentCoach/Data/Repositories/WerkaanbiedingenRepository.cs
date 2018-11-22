@@ -12,14 +12,17 @@ namespace TalentCoach.Data.Repositories
 
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Werkaanbieding> _werkaanbiedingen;
+        private readonly IWerkgeversRepository _werkgeversRepository;
 
         public WerkaanbiedingenRepository(ApplicationDbContext context)
         {
             _context = context;
             _werkaanbiedingen = context.Werkaanbiedingen;
+            _werkgeversRepository = new WerkgeversRepository(context);
         }
         public Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding)
         {
+            aanbieding.Werkgever = _werkgeversRepository.GetWerkgever(aanbieding.Werkgever.Id);
             _werkaanbiedingen.Add(aanbieding);
             SaveChanges();
             return aanbieding;
@@ -38,15 +41,15 @@ namespace TalentCoach.Data.Repositories
         }
 
         public List<Werkaanbieding> GetAll() => _werkaanbiedingen
-                .Include(w => w.Projecten)
-                    .ThenInclude(p => p.Competenties)
+                //.Include(w => w.Projecten)
+                //.ThenInclude(p => p.Competenties)
                 .Include(w => w.Werkgever)
                 .OrderBy(wa => wa.Id)
                 .ToList();
 
         public Werkaanbieding GetWerkaanbieding(int id) => _werkaanbiedingen
-                .Include(w => w.Projecten)
-                    .ThenInclude(p => p.Competenties)
+                //.Include(w => w.Projecten)
+                //.ThenInclude(p => p.Competenties)
                 .Include(w => w.Werkgever)
                 .FirstOrDefault(w => w.Id == id);
 
@@ -63,7 +66,7 @@ namespace TalentCoach.Data.Repositories
             else
             {
                 wa.Omschrijving = werkaanbieding.Omschrijving;
-                wa.Projecten = werkaanbieding.Projecten;
+                //wa.Projecten = werkaanbieding.Projecten;
                 SaveChanges();
             }
             return wa;

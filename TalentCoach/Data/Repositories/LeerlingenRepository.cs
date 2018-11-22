@@ -116,6 +116,7 @@ namespace TalentCoach.Data.Repositories
                 leerling.GeboorteDatum = item.GeboorteDatum;
                 leerling.Geslacht = item.Geslacht;
                 leerling.Email = item.Email;
+                leerling.Interesses = item.Interesses;
                 leerling.Password = item.Password;
                 leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
                 leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
