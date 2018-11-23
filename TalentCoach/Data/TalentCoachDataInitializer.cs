@@ -83,7 +83,7 @@ namespace TalentCoach.Data
                 activiteit1.AddCompetentie(competentie3);
                 activiteit1.AddCompetentie(competentie4);
 
-                var activiteit2 = new HoofdCompetentie("Neemt deel aan de organisatie van het kapsalon", "2e graad", "10/05/2018");
+                var activiteit2 = new HoofdCompetentie("Neemt deel aan de organisatie van het kapsalon", "2e graad");
                 activiteit2.AddCompetentie(competentie5);
                 activiteit2.AddCompetentie(competentie6);
                 activiteit2.AddCompetentie(competentie7);
@@ -95,7 +95,7 @@ namespace TalentCoach.Data
                 activiteit3.AddCompetentie(competentie11);
                 activiteit3.AddCompetentie(competentie12);
 
-                var activiteit4 = new HoofdCompetentie("Volgt de klant op", "1e graad", "03/02/2017");
+                var activiteit4 = new HoofdCompetentie("Volgt de klant op", "1e graad");
                 activiteit4.AddCompetentie(competentie13);
                 activiteit4.AddCompetentie(competentie14);
                 activiteit4.AddCompetentie(competentie15);
@@ -105,7 +105,7 @@ namespace TalentCoach.Data
                 activiteit5.AddCompetentie(competentie17);
                 activiteit5.AddCompetentie(competentie18);
 
-                var activiteit6 = new HoofdCompetentie("Vormt het haar blijvend om (krullen, ontkrullen)", "3e graad", "29/10/2018");
+                var activiteit6 = new HoofdCompetentie("Vormt het haar blijvend om (krullen, ontkrullen)", "3e graad");
                 activiteit6.AddCompetentie(competentie19);
                 activiteit6.AddCompetentie(competentie20);
                 activiteit6.AddCompetentie(competentie21);
@@ -122,7 +122,7 @@ namespace TalentCoach.Data
                 activiteit7.AddCompetentie(competentie30);
                 activiteit7.AddCompetentie(competentie31);
 
-                var activiteit8 = new HoofdCompetentie("Ontkleurt het haar (volledig of haarlokken)", "2e graad", "12/06/2016");
+                var activiteit8 = new HoofdCompetentie("Ontkleurt het haar (volledig of haarlokken)", "2e graad");
                 activiteit8.AddCompetentie(competentie32);
                 activiteit8.AddCompetentie(competentie33);
                 activiteit8.AddCompetentie(competentie34);
@@ -140,20 +140,20 @@ namespace TalentCoach.Data
                 var activiteiten = new List<HoofdCompetentie> { activiteit1, activiteit2, activiteit3, activiteit4, activiteit5,
                  activiteit6, activiteit7, activiteit8, activiteit9 };
 
-                _context.Activiteiten.AddRange(activiteiten);
+                _context.HoofdCompetenties.AddRange(activiteiten);
                 _context.SaveChanges();
 
                 // Richting
                 var richting = new Richting("Haarzorg", "scissors","red");
-                richting.AddActiviteit(activiteit1);
-                richting.AddActiviteit(activiteit2);
-                richting.AddActiviteit(activiteit3);
-                richting.AddActiviteit(activiteit4);
-                richting.AddActiviteit(activiteit5);
-                richting.AddActiviteit(activiteit6);
-                richting.AddActiviteit(activiteit7);
-                richting.AddActiviteit(activiteit8);
-                richting.AddActiviteit(activiteit9);
+                richting.AddHoofdCompetentie(activiteit1);
+                richting.AddHoofdCompetentie(activiteit2);
+                richting.AddHoofdCompetentie(activiteit3);
+                richting.AddHoofdCompetentie(activiteit4);
+                richting.AddHoofdCompetentie(activiteit5);
+                richting.AddHoofdCompetentie(activiteit6);
+                richting.AddHoofdCompetentie(activiteit7);
+                richting.AddHoofdCompetentie(activiteit8);
+                richting.AddHoofdCompetentie(activiteit9);
 
 
                 _context.Add(richting);

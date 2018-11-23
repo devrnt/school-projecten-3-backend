@@ -36,6 +36,7 @@ namespace TalentCoach.Models
             DeelCompetenties = new List<DeelCompetentie>();
             Graad = graad;
         }
+
         #endregion
 
         #region === Methods === 

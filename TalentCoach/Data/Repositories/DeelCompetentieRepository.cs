@@ -6,16 +6,16 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
 {
-    public class CompetentiesRepository : ICompetentiesRepository
+    public class DeelCompetentieRepository : IDeelCompetentieRepository
     {
         private readonly ApplicationDbContext _context;
 
         private readonly DbSet<DeelCompetentie> _competenties;
 
-        public CompetentiesRepository(ApplicationDbContext context)
+        public DeelCompetentieRepository(ApplicationDbContext context)
         {
             _context = context;
-            _competenties = _context.Competenties;
+            _competenties = _context.DeelCompetenties;
         }
 
         public List<DeelCompetentie> GetAll()
@@ -47,9 +47,6 @@ namespace TalentCoach.Data.Repositories
             }
             else
             {
-                competentie.Behaald = item.Behaald;
-                competentie.AantalKeerGeëvalueerd = item.AantalKeerGeëvalueerd;
-                competentie.Beoordeling = item.Beoordeling;
                 competentie.Omschrijving = item.Omschrijving;
 
                 _competenties.Update(competentie);

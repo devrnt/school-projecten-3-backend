@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace TalentCoach.Models.Domain 
 {
-    public class CompetentieBeoordeling
+    public class LeerlingDeelCompetentie
     {
         public int Id
         {
@@ -13,13 +13,13 @@ namespace TalentCoach.Models.Domain
         public Leerling Leerling
         {
             get;
-            set;
+            private set;
         }
 
-        public DeelCompetentie Competentie
+        public DeelCompetentie DeelCompetentie
         {
             get;
-            set;
+            private set;
         }
 
         public bool Geslaagd
@@ -40,5 +40,15 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
+        public void addBeoordeling(BeoordelingDeelCompetentie beoordeling)
+        {
+            this.Beoordelingen.Add(beoordeling);
+        }
+
+        public LeerlingDeelCompetentie(Leerling l,DeelCompetentie dc)
+        {
+            this.Leerling = Leerling;
+            this.DeelCompetentie = dc;
+        }
     } 
 }

@@ -6,48 +6,48 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
 {
-    public class ActiviteitenRepository : IHoofdCompetentieRepository
+    public class HoofdCompetentieRepository : IHoofdCompetentieRepository
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly DbSet<HoofdCompetentie> _activiteiten;
+        private readonly DbSet<HoofdCompetentie> _hoofdCompetenties;
 
-        public ActiviteitenRepository(ApplicationDbContext context)
+        public HoofdCompetentieRepository(ApplicationDbContext context)
         {
             _context = context;
-            _activiteiten = _context.Activiteiten;
+            _hoofdCompetenties = _context.HoofdCompetenties;
         }
 
         public List<HoofdCompetentie> GetAll()
         {
-            return _activiteiten
-                    .Include(a => a.Competenties)
+            return _hoofdCompetenties
+                .Include(a => a.DeelCompetenties)
                     .OrderBy(a => a.Id)
                     .ToList();
         }
 
         public HoofdCompetentie GetActiviteit(int id)
         {
-            return _activiteiten
-                .Include(a => a.Competenties)
+            return _hoofdCompetenties
+                .Include(a => a.DeelCompetenties)
                 .SingleOrDefault(a => a.Id == id);
         }
 
         public HoofdCompetentie AddActiviteit(HoofdCompetentie item)
         {
-            _activiteiten.Add(item);
+            _hoofdCompetenties.Add(item);
             SaveChanges();
             return item;
         }
 
         public HoofdCompetentie Delete(int id)
         {
-            HoofdCompetentie activiteit = _activiteiten.Find(id);
+            HoofdCompetentie activiteit = _hoofdCompetenties.Find(id);
             if (activiteit == null)
             {
                 return null;
             }
-            _activiteiten.Remove(activiteit);
+            _hoofdCompetenties.Remove(activiteit);
             SaveChanges();
             return activiteit;
         }
@@ -59,7 +59,7 @@ namespace TalentCoach.Data.Repositories
 
         public HoofdCompetentie UpdateActiviteit(int id, HoofdCompetentie item)
         {
-            HoofdCompetentie activiteit = _activiteiten.Find(id);
+            HoofdCompetentie activiteit = _hoofdCompetenties.Find(id);
             if (activiteit == null)
             {
                 return null;
@@ -67,7 +67,7 @@ namespace TalentCoach.Data.Repositories
             else
             {
                 activiteit.Omschrijving = item.Omschrijving;
-                _activiteiten.Update(activiteit);
+                _hoofdCompetenties.Update(activiteit);
                 SaveChanges();
             }
             return activiteit;

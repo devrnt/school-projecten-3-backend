@@ -25,9 +25,6 @@ namespace TalentCoach.Data.Repositories
             // enkel Richting nodig?
             return _leerlingen
                 .Include(l => l.Richting)
-                .Include(l => l.Competenties)
-                .Include(l => l.Projecten)
-                .ThenInclude(p => p.Competenties)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
@@ -48,12 +45,7 @@ namespace TalentCoach.Data.Repositories
                 Werkgever = l.Werkgever!=null? new Werkgever(){Naam = l.Werkgever.Naam, Id = l.Werkgever.Id}: null
             });
             return leerlingen
-                
                 .Include(l => l.Richting)
-                .Include(l => l.Competenties)
-                    .ThenInclude(a => a.Competenties)
-                .Include(l => l.Projecten)
-                .ThenInclude(p => p.Competenties)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
@@ -61,15 +53,16 @@ namespace TalentCoach.Data.Repositories
         public Leerling GetLeerling(int id)
         {
             var leerling = _leerlingen
+                .Include(l => l.Richting)
+                    .ThenInclude(r => r.HoofdCompetenties)
+                        .ThenInclude(a => a.Deelcompetenties)
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
-                .Include(l => l.Richting)
-                    .ThenInclude(r => r.Activiteiten)
-                    .ThenInclude(a => a.Competenties)
-                .Include(l => l.Competenties)
+               
+                .Include(l => l)
                 .Include(l => l.Projecten)
-                    .ThenInclude(p => p.Competenties)
+                    .ThenInclude(p => p.Deelcompetenties)
                 .SingleOrDefault(l => l.Id == id);
 
             if (leerling != null)

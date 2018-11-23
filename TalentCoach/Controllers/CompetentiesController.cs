@@ -12,9 +12,9 @@ namespace TalentCoach.Controllers
     [ApiController]
     public class CompetentiesController : ControllerBase
     {
-        private readonly ICompetentiesRepository _repository;
+        private readonly IDeelCompetentieRepository _repository;
 
-        public CompetentiesController(ICompetentiesRepository repository)
+        public CompetentiesController(IDeelCompetentieRepository repository)
         {
             _repository = repository;
         }
