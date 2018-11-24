@@ -190,10 +190,7 @@ namespace TalentCoach.Data
                 var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
-                leerling1.AddCompetentieLeerling(activiteit2);
-                leerling1.AddCompetentieLeerling(activiteit4);
-                leerling1.AddCompetentieLeerling(activiteit6);
-                leerling1.AddCompetentieLeerling(activiteit8);
+
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;

@@ -24,7 +24,7 @@ namespace TalentCoach.Models.Domain
             set { _deelCompetentie = value; }
         }
 
-        public bool Geslaagd
+        public bool Behaald
         {
             get;
             set;

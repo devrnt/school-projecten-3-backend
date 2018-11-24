@@ -40,7 +40,6 @@ namespace TalentCoach.Data.Repositories
                 Geslacht = l.Geslacht,
                 Email = l.Email,
                 Richting = new Richting(){ Naam = l.Richting.Naam, Id = l.Richting.Id },
-                Competenties = l.Competenties,
                 Projecten = l.Projecten,
                 Werkgever = l.Werkgever!=null? new Werkgever(){Naam = l.Werkgever.Naam, Id = l.Werkgever.Id}: null
             });

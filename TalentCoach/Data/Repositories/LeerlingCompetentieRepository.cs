@@ -15,18 +15,20 @@ namespace TalentCoach.Data.Repositories
         private readonly DbSet<LeerlingHoofdCompetentie> _lhoofdcompetenties;
         private readonly DbSet<LeerlingDeelCompetentie> _ldeelcompetenties;
 
-        public void MaakgCompetentiesNieuweLeerling(Leerling leerling)
+        public IList<LeerlingHoofdCompetentie> MaakCompetentiesNieuweLeerling(Leerling leerling)
         {
-            this.addNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+            this.AddNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+            return this.GetAllLeerlingCompetenties(leerling);
         }
 
-        public void UpdateCompetentiesBijVeranderingRichting(Leerling leerling)
+        public IList<LeerlingHoofdCompetentie> UpdateCompetentiesBijVeranderingRichting(Leerling leerling)
         {
             this._lhoofdcompetenties.RemoveRange(this._lhoofdcompetenties.Where(lhc => !lhc.Behaald));
-            this.addNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+            this.AddNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+            return this.GetAllLeerlingCompetenties(leerling);
         }
 
-        private void addNieuweHoofdEnDeelOpBasisVanRichting(Leerling leerling)
+        private void AddNieuweHoofdEnDeelOpBasisVanRichting(Leerling leerling)
         {
             IList<LeerlingHoofdCompetentie> competenties = leerling.Richting.HoofdCompetenties.Select(h =>
                 new LeerlingHoofdCompetentie()
@@ -44,11 +46,17 @@ namespace TalentCoach.Data.Repositories
                 {
                     Leerling = leerling,
                     DeelCompetentie = dc,
-                    Geslaagd = false
+                    Behaald = false
                 }
             ).ToList();
             _ldeelcompetenties.AddRangeAsync(deelcompetenties);
             this.SaveChanges();
+        }
+
+        private void ControlleerBehaaldeDeelCompetenties(Leerling leerling)
+        {
+            var behaaldeDeelcompetenties = this._ldeelcompetenties.Where(ldc => ldc.Behaald);
+            this._ldeelcompetenties.RemoveRange(this._ldeelcompetenties.Where(ldc => behaaldeDeelcompetenties.Contains(ldc)).ToArray());
         }
 
         public void AddBeoordeling(Leerling leerling, DeelCompetentie dc, BeoordelingDeelCompetentie bd)
@@ -59,22 +67,16 @@ namespace TalentCoach.Data.Repositories
 
         public void SetBehaald(Leerling leerling, DeelCompetentie dc)
         {
-            FindOrAddLeerlingCompetentie(leerling, dc).Geslaagd = true;
+            FindOrAddLeerlingCompetentie(leerling, dc).Behaald = true;
             this.SaveChanges();
         }
 
         public IList<LeerlingHoofdCompetentie> GetAllLeerlingCompetenties(Leerling fromLeerling)
         {
-
             // lijst van leerling-hoofdcompetenties zonder leerling-deelcompetenties
-            IList<LeerlingHoofdCompetentie> beoordeeldeCompetenties =
+            IList<LeerlingHoofdCompetentie> competenties =
                 this._lhoofdcompetenties.Where(hdc => hdc.Leerling.Id == fromLeerling.Id).ToList();
-
-
-
-            // deelcompetenties toevoegen per hoofdcompetentie
-            competenties = this.DeelCompetentiesPerHoofdCompetentie(competenties);
-            // nog niet gescoorde competenties toevoegen (van richtinh)
+           return this.DeelCompetentiesPerHoofdCompetentie(competenties);
         }
 
         private IList<LeerlingHoofdCompetentie> DeelCompetentiesPerHoofdCompetentie(IList<LeerlingHoofdCompetentie> competenties)
@@ -89,7 +91,6 @@ namespace TalentCoach.Data.Repositories
                 competenties[i] = current;
             }
             return competenties;
-
         }
 
         public void SaveChanges()

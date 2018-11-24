@@ -5,8 +5,8 @@ namespace TalentCoach.Models.Domain
 {
     public interface ILeerlingCompetentieRepository
     {
-        IList<LeerlingDeelCompetentie> GetAllDeel(Leerling from);
-        IList<LeerlingHoofdCompetentie> GetAllHoofd(Leerling from);
+        IList<LeerlingHoofdCompetentie> MaakCompetentiesNieuweLeerling(Leerling leerling);
+        IList<LeerlingHoofdCompetentie> UpdateCompetentiesBijVeranderingRichting(Leerling leerling);
         void AddBeoordeling(Leerling leerling,DeelCompetentie dc, BeoordelingDeelCompetentie bd);
         void SetBehaald(Leerling leerling, DeelCompetentie dc);
         void SaveChanges();
