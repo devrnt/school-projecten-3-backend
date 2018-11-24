@@ -16,12 +16,12 @@ namespace TalentCoach.Models.Domain
         public string Password { get; set; }
         public string Interesses { get; set; }
         public Richting Richting { get; set; }
-        public List<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
-        public List<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
+        public IList<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
+        public IList<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
         [JsonIgnore]
         public List<LeerlingWerkaanbieding> GereageerdeWerkaanbiedingen { get; set; }
-        public List<HoofdCompetentie> Competenties { get; set; }
-        public List<HoofdCompetentie> Projecten { get; set; }
+        public IList<LeerlingHoofdCompetentie> HoofdCompetenties { get; set; }
+        public IList<LeerlingHoofdCompetentie> Projecten { get; set; }
         // TODO: Add wergever and stage
         public Werkgever Werkgever { get; set;}
 
@@ -48,7 +48,6 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
             BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
             VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
-            Competenties = new List<HoofdCompetentie>();
         }
 
         public void AddGereageerdeWerkaanbieding(Werkaanbieding werkaanbieding, Like like)
@@ -56,10 +55,5 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
 
         }
-
-        public void AddCompetentieLeerling(HoofdCompetentie activiteit){
-            Competenties.Add(activiteit);
-        }
-
     }
 }

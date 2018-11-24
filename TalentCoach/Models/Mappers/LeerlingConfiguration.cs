@@ -11,6 +11,7 @@ namespace TalentCoach.Models.Mappers
         {
             builder.Ignore(l => l.VerwijderdeWerkaanbiedingen);
             builder.Ignore(l => l.BewaardeWerkaanbiedingen);
+            builder.Ignore(l => l.HoofdCompetenties);
         }
     }
 }

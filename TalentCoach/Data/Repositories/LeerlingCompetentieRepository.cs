@@ -7,7 +7,7 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
 {
-    public class LeerlingCompetentieRepository: ILeerlingCompetentieRepository
+    public class LeerlingCompetentieRepository : ILeerlingCompetentieRepository
     {
 
         private readonly ApplicationDbContext _context;
@@ -15,27 +15,81 @@ namespace TalentCoach.Data.Repositories
         private readonly DbSet<LeerlingHoofdCompetentie> _lhoofdcompetenties;
         private readonly DbSet<LeerlingDeelCompetentie> _ldeelcompetenties;
 
+        public void MaakgCompetentiesNieuweLeerling(Leerling leerling)
+        {
+            this.addNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+        }
+
+        public void UpdateCompetentiesBijVeranderingRichting(Leerling leerling)
+        {
+            this._lhoofdcompetenties.RemoveRange(this._lhoofdcompetenties.Where(lhc => !lhc.Behaald));
+            this.addNieuweHoofdEnDeelOpBasisVanRichting(leerling);
+        }
+
+        private void addNieuweHoofdEnDeelOpBasisVanRichting(Leerling leerling)
+        {
+            IList<LeerlingHoofdCompetentie> competenties = leerling.Richting.HoofdCompetenties.Select(h =>
+                new LeerlingHoofdCompetentie()
+                {
+                    Leerling = leerling,
+                    HoofdCompetentie = h,
+                    Behaald = false,
+                }
+           ).ToList();
+            _lhoofdcompetenties.AddRangeAsync(competenties.ToArray());
+            this.SaveChanges();
+
+            var deelcompetenties = leerling.Richting.HoofdCompetenties.SelectMany(hc => hc.DeelCompetenties).Select(dc =>
+                new LeerlingDeelCompetentie()
+                {
+                    Leerling = leerling,
+                    DeelCompetentie = dc,
+                    Geslaagd = false
+                }
+            ).ToList();
+            _ldeelcompetenties.AddRangeAsync(deelcompetenties);
+            this.SaveChanges();
+        }
+
         public void AddBeoordeling(Leerling leerling, DeelCompetentie dc, BeoordelingDeelCompetentie bd)
         {
-            FindOrAddLeerlingComponent(leerling,dc).addBeoordeling(bd);
+            FindOrAddLeerlingCompetentie(leerling, dc).addBeoordeling(bd);
             this.SaveChanges();
         }
 
         public void SetBehaald(Leerling leerling, DeelCompetentie dc)
         {
-            FindOrAddLeerlingComponent(leerling,dc).Geslaagd = true;
+            FindOrAddLeerlingCompetentie(leerling, dc).Geslaagd = true;
             this.SaveChanges();
         }
 
-        public IList<LeerlingDeelCompetentie> GetAllDeel(Leerling from)
+        public IList<LeerlingHoofdCompetentie> GetAllLeerlingCompetenties(Leerling fromLeerling)
         {
 
-            return this._ldeelcompetenties.Where(ldc => ldc.Leerling.Id == from.Id).ToList();
+            // lijst van leerling-hoofdcompetenties zonder leerling-deelcompetenties
+            IList<LeerlingHoofdCompetentie> beoordeeldeCompetenties =
+                this._lhoofdcompetenties.Where(hdc => hdc.Leerling.Id == fromLeerling.Id).ToList();
+
+
+
+            // deelcompetenties toevoegen per hoofdcompetentie
+            competenties = this.DeelCompetentiesPerHoofdCompetentie(competenties);
+            // nog niet gescoorde competenties toevoegen (van richtinh)
         }
 
-        public IList<LeerlingHoofdCompetentie> GetAllHoofd(Leerling from)
+        private IList<LeerlingHoofdCompetentie> DeelCompetentiesPerHoofdCompetentie(IList<LeerlingHoofdCompetentie> competenties)
         {
-            return this._lhoofdcompetenties.Where(hdc => hdc.Leerling.Id == from.Id).ToList();
+            for (int i = 0; i < competenties.Count(); i++)
+            {
+                var current = competenties.ElementAt(i);
+                var deelCompetenties = current.HoofdCompetentie.DeelCompetenties.Select(dc => dc.Id);
+                current.DeelCompetenties =
+                    this._ldeelcompetenties.Where(ldc =>
+                    deelCompetenties.Contains(ldc.Id)).ToList();
+                competenties[i] = current;
+            }
+            return competenties;
+
         }
 
         public void SaveChanges()
@@ -44,11 +98,12 @@ namespace TalentCoach.Data.Repositories
         }
 
 
-        private bool Exists(Leerling leerling, DeelCompetentie dc) {
-           return this._ldeelcompetenties.Any(
-              ldc => ldc.Leerling.Id == leerling.Id &&
-              ldc.DeelCompetentie.Id == dc.Id
-          );
+        private bool Exists(Leerling leerling, DeelCompetentie dc)
+        {
+            return this._ldeelcompetenties.Any(
+               ldc => ldc.Leerling.Id == leerling.Id &&
+               ldc.DeelCompetentie.Id == dc.Id
+           );
         }
 
         private bool Exists(Leerling leerling, HoofdCompetentie hc)
@@ -59,7 +114,8 @@ namespace TalentCoach.Data.Repositories
           );
         }
 
-        private LeerlingDeelCompetentie FindOrAddLeerlingComponent(Leerling leerling, DeelCompetentie dc){
+        private LeerlingDeelCompetentie FindOrAddLeerlingCompetentie(Leerling leerling, DeelCompetentie dc)
+        {
             if (!Exists(leerling, dc))
             {
                 this._ldeelcompetenties.Add(new LeerlingDeelCompetentie(leerling, dc) { });
@@ -69,7 +125,7 @@ namespace TalentCoach.Data.Repositories
             );
         }
 
-        private LeerlingHoofdCompetentie FindOrAddLeerlingComponent(Leerling leerling, HoofdCompetentie hc)
+        private LeerlingHoofdCompetentie FindOrAddLeerlingCompetentie(Leerling leerling, HoofdCompetentie hc)
         {
             if (!Exists(leerling, hc))
             {

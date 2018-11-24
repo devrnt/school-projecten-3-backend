@@ -35,10 +35,21 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
+        public IList<LeerlingDeelCompetentie> DeelCompetenties
+        {
+            get;
+            set;
+        }
+
         public LeerlingHoofdCompetentie(Leerling leerling, HoofdCompetentie hoofdCompetentie)
         {
             this.Leerling = leerling;
             this.HoofdCompetentie = hoofdCompetentie;
+        }
+
+        public LeerlingHoofdCompetentie()
+        {
+
         }
 
     }

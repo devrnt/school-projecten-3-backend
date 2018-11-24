@@ -55,14 +55,14 @@ namespace TalentCoach.Data.Repositories
             var leerling = _leerlingen
                 .Include(l => l.Richting)
                     .ThenInclude(r => r.HoofdCompetenties)
-                        .ThenInclude(a => a.Deelcompetenties)
+                .ThenInclude(a => a.Select(s => s.DeelCompetenties))
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
                
                 .Include(l => l)
                 .Include(l => l.Projecten)
-                    .ThenInclude(p => p.Deelcompetenties)
+                     .ThenInclude(a => a.Select(s => s.DeelCompetenties))
                 .SingleOrDefault(l => l.Id == id);
 
             if (leerling != null)
@@ -103,7 +103,6 @@ namespace TalentCoach.Data.Repositories
                     item.AddGereageerdeWerkaanbieding(_werkaanbiedingenRepository.GetWerkaanbieding(wa.Id), Like.No);
                 }
 
-
                 leerling.Naam = item.Naam;
                 leerling.Voornaam = item.Voornaam;
                 leerling.GeboorteDatum = item.GeboorteDatum;
@@ -111,6 +110,7 @@ namespace TalentCoach.Data.Repositories
                 leerling.Email = item.Email;
                 leerling.Interesses = item.Interesses;
                 leerling.Password = item.Password;
+                leerling.Richting = item.Richting;
                 leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
                 leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
                 leerling.GereageerdeWerkaanbiedingen.Clear();
@@ -120,7 +120,6 @@ namespace TalentCoach.Data.Repositories
                 _leerlingen.Update(leerling);
                 SaveChanges();
             }
-
             return leerling;
         }
 

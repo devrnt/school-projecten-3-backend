@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace TalentCoach.Models.Domain 
+namespace TalentCoach.Models.Domain
 {
     public class LeerlingDeelCompetentie
     {
@@ -10,16 +10,18 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
+        private Leerling _leerling;
         public Leerling Leerling
         {
-            get;
-            private set;
+            get { return _leerling; }
+            set { _leerling = value; }
         }
 
+        private DeelCompetentie _deelCompetentie;
         public DeelCompetentie DeelCompetentie
         {
-            get;
-            private set;
+            get { return this._deelCompetentie; }
+            set { _deelCompetentie = value; }
         }
 
         public bool Geslaagd
@@ -45,10 +47,15 @@ namespace TalentCoach.Models.Domain
             this.Beoordelingen.Add(beoordeling);
         }
 
-        public LeerlingDeelCompetentie(Leerling l,DeelCompetentie dc)
+        public LeerlingDeelCompetentie(Leerling leerling,DeelCompetentie dc)
         {
-            this.Leerling = Leerling;
+            this.Leerling = leerling;
             this.DeelCompetentie = dc;
+        }
+
+        public LeerlingDeelCompetentie()
+        {
+
         }
     } 
 }

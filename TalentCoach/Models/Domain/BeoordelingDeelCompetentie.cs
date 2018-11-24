@@ -3,6 +3,12 @@ namespace TalentCoach.Models.Domain
 {
     public class BeoordelingDeelCompetentie
     {
+        public int Id
+        {
+            get;
+            set;
+        }
+
         public BeoordelingScore Score
         {
             get;
