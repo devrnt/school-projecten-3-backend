@@ -31,6 +31,8 @@ namespace TalentCoach.Data
             modelBuilder.ApplyConfiguration(new LeerlingWerkaanbiedingConfiguration());
             modelBuilder.ApplyConfiguration(new LeerlingConfiguration());
             modelBuilder.ApplyConfiguration(new WerkaanbiedingConfiguration());
+            modelBuilder.ApplyConfiguration(new LeerlingHoofdConfiguration());
+            modelBuilder.ApplyConfiguration(new LeerlingDeelConfiguration());
         }
 
         public DbSet<Richting> Richting { get; set; }

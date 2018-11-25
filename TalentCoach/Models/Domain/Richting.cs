@@ -7,18 +7,10 @@ namespace TalentCoach.Models.Domain
         #region === Properties ===
         public int Id { get; set; }
         public string Naam { get; set; }
-        public IList<HoofdCompetentie> HoofdCompetenties { get; set; } // very important
+        public List<HoofdCompetentie> HoofdCompetenties { get; set; } // very important
         public string Kleur{get; set;}
         public string Icon { get; set; }
-        public int AantalCompetenties
-        {
-            get
-            {
-                int aantal = 0;
-                (HoofdCompetenties as List<HoofdCompetentie>).ForEach(a => aantal += a.AantalCompetenties);
-                return aantal;
-            }
-        }
+        public int AantalCompetenties { get; set;}
         #endregion
 
         #region === Constructor ===

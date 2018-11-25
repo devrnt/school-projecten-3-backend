@@ -23,12 +23,6 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
-        public Leerling Leerling
-        {
-            get;
-            set;
-        }
-
         public HoofdCompetentie HoofdCompetentie
         {
             get;
@@ -41,9 +35,8 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
-        public LeerlingHoofdCompetentie(Leerling leerling, HoofdCompetentie hoofdCompetentie)
+        public LeerlingHoofdCompetentie(HoofdCompetentie hoofdCompetentie)
         {
-            this.Leerling = leerling;
             this.HoofdCompetentie = hoofdCompetentie;
         }
 

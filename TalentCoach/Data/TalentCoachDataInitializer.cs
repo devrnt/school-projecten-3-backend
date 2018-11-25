@@ -195,24 +195,34 @@ namespace TalentCoach.Data
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
 
+                    //Leerling Competenties
+
+                    var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
+                    {
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie1, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie2, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie3, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie4, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie5, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie6, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie7, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
+                    };
+
+                    leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
+                    {
+                        new LeerlingHoofdCompetentie()
+                        {
+                            HoofdCompetentie = activiteit1 , Behaald = false,
+                            DeelCompetenties = leerlingCompetenties.GetRange(0,4)
+                        }
+                    };
                 var leerlingen = new List<Leerling>() { leerling1, leerling2 };
 
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-                //Leerling Competenties
-
-                var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
-                {
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie1, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie2, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie3, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie4, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie5, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie6, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie7, Behaald = false},
-                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie8, Behaald = false}
-                };
+               
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {

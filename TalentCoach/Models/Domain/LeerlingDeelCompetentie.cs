@@ -10,18 +10,10 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
-        private Leerling _leerling;
-        public Leerling Leerling
-        {
-            get { return _leerling; }
-            set { _leerling = value; }
-        }
-
-        private DeelCompetentie _deelCompetentie;
         public DeelCompetentie DeelCompetentie
         {
-            get { return this._deelCompetentie; }
-            set { _deelCompetentie = value; }
+            get;
+            set;
         }
 
         public bool Behaald
@@ -42,14 +34,9 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
-        public void addBeoordeling(BeoordelingDeelCompetentie beoordeling)
-        {
-            this.Beoordelingen.Add(beoordeling);
-        }
 
         public LeerlingDeelCompetentie(Leerling leerling,DeelCompetentie dc)
         {
-            this.Leerling = leerling;
             this.DeelCompetentie = dc;
         }
 

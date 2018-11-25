@@ -23,7 +23,6 @@ namespace TalentCoach.Data.Repositories
         public List<Richting> GetAll()
         {
             return _richtingen
-                .OrderBy(r => r.Id)
                 .ToList();
         }
 
