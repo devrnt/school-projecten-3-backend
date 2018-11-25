@@ -55,8 +55,8 @@ namespace TalentCoach.Data.Repositories
 
         private void ControlleerBehaaldeDeelCompetenties(Leerling leerling)
         {
-            var behaaldeDeelcompetenties = this._ldeelcompetenties.Where(ldc => ldc.Behaald);
-            this._ldeelcompetenties.RemoveRange(this._ldeelcompetenties.Where(ldc => behaaldeDeelcompetenties.Contains(ldc)).ToArray());
+            var behaaldeDeelcompetenties = this._ldeelcompetenties.Where(ldc => ldc.Behaald).Select(ldc => ldc.DeelCompetentie.Id).ToList();
+            this._ldeelcompetenties.RemoveRange(this._ldeelcompetenties.Where(ldc => !ldc.Behaald && behaaldeDeelcompetenties.Contains(ldc.DeelCompetentie.Id)).ToArray());
         }
 
         public void AddBeoordeling(Leerling leerling, DeelCompetentie dc, BeoordelingDeelCompetentie bd)

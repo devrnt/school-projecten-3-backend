@@ -9,6 +9,7 @@ namespace TalentCoach.Data.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly WerkaanbiedingenRepository _werkaanbiedingenRepository;
+        private readonly LeerlingCompetentieRepository _leerlingCompetentiesRepository;
 
         private readonly DbSet<Leerling> _leerlingen;
 
@@ -17,6 +18,7 @@ namespace TalentCoach.Data.Repositories
             _context = context;
             _leerlingen = _context.Leerlingen;
             _werkaanbiedingenRepository = new WerkaanbiedingenRepository(context);
+            _leerlingCompetentiesRepository = new LeerlingCompetentieRepository(context);
         }
 
         public List<Leerling> GetAll()
@@ -53,15 +55,15 @@ namespace TalentCoach.Data.Repositories
         {
             var leerling = _leerlingen
                 .Include(l => l.Richting)
-                    .ThenInclude(r => r.HoofdCompetenties)
-                .ThenInclude(a => a.Select(s => s.DeelCompetenties))
+                    //.ThenInclude(r => r.HoofdCompetenties)
+                        //.ThenInclude(a => a.Select(s => s.DeelCompetenties))
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
-               
-                .Include(l => l)
                 .Include(l => l.Projecten)
-                     .ThenInclude(a => a.Select(s => s.DeelCompetenties))
+                     .ThenInclude(a => a.DeelCompetenties)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
                 .SingleOrDefault(l => l.Id == id);
 
             if (leerling != null)
@@ -73,7 +75,6 @@ namespace TalentCoach.Data.Repositories
                     .Where(lw => lw.Like == Like.No)
                     .Select(lw => lw.Werkaanbieding).ToList();
             }
-
             return leerling;
         }
 
@@ -81,6 +82,7 @@ namespace TalentCoach.Data.Repositories
         {
             _leerlingen.Add(item);
             SaveChanges();
+            this._leerlingCompetentiesRepository.MaakCompetentiesNieuweLeerling(item);
             return item;
         }
 
@@ -109,7 +111,12 @@ namespace TalentCoach.Data.Repositories
                 leerling.Email = item.Email;
                 leerling.Interesses = item.Interesses;
                 leerling.Password = item.Password;
-                leerling.Richting = item.Richting;
+                if (leerling.Richting.Id != item.Richting.Id)
+                {
+                    leerling.Richting = item.Richting;
+                    this._leerlingCompetentiesRepository.UpdateCompetentiesBijVeranderingRichting(leerling);
+                }
+
                 leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
                 leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
                 leerling.GereageerdeWerkaanbiedingen.Clear();

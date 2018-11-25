@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors","red");
+                var richting = new Richting("Haarzorg", "scissors","blue");
                 richting.AddHoofdCompetentie(activiteit1);
                 richting.AddHoofdCompetentie(activiteit2);
                 richting.AddHoofdCompetentie(activiteit3);
@@ -200,6 +200,19 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
+                //Leerling Competenties
+
+                var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
+                {
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie1, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie2, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie3, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie4, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie5, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie6, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie7, Behaald = false},
+                    new LeerlingDeelCompetentie(){Leerling = leerling1, DeelCompetentie = competentie8, Behaald = false}
+                };
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
