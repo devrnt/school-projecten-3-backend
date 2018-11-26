@@ -5,10 +5,13 @@ namespace TalentCoach.Models.Domain
 {
     public interface ILeerlingCompetentieRepository
     {
-        IList<LeerlingHoofdCompetentie> MaakCompetentiesNieuweLeerling(Leerling leerling);
-        IList<LeerlingHoofdCompetentie> UpdateCompetentiesBijVeranderingRichting(Leerling leerling);
-        void AddBeoordeling(Leerling leerling,DeelCompetentie dc, BeoordelingDeelCompetentie bd);
-        void SetBehaald(Leerling leerling, DeelCompetentie dc);
-        void SaveChanges();
+        LeerlingDeelCompetentie GetDeelCompetentie(int deelcomeptentieId);
+        LeerlingHoofdCompetentie GetHoofdCompetentie(int hoofdcomeptentieId);
+        void DeleteHoofdCompetentie(int hoofdCompetentieId);
+        void DeleteDeelCompetentie(int deelcompetentieId);
+        void BeoordeelDeelCompetentie(int deelcompetentieId, BeoordelingDeelCompetentie beoordeling);
+        void BeoordeelHoofdCompetentie(int hoofdcompetentieId, BeoordelingDeelCompetentie beoordeling);
+        void BehaalDeelCompetentie(int deelcompetentieId);
+
     }
 }

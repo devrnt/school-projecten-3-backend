@@ -16,10 +16,18 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
+        private bool _behaald;
         public bool Behaald
         {
-            get;
-            set;
+            get
+            {
+                return this._behaald;
+            }
+            set 
+            {
+                this._behaald = value;
+                DatumGeslaagd = DateTime.Now;
+            }
         }
 
         public DateTime DatumGeslaagd

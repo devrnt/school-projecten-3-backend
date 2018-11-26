@@ -69,7 +69,7 @@ namespace TalentCoach.Controllers
         ///     Wijzigt het leerling object in de databank
         /// </summary>
         /// <param name="id">De id van de weer te geven leerling</param>
-        /// <param name="item">Het volledige (alle attributen) bijgewerkte leerling object</param>
+        /// <param name="leerling">Het volledige (alle attributen) bijgewerkte leerling object</param>
         /// <returns>
         ///	Geldig id: Leerling
         ///	
@@ -134,13 +134,28 @@ namespace TalentCoach.Controllers
         /// CreatedAtRoute van GetLeerling
         /// </returns>  
         // POST api/leerlingen
-        [HttpPost]
-        public IActionResult Create(int competentieId, BeoordelingDeelCompetentie beoordeling)
+        [HttpPost("deelcompetenties/beoordelen/{competentieId}")]
+        public ActionResult<LeerlingDeelCompetentie> BeoordeelDeelCompetentie(int competentieId, BeoordelingDeelCompetentie beoordeling)
         {
-            var result = _.AddLeerling(item);
-            var id = item.Id;
-            return CreatedAtRoute("GetLeerling", new { id = item.Id }, item);
+            this._competentieRepository.BeoordeelDeelCompetentie(competentieId, beoordeling);
+            var result = this._competentieRepository.GetDeelCompetentie(competentieId);
+            return result ?? (ActionResult<LeerlingDeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"deelcompetentie with id: {competentieId} not found" } });
         }
 
+        /// <summary>
+        ///    Voegt een nieuwe beooreling toe aan een leerlingDeelCompetentie
+        /// </summary>
+        /// <param name="competentieId">Het id van de leerlingDeelCompetentie die wordtbehaald</param>
+        /// <returns>
+        /// CreatedAtRoute van GetLeerling
+        /// </returns>  
+        // POST api/leerlingen
+        [HttpPost("deelcompetenties/behalen/{competentieId}")]
+        public ActionResult<LeerlingDeelCompetentie> BehaalDeelCompetentie(int competentieId)
+        {
+            this._competentieRepository.BehaalDeelCompetentie(competentieId);
+            var result = this._competentieRepository.GetDeelCompetentie(competentieId);
+            return result ?? (ActionResult<LeerlingDeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"deelcompetentie with id: {competentieId} not found" } });
+        }
     }
 }

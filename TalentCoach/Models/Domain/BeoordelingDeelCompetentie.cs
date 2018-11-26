@@ -19,6 +19,7 @@ namespace TalentCoach.Models.Domain
             get;
             set;
         }
+
         public DateTime Datum
         {
             get;
@@ -26,7 +27,7 @@ namespace TalentCoach.Models.Domain
         }
         public BeoordelingDeelCompetentie()
         {
-
+            Datum = DateTime.Now;
         }
     }
 }
