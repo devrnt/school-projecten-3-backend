@@ -181,6 +181,26 @@ namespace TalentCoach.Data.Repositories
                     .ThenInclude(r => r.HoofdCompetenties)
                                .ThenInclude(hc => hc.DeelCompetenties)
                 .Where(l => l.Id == leerlingId).FirstOrDefault();
+            var hoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
+            while (hoofdcompetenties.MoveNext())
+            {
+                var lhc = hoofdcompetenties.Current;
+                if (!lhc.Behaald)
+                {
+                    var deelcompetenties = lhc.DeelCompetenties.GetEnumerator();
+                    while (deelcompetenties.MoveNext())
+                    {
+                        var ldc = deelcompetenties.Current;
+                        if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
+                        {
+                            leerling.HoofdCompetenties
+                                    .FirstOrDefault(l => l.Id == lhc.Id)
+                                    .DeelCompetenties.Remove(ldc);
+                        }
+                    }
+                    leerling.HoofdCompetenties.Remove(lhc);
+                }
+            }
             var richting = leerling.Richting;
             richting.HoofdCompetenties.ForEach(hc =>
             {
