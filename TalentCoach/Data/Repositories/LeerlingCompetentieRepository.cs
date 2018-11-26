@@ -48,6 +48,7 @@ namespace TalentCoach.Data.Repositories
             this.SaveChanges();
         }
 
+        //deelcompetentie behalen
         public void BehaalDeelCompetentie(int deelcompetentieId, BeoordelingDeelCompetentie beoordeling)
         {
             this.FindDeelCompetentie(deelcompetentieId).Behaald = true;

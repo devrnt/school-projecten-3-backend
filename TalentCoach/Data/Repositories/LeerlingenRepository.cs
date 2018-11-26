@@ -52,6 +52,28 @@ namespace TalentCoach.Data.Repositories
                 .ToList();
         }
 
+
+        public List<LeerlingHoofdCompetentie> GetLeerlingCompetenties(int leerlingId)
+        {
+            var competenties = _leerlingen
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.DeelCompetentie)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.Beoordelingen)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.HoofdCompetentie)
+                .Where(l => l.Id == leerlingId).FirstOrDefault().HoofdCompetenties.ToList();
+            var competentieEnum = competenties.GetEnumerator();
+            while (competentieEnum.MoveNext())
+            {
+                var hoofdcompentie = competentieEnum.Current;
+                hoofdcompentie.HoofdCompetentie.DeelCompetenties = new List<DeelCompetentie>();
+            }
+            return competenties;
+        }
+
         public Leerling GetLeerling(int id)
         {
             var leerling = _leerlingen
