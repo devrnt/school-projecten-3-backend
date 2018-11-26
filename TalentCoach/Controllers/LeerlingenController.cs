@@ -143,7 +143,7 @@ namespace TalentCoach.Controllers
         }
 
         /// <summary>
-        ///    Voegt een nieuwe beooreling toe aan een leerlingDeelCompetentie
+        ///    Zet een deelcompetentie op behaald
         /// </summary>
         /// <param name="competentieId">Het id van de leerlingDeelCompetentie die wordtbehaald</param>
         /// <returns>
