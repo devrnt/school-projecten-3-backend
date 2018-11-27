@@ -7,8 +7,10 @@ namespace TalentCoach.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Competentie> Competenties { get; set; }
-        public DbSet<Activiteit> Activiteiten { get; set; }
+        public DbSet<DeelCompetentie> DeelCompetenties { get; set; }
+        public DbSet<HoofdCompetentie> HoofdCompetenties { get; set; }
+        public DbSet<LeerlingDeelCompetentie> LeerlingDeelCompetenties { get; set; }
+        public DbSet<LeerlingHoofdCompetentie> LeerlingHoofdCompetenties { get; set; }
         public DbSet<Richting> Richtingen { get; set; }
         public DbSet<Leerling> Leerlingen { get; set; }
         public DbSet<Werkgever> Werkgevers { get; set; }
@@ -29,6 +31,8 @@ namespace TalentCoach.Data
             modelBuilder.ApplyConfiguration(new LeerlingWerkaanbiedingConfiguration());
             modelBuilder.ApplyConfiguration(new LeerlingConfiguration());
             modelBuilder.ApplyConfiguration(new WerkaanbiedingConfiguration());
+            modelBuilder.ApplyConfiguration(new LeerlingHoofdConfiguration());
+            modelBuilder.ApplyConfiguration(new LeerlingDeelConfiguration());
         }
 
         public DbSet<Richting> Richting { get; set; }

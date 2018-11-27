@@ -9,9 +9,9 @@ namespace TalentCoach.Controllers
     [ApiController]
     public class ActiviteitenController : ControllerBase
     {
-        private readonly IActiviteitenRepository _repository;
+        private readonly IHoofdCompetentieRepository _repository;
 
-        public ActiviteitenController(IActiviteitenRepository repository)
+        public ActiviteitenController(IHoofdCompetentieRepository repository)
         {
             _repository = repository;
         }
@@ -24,7 +24,7 @@ namespace TalentCoach.Controllers
         /// </returns>		
         // GET api/activiteiten
         [HttpGet]
-        public ActionResult<List<Activiteit>> GetAll()
+        public ActionResult<List<HoofdCompetentie>> GetAll()
         {
             return _repository.GetAll();
         }
@@ -40,11 +40,11 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // GET api/activiteiten/1
         [HttpGet("{id}", Name = "GetActiviteit")]
-        public ActionResult<Activiteit> GetById(int id)
+        public ActionResult<HoofdCompetentie> GetById(int id)
         {
 
             var result = _repository.GetActiviteit(id);
-            return result ?? (ActionResult<Activiteit>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
+            return result ?? (ActionResult<HoofdCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // POST api/activiteiten
         [HttpPost]
-        public IActionResult Create(Activiteit item)
+        public IActionResult Create(HoofdCompetentie item)
         {
             var result = _repository.AddActiviteit(item);
             var id = item.Id;
@@ -75,10 +75,10 @@ namespace TalentCoach.Controllers
         /// </returns>	
         // PUT api/activieiten/1
         [HttpPut("{id}")]
-        public ActionResult<Activiteit> Update(int id, Activiteit item)
+        public ActionResult<HoofdCompetentie> Update(int id, HoofdCompetentie item)
         {
             var result = _repository.UpdateActiviteit(id, item);
-            return result ?? (ActionResult<Activiteit>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
+            return result ?? (ActionResult<HoofdCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"activiteit with id: {id} not Found" } });
         }
 
         /// <summary>

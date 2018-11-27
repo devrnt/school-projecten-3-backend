@@ -24,88 +24,88 @@ namespace TalentCoach.Data
             {
 
                 // Competenties
-                var competentie1 = new Competentie("Houdt zich aan de richtlijnen voor hygiëne, veiligheid en ergonomie");
-                var competentie2 = new Competentie("Ruimt de gebruikte werkpost op na elke behandeling en reinigt deze");
-                var competentie3 = new Competentie("Reinigt het gebruikte materieel en ontsmet indien nodig");
-                var competentie4 = new Competentie("Sorteert afval volgens de richtlijnen");
+                var competentie1 = new DeelCompetentie("Houdt zich aan de richtlijnen voor hygiëne, veiligheid en ergonomie");
+                var competentie2 = new DeelCompetentie("Ruimt de gebruikte werkpost op na elke behandeling en reinigt deze");
+                var competentie3 = new DeelCompetentie("Reinigt het gebruikte materieel en ontsmet indien nodig");
+                var competentie4 = new DeelCompetentie("Sorteert afval volgens de richtlijnen");
 
-                var competentie5 = new Competentie("Houdt zich aan de richtlijnen voor hygiëne, veiligheid en ergonomie");
-                var competentie6 = new Competentie("Ruimt de gebruikte werkpost op na elke behandeling en reinigt deze");
-                var competentie7 = new Competentie("Reinigt het gebruikte materieel en ontsmet indien nodig");
-                var competentie8 = new Competentie("Sorteert afval volgens de richtlijnen");
+                var competentie5 = new DeelCompetentie("Houdt zich aan de richtlijnen voor hygiëne, veiligheid en ergonomie");
+                var competentie6 = new DeelCompetentie("Ruimt de gebruikte werkpost op na elke behandeling en reinigt deze");
+                var competentie7 = new DeelCompetentie("Reinigt het gebruikte materieel en ontsmet indien nodig");
+                var competentie8 = new DeelCompetentie("Sorteert afval volgens de richtlijnen");
 
-                var competentie9 = new Competentie("Staat de klant te woord aan de telefoon of aan de receptie");
-                var competentie10 = new Competentie("Schat de tijdsduur van de gewenste behandeling in");
-                var competentie11 = new Competentie("Gebruikt informatie- en communicatietechnologie");
-                var competentie12 = new Competentie("Maakt een afspraak met de klant en legt deze vast in de agenda");
+                var competentie9 = new DeelCompetentie("Staat de klant te woord aan de telefoon of aan de receptie");
+                var competentie10 = new DeelCompetentie("Schat de tijdsduur van de gewenste behandeling in");
+                var competentie11 = new DeelCompetentie("Gebruikt informatie- en communicatietechnologie");
+                var competentie12 = new DeelCompetentie("Maakt een afspraak met de klant en legt deze vast in de agenda");
 
-                var competentie13 = new Competentie("Houdt klantenfiche bij en vult de gegevens van de behandeling in");
-                var competentie14 = new Competentie("Verstrekt uitleg over de behandeling en de gebruikte producten");
-                var competentie15 = new Competentie("Begeleidt de klant naar de volgende stap en garandeert opvolging");
+                var competentie13 = new DeelCompetentie("Houdt klantenfiche bij en vult de gegevens van de behandeling in");
+                var competentie14 = new DeelCompetentie("Verstrekt uitleg over de behandeling en de gebruikte producten");
+                var competentie15 = new DeelCompetentie("Begeleidt de klant naar de volgende stap en garandeert opvolging");
 
-                var competentie16 = new Competentie("Borstelt en ontwart het haar");
-                var competentie17 = new Competentie("Voert elke stap van werkwijze uit volgens verdere behandeling");
-                var competentie18 = new Competentie("Brengt de gewenste haar- en huidverzorging aan en masseert eventueel de hoofdhuid");
+                var competentie16 = new DeelCompetentie("Borstelt en ontwart het haar");
+                var competentie17 = new DeelCompetentie("Voert elke stap van werkwijze uit volgens verdere behandeling");
+                var competentie18 = new DeelCompetentie("Brengt de gewenste haar- en huidverzorging aan en masseert eventueel de hoofdhuid");
 
-                var competentie19 = new Competentie("Voert indien nodig een voorverzorging uit");
-                var competentie20 = new Competentie("Stelt de juiste omvormingsdiagnose");
-                var competentie21 = new Competentie("Voert indien nodig een naverzorging uit");
-                var competentie22 = new Competentie("Stemt de techniek en het materieel af op de omvorming (krullen, ontkrullen)");
-                var competentie23 = new Competentie("Brengt een product aan");
-                var competentie24 = new Competentie("Controleert de omvorming van het haar en respecteert de pauzetijd");
-                var competentie25 = new Competentie("Analyseert en verbetert het resultaat indien nodig");
-                var competentie26 = new Competentie("Neutraliseert het haar volgens de richtlijnen van het gebruikte product");
+                var competentie19 = new DeelCompetentie("Voert indien nodig een voorverzorging uit");
+                var competentie20 = new DeelCompetentie("Stelt de juiste omvormingsdiagnose");
+                var competentie21 = new DeelCompetentie("Voert indien nodig een naverzorging uit");
+                var competentie22 = new DeelCompetentie("Stemt de techniek en het materieel af op de omvorming (krullen, ontkrullen)");
+                var competentie23 = new DeelCompetentie("Brengt een product aan");
+                var competentie24 = new DeelCompetentie("Controleert de omvorming van het haar en respecteert de pauzetijd");
+                var competentie25 = new DeelCompetentie("Analyseert en verbetert het resultaat indien nodig");
+                var competentie26 = new DeelCompetentie("Neutraliseert het haar volgens de richtlijnen van het gebruikte product");
 
-                var competentie27 = new Competentie("Stelt de juiste kleurdiagnose");
-                var competentie28 = new Competentie("Berekent en past de juiste formule toe");
-                var competentie29 = new Competentie("Emulgeert en spoelt het haar uit");
-                var competentie30 = new Competentie("Voert een naverzorging uit");
-                var competentie31 = new Competentie("Analyseert en verbetert het resultaat indien nodig");
+                var competentie27 = new DeelCompetentie("Stelt de juiste kleurdiagnose");
+                var competentie28 = new DeelCompetentie("Berekent en past de juiste formule toe");
+                var competentie29 = new DeelCompetentie("Emulgeert en spoelt het haar uit");
+                var competentie30 = new DeelCompetentie("Voert een naverzorging uit");
+                var competentie31 = new DeelCompetentie("Analyseert en verbetert het resultaat indien nodig");
 
-                var competentie32 = new Competentie("Stelt de juiste diagnose");
-                var competentie33 = new Competentie("Spoelt het haar");
-                var competentie34 = new Competentie("Bereidt het mengsel");
-                var competentie35 = new Competentie("Voert een naverzorging uit");
-                var competentie36 = new Competentie("Analyseert en verbetert het resultaat indien nodig");
+                var competentie32 = new DeelCompetentie("Stelt de juiste diagnose");
+                var competentie33 = new DeelCompetentie("Spoelt het haar");
+                var competentie34 = new DeelCompetentie("Bereidt het mengsel");
+                var competentie35 = new DeelCompetentie("Voert een naverzorging uit");
+                var competentie36 = new DeelCompetentie("Analyseert en verbetert het resultaat indien nodig");
 
-                var competentie37 = new Competentie("Stemt de techniek en het materiaal af op het gelegenheidskapsel");
-                var competentie38 = new Competentie("Realiseert opsteekkaspels of vlechten");
-                var competentie39 = new Competentie("Gebruikt de juiste producten om het gewenste resultaat te bekomen");
-                var competentie40 = new Competentie("Analyseert en verbetert het resultaat indien nodig");
-                var competentie41 = new Competentie("Werkt het kaspel af");
+                var competentie37 = new DeelCompetentie("Stemt de techniek en het materiaal af op het gelegenheidskapsel");
+                var competentie38 = new DeelCompetentie("Realiseert opsteekkaspels of vlechten");
+                var competentie39 = new DeelCompetentie("Gebruikt de juiste producten om het gewenste resultaat te bekomen");
+                var competentie40 = new DeelCompetentie("Analyseert en verbetert het resultaat indien nodig");
+                var competentie41 = new DeelCompetentie("Werkt het kaspel af");
 
 
 
                 // Activiteit
-                var activiteit1 = new Activiteit("Ruimt de werkpost op en maakt hem schoon", "1e graad");
+                var activiteit1 = new HoofdCompetentie("Ruimt de werkpost op en maakt hem schoon", "1e graad");
                 activiteit1.AddCompetentie(competentie1);
                 activiteit1.AddCompetentie(competentie2);
                 activiteit1.AddCompetentie(competentie3);
                 activiteit1.AddCompetentie(competentie4);
 
-                var activiteit2 = new Activiteit("Neemt deel aan de organisatie van het kapsalon", "2e graad", "10/05/2018");
+                var activiteit2 = new HoofdCompetentie("Neemt deel aan de organisatie van het kapsalon", "2e graad");
                 activiteit2.AddCompetentie(competentie5);
                 activiteit2.AddCompetentie(competentie6);
                 activiteit2.AddCompetentie(competentie7);
                 activiteit2.AddCompetentie(competentie8);
 
-                var activiteit3 = new Activiteit("Legt een afspraak vast met de klant", "3e graad");
+                var activiteit3 = new HoofdCompetentie("Legt een afspraak vast met de klant", "3e graad");
                 activiteit3.AddCompetentie(competentie9);
                 activiteit3.AddCompetentie(competentie10);
                 activiteit3.AddCompetentie(competentie11);
                 activiteit3.AddCompetentie(competentie12);
 
-                var activiteit4 = new Activiteit("Volgt de klant op", "1e graad", "03/02/2017");
+                var activiteit4 = new HoofdCompetentie("Volgt de klant op", "1e graad");
                 activiteit4.AddCompetentie(competentie13);
                 activiteit4.AddCompetentie(competentie14);
                 activiteit4.AddCompetentie(competentie15);
 
-                var activiteit5 = new Activiteit("Past shampoos en specifieke haarverzorging toe", "2e graad");
+                var activiteit5 = new HoofdCompetentie("Past shampoos en specifieke haarverzorging toe", "2e graad");
                 activiteit5.AddCompetentie(competentie16);
                 activiteit5.AddCompetentie(competentie17);
                 activiteit5.AddCompetentie(competentie18);
 
-                var activiteit6 = new Activiteit("Vormt het haar blijvend om (krullen, ontkrullen)", "3e graad", "29/10/2018");
+                var activiteit6 = new HoofdCompetentie("Vormt het haar blijvend om (krullen, ontkrullen)", "3e graad");
                 activiteit6.AddCompetentie(competentie19);
                 activiteit6.AddCompetentie(competentie20);
                 activiteit6.AddCompetentie(competentie21);
@@ -115,21 +115,21 @@ namespace TalentCoach.Data
                 activiteit6.AddCompetentie(competentie25);
                 activiteit6.AddCompetentie(competentie26);
 
-                var activiteit7 = new Activiteit("Kleurt het haar (volledig of haarlokken)", "1e graad");
+                var activiteit7 = new HoofdCompetentie("Kleurt het haar (volledig of haarlokken)", "1e graad");
                 activiteit7.AddCompetentie(competentie27);
                 activiteit7.AddCompetentie(competentie28);
                 activiteit7.AddCompetentie(competentie29);
                 activiteit7.AddCompetentie(competentie30);
                 activiteit7.AddCompetentie(competentie31);
 
-                var activiteit8 = new Activiteit("Ontkleurt het haar (volledig of haarlokken)", "2e graad", "12/06/2016");
+                var activiteit8 = new HoofdCompetentie("Ontkleurt het haar (volledig of haarlokken)", "2e graad");
                 activiteit8.AddCompetentie(competentie32);
                 activiteit8.AddCompetentie(competentie33);
                 activiteit8.AddCompetentie(competentie34);
                 activiteit8.AddCompetentie(competentie35);
                 activiteit8.AddCompetentie(competentie36);
 
-                var activiteit9 = new Activiteit("Voert een gelegenheidskapsel uit", "2e graad");
+                var activiteit9 = new HoofdCompetentie("Voert een gelegenheidskapsel uit", "2e graad");
                 activiteit9.AddCompetentie(competentie37);
                 activiteit9.AddCompetentie(competentie38);
                 activiteit9.AddCompetentie(competentie39);
@@ -137,23 +137,23 @@ namespace TalentCoach.Data
                 activiteit9.AddCompetentie(competentie41);
 
 
-                var activiteiten = new List<Activiteit> { activiteit1, activiteit2, activiteit3, activiteit4, activiteit5,
+                var activiteiten = new List<HoofdCompetentie> { activiteit1, activiteit2, activiteit3, activiteit4, activiteit5,
                  activiteit6, activiteit7, activiteit8, activiteit9 };
 
-                _context.Activiteiten.AddRange(activiteiten);
+                _context.HoofdCompetenties.AddRange(activiteiten);
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors","red");
-                richting.AddActiviteit(activiteit1);
-                richting.AddActiviteit(activiteit2);
-                richting.AddActiviteit(activiteit3);
-                richting.AddActiviteit(activiteit4);
-                richting.AddActiviteit(activiteit5);
-                richting.AddActiviteit(activiteit6);
-                richting.AddActiviteit(activiteit7);
-                richting.AddActiviteit(activiteit8);
-                richting.AddActiviteit(activiteit9);
+                var richting = new Richting("Haarzorg", "scissors","blue");
+                richting.AddHoofdCompetentie(activiteit1);
+                richting.AddHoofdCompetentie(activiteit2);
+                richting.AddHoofdCompetentie(activiteit3);
+                richting.AddHoofdCompetentie(activiteit4);
+                richting.AddHoofdCompetentie(activiteit5);
+                richting.AddHoofdCompetentie(activiteit6);
+                richting.AddHoofdCompetentie(activiteit7);
+                richting.AddHoofdCompetentie(activiteit8);
+                richting.AddHoofdCompetentie(activiteit9);
 
 
                 _context.Add(richting);
@@ -190,24 +190,44 @@ namespace TalentCoach.Data
                 var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
-                leerling1.AddCompetentieLeerling(activiteit2);
-                leerling1.AddCompetentieLeerling(activiteit4);
-                leerling1.AddCompetentieLeerling(activiteit6);
-                leerling1.AddCompetentieLeerling(activiteit8);
+
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
 
+                    //Leerling Competenties
+
+                    var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
+                    {
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie1, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie2, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie3, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie4, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie5, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie6, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie7, Behaald = false},
+                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
+                    };
+
+                    leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
+                    {
+                        new LeerlingHoofdCompetentie()
+                        {
+                            HoofdCompetentie = activiteit1 , Behaald = false,
+                            DeelCompetenties = leerlingCompetenties.GetRange(0,4)
+                        }
+                    };
                 var leerlingen = new List<Leerling>() { leerling1, leerling2 };
 
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
+               
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
-                        new Werkspreuk(1, "Alle begin is moeilijk ook op school, maar ga ervoor! Hard werken wordt beloond."),
-                new Werkspreuk(2, "De eerste week zit er al op, de volgende kan alleen maar beter!")
+                     new Werkspreuk(1, "Alle begin is moeilijk ook op school, maar ga ervoor! Hard werken wordt beloond."),
+                     new Werkspreuk(2, "De eerste week zit er al op, de volgende kan alleen maar beter!"),
                 };
 
                 _context.AddRange(werkspreuken);

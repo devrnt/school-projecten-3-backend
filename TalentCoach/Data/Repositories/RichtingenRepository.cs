@@ -23,17 +23,14 @@ namespace TalentCoach.Data.Repositories
         public List<Richting> GetAll()
         {
             return _richtingen
-                .Include(r => r.Activiteiten)
-                    .ThenInclude(a => a.Competenties)
-                .OrderBy(r => r.Id)
                 .ToList();
         }
 
         public Richting GetRichting(int id)
         {
             return _richtingen
-                .Include(r => r.Activiteiten)
-                    .ThenInclude(a => a.Competenties)
+                .Include(r => r.HoofdCompetenties)
+                .ThenInclude(a => a.DeelCompetenties)
                 .SingleOrDefault(r => r.Id == id);
         }
 
@@ -55,7 +52,7 @@ namespace TalentCoach.Data.Repositories
             else
             {
                 richting.Naam = item.Naam;
-                richting.Activiteiten = item.Activiteiten;
+                richting.HoofdCompetenties = item.HoofdCompetenties;
                 _richtingen.Update(richting);
                 SaveChanges();
             }

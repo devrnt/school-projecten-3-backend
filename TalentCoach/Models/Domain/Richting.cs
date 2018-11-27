@@ -7,18 +7,10 @@ namespace TalentCoach.Models.Domain
         #region === Properties ===
         public int Id { get; set; }
         public string Naam { get; set; }
-        public List<Activiteit> Activiteiten { get; set; }
+        public List<HoofdCompetentie> HoofdCompetenties { get; set; } // very important
         public string Kleur{get; set;}
         public string Icon { get; set; }
-        public int AantalCompetenties
-        {
-            get
-            {
-                int aantal = 0;
-                Activiteiten.ForEach(a => aantal += a.AantalCompetenties);
-                return aantal;
-            }
-        }
+        public int AantalCompetenties { get; set;}
         #endregion
 
         #region === Constructor ===
@@ -27,7 +19,7 @@ namespace TalentCoach.Models.Domain
             Naam = naam;
             Icon = icon;
             Kleur = kleur;
-            Activiteiten = new List<Activiteit>();
+            HoofdCompetenties = new List<HoofdCompetentie>();
         }
 
         public Richting()
@@ -37,9 +29,9 @@ namespace TalentCoach.Models.Domain
         #endregion
 
         #region === Methods ===
-        public void AddActiviteit(Activiteit activiteit)
+        public void AddHoofdCompetentie(HoofdCompetentie hoofdCompetentie)
         {
-            Activiteiten.Add(activiteit);
+            HoofdCompetenties.Add(hoofdCompetentie);
         }
         #endregion
     }

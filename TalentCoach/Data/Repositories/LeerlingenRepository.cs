@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using TalentCoach.Models;
 using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
@@ -9,6 +10,7 @@ namespace TalentCoach.Data.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly WerkaanbiedingenRepository _werkaanbiedingenRepository;
+        private readonly LeerlingCompetentieRepository _leerlingCompetentiesRepository;
 
         private readonly DbSet<Leerling> _leerlingen;
 
@@ -17,6 +19,7 @@ namespace TalentCoach.Data.Repositories
             _context = context;
             _leerlingen = _context.Leerlingen;
             _werkaanbiedingenRepository = new WerkaanbiedingenRepository(context);
+            _leerlingCompetentiesRepository = new LeerlingCompetentieRepository(context);
         }
 
         public List<Leerling> GetAll()
@@ -25,9 +28,6 @@ namespace TalentCoach.Data.Repositories
             // enkel Richting nodig?
             return _leerlingen
                 .Include(l => l.Richting)
-                .Include(l => l.Competenties)
-                .Include(l => l.Projecten)
-                .ThenInclude(p => p.Competenties)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
@@ -43,33 +43,54 @@ namespace TalentCoach.Data.Repositories
                 Geslacht = l.Geslacht,
                 Email = l.Email,
                 Richting = new Richting(){ Naam = l.Richting.Naam, Id = l.Richting.Id },
-                Competenties = l.Competenties,
                 Projecten = l.Projecten,
                 Werkgever = l.Werkgever!=null? new Werkgever(){Naam = l.Werkgever.Naam, Id = l.Werkgever.Id}: null
             });
             return leerlingen
-                
                 .Include(l => l.Richting)
-                .Include(l => l.Competenties)
-                    .ThenInclude(a => a.Competenties)
-                .Include(l => l.Projecten)
-                .ThenInclude(p => p.Competenties)
                 .OrderBy(l => l.Id)
                 .ToList();
+        }
+
+
+        public List<LeerlingHoofdCompetentie> GetLeerlingCompetenties(int leerlingId)
+        {
+            var competenties = _leerlingen
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.DeelCompetentie)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.Beoordelingen)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.HoofdCompetentie)
+                .Where(l => l.Id == leerlingId).FirstOrDefault().HoofdCompetenties.ToList();
+            var competentieEnum = competenties.GetEnumerator();
+            while (competentieEnum.MoveNext())
+            {
+                var hoofdcompentie = competentieEnum.Current;
+                hoofdcompentie.HoofdCompetentie.DeelCompetenties = new List<DeelCompetentie>();
+            }
+            return competenties;
         }
 
         public Leerling GetLeerling(int id)
         {
             var leerling = _leerlingen
+                .Include(l => l.Richting)
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
-                .Include(l => l.Richting)
-                    .ThenInclude(r => r.Activiteiten)
-                    .ThenInclude(a => a.Competenties)
-                .Include(l => l.Competenties)
                 .Include(l => l.Projecten)
-                    .ThenInclude(p => p.Competenties)
+                     .ThenInclude(a => a.DeelCompetenties)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.DeelCompetentie)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.DeelCompetenties)
+                        .ThenInclude(dc => dc.Beoordelingen)
+                .Include(l => l.HoofdCompetenties)
+                    .ThenInclude(hc => hc.HoofdCompetentie)
                 .SingleOrDefault(l => l.Id == id);
 
             if (leerling != null)
@@ -81,7 +102,13 @@ namespace TalentCoach.Data.Repositories
                     .Where(lw => lw.Like == Like.No)
                     .Select(lw => lw.Werkaanbieding).ToList();
             }
-
+            leerling.Richting.HoofdCompetenties = null;
+            var leerlinghoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
+            while(leerlinghoofdcompetenties.MoveNext())
+            {
+                var hoofdcompentie = leerlinghoofdcompetenties.Current;
+                hoofdcompentie.HoofdCompetentie.DeelCompetenties  = new List<DeelCompetentie>();
+            }
             return leerling;
         }
 
@@ -89,7 +116,7 @@ namespace TalentCoach.Data.Repositories
         {
             _leerlingen.Add(item);
             SaveChanges();
-            return item;
+            return this.MaakCompetentiesNieuweLeerling(this._leerlingen.ToList()[this._leerlingen.Count() - 1].Id);
         }
 
         public Leerling UpdateLeerling(int id, Leerling item)
@@ -110,7 +137,6 @@ namespace TalentCoach.Data.Repositories
                     item.AddGereageerdeWerkaanbieding(_werkaanbiedingenRepository.GetWerkaanbieding(wa.Id), Like.No);
                 }
 
-
                 leerling.Naam = item.Naam;
                 leerling.Voornaam = item.Voornaam;
                 leerling.GeboorteDatum = item.GeboorteDatum;
@@ -118,6 +144,12 @@ namespace TalentCoach.Data.Repositories
                 leerling.Email = item.Email;
                 leerling.Interesses = item.Interesses;
                 leerling.Password = item.Password;
+                if (leerling.Richting.Id != item.Richting.Id)
+                {
+                    leerling.Richting = item.Richting;
+                    //this._leerlingCompetentiesRepository.UpdateCompetentiesBijVeranderingRichting(leerling);
+                }
+
                 leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
                 leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
                 leerling.GereageerdeWerkaanbiedingen.Clear();
@@ -127,7 +159,6 @@ namespace TalentCoach.Data.Repositories
                 _leerlingen.Update(leerling);
                 SaveChanges();
             }
-
             return leerling;
         }
 
@@ -143,10 +174,60 @@ namespace TalentCoach.Data.Repositories
             return leerling;
         }
 
+        private Leerling MaakCompetentiesNieuweLeerling(int leerlingId)
+        {
+            var leerling = this._leerlingen
+                .Include(l => l.Richting)
+                    .ThenInclude(r => r.HoofdCompetenties)
+                               .ThenInclude(hc => hc.DeelCompetenties)
+                .Where(l => l.Id == leerlingId).FirstOrDefault();
+            var hoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
+            while (hoofdcompetenties.MoveNext())
+            {
+                var lhc = hoofdcompetenties.Current;
+                if (!lhc.Behaald)
+                {
+                    var deelcompetenties = lhc.DeelCompetenties.GetEnumerator();
+                    while (deelcompetenties.MoveNext())
+                    {
+                        var ldc = deelcompetenties.Current;
+                        if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
+                        {
+                            leerling.HoofdCompetenties
+                                    .FirstOrDefault(l => l.Id == lhc.Id)
+                                    .DeelCompetenties.Remove(ldc);
+                        }
+                    }
+                    leerling.HoofdCompetenties.Remove(lhc);
+                }
+            }
+            var richting = leerling.Richting;
+            richting.HoofdCompetenties.ForEach(hc =>
+            {
+                leerling.HoofdCompetenties.Add(
+                    new LeerlingHoofdCompetentie()
+                    {
+                        HoofdCompetentie = hc,
+                        Behaald = false,
+                        DeelCompetenties = hc.DeelCompetenties.Select(dc => new LeerlingDeelCompetentie()
+                        {
+                            DeelCompetentie = dc,
+                            Behaald = false,
+                            Beoordelingen = new List<BeoordelingDeelCompetentie>()
+                        }).ToList()
+                    }
+                );
+            });
+            leerling.Richting.HoofdCompetenties = new List<HoofdCompetentie>();
+            return leerling;
+        }
+
+
         public void SaveChanges()
         {
             _context.SaveChanges();
         }
+
 
     }
 }

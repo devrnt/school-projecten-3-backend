@@ -106,8 +106,9 @@ namespace TalentCoach
             });
             #endregion
 
-            services.AddScoped<ICompetentiesRepository, CompetentiesRepository>();
-            services.AddScoped<IActiviteitenRepository, ActiviteitenRepository>();
+            services.AddScoped<IDeelCompetentieRepository, DeelCompetentieRepository>();
+            services.AddScoped<IHoofdCompetentieRepository, HoofdCompetentieRepository>();
+            services.AddScoped<ILeerlingCompetentieRepository, LeerlingCompetentieRepository>();
             services.AddScoped<IRichtingenRepository, RichtingenRepository>();
             services.AddScoped<ILeerlingenRepository, LeerlingenRepository>();
             services.AddScoped<IWerkaanbiedingenRepository, WerkaanbiedingenRepository>();

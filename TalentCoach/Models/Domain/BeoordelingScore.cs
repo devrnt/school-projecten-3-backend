@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TalentCoach.Models
 {
-    public enum Beoordeling
+    public enum BeoordelingScore
     {
         ZG, G, V, O, OR, NN
     }

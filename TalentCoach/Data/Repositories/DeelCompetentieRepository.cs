@@ -6,50 +6,47 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Data.Repositories
 {
-    public class CompetentiesRepository : ICompetentiesRepository
+    public class DeelCompetentieRepository : IDeelCompetentieRepository
     {
         private readonly ApplicationDbContext _context;
 
-        private readonly DbSet<Competentie> _competenties;
+        private readonly DbSet<DeelCompetentie> _competenties;
 
-        public CompetentiesRepository(ApplicationDbContext context)
+        public DeelCompetentieRepository(ApplicationDbContext context)
         {
             _context = context;
-            _competenties = _context.Competenties;
+            _competenties = _context.DeelCompetenties;
         }
 
-        public List<Competentie> GetAll()
+        public List<DeelCompetentie> GetAll()
         {
             return _competenties
                 .OrderBy(c => c.Id)
                 .ToList();
         }
 
-        public Competentie GetCompetentie(int id)
+        public DeelCompetentie GetCompetentie(int id)
         {
             return _competenties
                 .SingleOrDefault(c => c.Id == id);
         }
 
-        public Competentie AddCompetentie(Competentie item)
+        public DeelCompetentie AddCompetentie(DeelCompetentie item)
         {
             _competenties.Add(item);
             SaveChanges();
             return item;
         }
 
-        public Competentie UpdateCompetentie(int id, Competentie item)
+        public DeelCompetentie UpdateCompetentie(int id, DeelCompetentie item)
         {
-            Competentie competentie = _competenties.Find(id);
+            DeelCompetentie competentie = _competenties.Find(id);
             if (competentie == null)
             {
                 return null;
             }
             else
             {
-                competentie.Behaald = item.Behaald;
-                competentie.AantalKeerGeëvalueerd = item.AantalKeerGeëvalueerd;
-                competentie.Beoordeling = item.Beoordeling;
                 competentie.Omschrijving = item.Omschrijving;
 
                 _competenties.Update(competentie);
@@ -58,9 +55,9 @@ namespace TalentCoach.Data.Repositories
             return competentie;
         }
 
-        public Competentie Delete(int id)
+        public DeelCompetentie Delete(int id)
         {
-            Competentie competentie = _competenties.Find(id);
+            DeelCompetentie competentie = _competenties.Find(id);
             if (competentie == null)
             {
                 return null;
