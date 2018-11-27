@@ -103,6 +103,8 @@ namespace TalentCoach.Controllers
                 return BadRequest(new { message = "Gebruikersnaam of wachtwoord is fout" });
             }
 
+            var gebruikersRol = gebruiker.GebruikersRol;
+
             var tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
@@ -110,22 +112,41 @@ namespace TalentCoach.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim(ClaimTypes.Name, gebruiker.Id.ToString())
+                        new Claim(ClaimTypes.Name, gebruiker.Id.ToString()),
                     }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
+            // Voeg rol toe aan jwt-token afhankelijk van de rol van de gebruiker
+            switch (gebruikersRol)
+            {
+                case GebruikersRol.Leerling:
+                    tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, nameof(GebruikersRol.Leerling)));
+                    break;
+
+                case GebruikersRol.Leerkracht:
+                    tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, nameof(GebruikersRol.Leerkracht)));
+                    break;
+
+                case GebruikersRol.Werkgever:
+                    tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, nameof(GebruikersRol.Werkgever)));
+                    break;
+            }
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             string tokenString = tokenHandler.WriteToken(token);
 
             // Geeft basis gebruiker info terug (zonder wachtwoord) en token voor op te slaan in client
+            // Gebruikersrol en concretGebruikerId kunnen eigenlijk gelezen worden uit token
             return Ok(new
             {
                 gebruiker.Id,
                 gebruiker.Gebruikersnaam,
                 gebruiker.Voornaam,
                 gebruiker.Naam,
+                gebruiker.GebruikersRol,
+                gebruiker.ConcreteGebruikerId,
                 Token = tokenString
             });
         }
