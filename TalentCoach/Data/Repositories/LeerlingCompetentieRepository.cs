@@ -36,15 +36,18 @@ namespace TalentCoach.Data.Repositories
 
         private LeerlingHoofdCompetentie FindHoofdFromDeel(int deelCompetentieId)
         {
-            return this._lhoofdcompetenties.Where(lhc => lhc.DeelCompetenties.Any(ldc => ldc.Id == deelCompetentieId)).FirstOrDefault();
+            return this._lhoofdcompetenties
+                       .Include(ldc => ldc.DeelCompetenties)
+                       .Where(lhc => lhc.DeelCompetenties.Any(ldc => ldc.Id == deelCompetentieId)).FirstOrDefault();
         }
 
         private void ControlleerHoofdCompetentieBehaald(int deelCompetentieId)
         {
             var lhc = this.FindHoofdFromDeel(deelCompetentieId);
-            if (lhc.DeelCompetenties.All(ldc => ldc.Behaald == true))
+            if (lhc.DeelCompetenties.All(ldc => ldc.Behaald))
             {
                 lhc.Behaald = true;
+                lhc.DatumBehaald = DateTime.Now;
             }
         }
         #endregion
