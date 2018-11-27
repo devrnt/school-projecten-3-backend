@@ -257,29 +257,69 @@ namespace TalentCoach.Data
                 _context.AddRange(specifiekeInfo);
                 _context.SaveChanges();
 
-                // Gebruikers
-                var gebruiker1 = new Gebruiker()
+                // === Gebruikers === 
+                // Leerlingen - hebben geen toegang tot de webapp
+                var gebruikerLeerling1 = new Gebruiker()
                 {
-                    Gebruikersnaam = "JonasDeVrient",
+                    Gebruikersnaam = "Leerling",
                     Naam = "De Vrient",
                     Voornaam = "Jonas",
-                    GebruikersRol = GebruikersRol.Leerkracht
+                    GebruikersRol = GebruikersRol.Leerling
                 };
-                const string gebruiker1wachtwoord = "jonasjonas";
+                const string gebruiker1wachtwoord = "leerling";
 
 
-                var gebruiker2 = new Gebruiker()
+                var gebruikerLeerling2 = new Gebruiker()
                 {
                     Gebruikersnaam = "BrunoStroobants",
                     Naam = "Stroobants",
                     Voornaam = "Bruno",
-                    GebruikersRol = GebruikersRol.Leerling
+                    GebruikersRol = GebruikersRol.Leerling,
+                    // dit is een tijdelijke link naar een leerling
+                    ConcreteGebruikerId = 1
                 };
                 const string gebruiker2wachtwoord = "brunobruno";
 
                 var gebruikersRepo = new GebruikersRepository(_context);
-                gebruikersRepo.CreateGebruiker(gebruiker1, gebruiker1wachtwoord);
-                gebruikersRepo.CreateGebruiker(gebruiker2, gebruiker2wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerling1, gebruiker1wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerling2, gebruiker2wachtwoord);
+
+                // Leerkrachten - hebben toegang tot het platform
+                var gebruikerLeerkracht1 = new Gebruiker()
+                {
+                    Gebruikersnaam = "SamDhondt",
+                    Naam = "Dhondt",
+                    Voornaam = "Sam",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht1wachtwoord = "samsam";
+
+
+                var gebruikerLeerkracht2 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Leerkracht",
+                    Naam = "De Meester",
+                    Voornaam = "Pieter",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht2wachtwoord = "leerkracht";
+
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht1, gebruikerLeerkracht1wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht2, gebruikerLeerkracht2wachtwoord);
+
+                var gebruikerWerkgever = new Gebruiker()
+                {
+                    Gebruikersnaam = "Werkgever",
+                    Naam = "Jan",
+                    Voornaam = "De Nul",
+                    GebruikersRol = GebruikersRol.Werkgever,
+                    // dit is een tijdelijke link naar een werkgever
+                    ConcreteGebruikerId = 1
+                };
+                const string gebruikerWerkgeverWachtwoord = "werkgever";
+
+                gebruikersRepo.CreateGebruiker(gebruikerWerkgever, gebruikerWerkgeverWachtwoord);
+
             }
         }
     }
