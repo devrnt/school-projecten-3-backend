@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "Leerkracht")]
     [ApiController]
     public class LeerlingenController : ControllerBase
     {
         private readonly ILeerlingenRepository _leerlingRepository;
         private readonly ILeerlingCompetentieRepository _competentieRepository;
 
-        public LeerlingenController(ILeerlingenRepository leerlingrepository,ILeerlingCompetentieRepository competentieRepository)
+        public LeerlingenController(ILeerlingenRepository leerlingrepository, ILeerlingCompetentieRepository competentieRepository)
         {
             _leerlingRepository = leerlingrepository;
             _competentieRepository = competentieRepository;

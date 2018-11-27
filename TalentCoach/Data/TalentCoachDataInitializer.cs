@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors","blue");
+                var richting = new Richting("Haarzorg", "scissors", "blue");
                 richting.AddHoofdCompetentie(activiteit1);
                 richting.AddHoofdCompetentie(activiteit2);
                 richting.AddHoofdCompetentie(activiteit3);
@@ -195,9 +195,9 @@ namespace TalentCoach.Data
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
 
-                    //Leerling Competenties
+                //Leerling Competenties
 
-                    var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
+                var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
                     {
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie1, Behaald = false},
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie2, Behaald = false},
@@ -209,7 +209,7 @@ namespace TalentCoach.Data
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
                     };
 
-                    leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
+                leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
                     {
                         new LeerlingHoofdCompetentie()
                         {
@@ -222,7 +222,7 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-               
+
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
@@ -263,6 +263,7 @@ namespace TalentCoach.Data
                     Gebruikersnaam = "JonasDeVrient",
                     Naam = "De Vrient",
                     Voornaam = "Jonas",
+                    GebruikersRol = GebruikersRol.Leerkracht
                 };
                 const string gebruiker1wachtwoord = "jonasjonas";
 
@@ -272,7 +273,7 @@ namespace TalentCoach.Data
                     Gebruikersnaam = "BrunoStroobants",
                     Naam = "Stroobants",
                     Voornaam = "Bruno",
-
+                    GebruikersRol = GebruikersRol.Leerling
                 };
                 const string gebruiker2wachtwoord = "brunobruno";
 
