@@ -20,4 +20,22 @@ All endpoints do have the following http requests:
 * https://localhost:44392/api/werkgevers
 * https://localhost:44392/api/werkspreuken
 
+#### Gebruikers 
+##### Leerlingen
+| Gebruikersnaam | Wachtwoord |
+| ------ | ----------- |
+| Leerling | leerling |
+| BrunoStroobants | brunobruno |
+
+##### Leerkrachten
+| Gebruikersnaam | Wachtwoord |
+| ------ | ----------- |
+| Leerkracht | leerkracht |
+| SamDhondt | samsam |
+
+##### Werkgevers
+| Gebruikersnaam | Wachtwoord |
+| ------ | ----------- |
+| Werkgever | werkgever |
+
 
