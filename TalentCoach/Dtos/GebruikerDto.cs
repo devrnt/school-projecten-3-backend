@@ -1,4 +1,6 @@
-﻿namespace TalentCoach.Dtos
+﻿using TalentCoach.Models.Domain;
+
+namespace TalentCoach.Dtos
 {
     public class GebruikerDto
     {
@@ -9,5 +11,7 @@
         // Only used for model binding data in GebruikersController 
         // Not used in the http reponses
         public string Wachtwoord { get; set; }
+        public GebruikersRol GebruikersRol { get; set; }
+        public int ConcreteGebruikerId  { get; set; }
     }
 }

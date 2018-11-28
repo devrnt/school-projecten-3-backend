@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors","blue");
+                var richting = new Richting("Haarzorg", "scissors", "blue");
                 richting.AddHoofdCompetentie(activiteit1);
                 richting.AddHoofdCompetentie(activiteit2);
                 richting.AddHoofdCompetentie(activiteit3);
@@ -187,7 +187,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Leerlingen
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be") { Interesses = "teamwork" };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
@@ -195,9 +195,9 @@ namespace TalentCoach.Data
                 leerling1.Richting = richting;
                 leerling2.Richting = richting;
 
-                    //Leerling Competenties
+                //Leerling Competenties
 
-                    var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
+                var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
                     {
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie1, Behaald = false},
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie2, Behaald = false},
@@ -209,7 +209,7 @@ namespace TalentCoach.Data
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
                     };
 
-                    leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
+                leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
                     {
                         new LeerlingHoofdCompetentie()
                         {
@@ -222,7 +222,7 @@ namespace TalentCoach.Data
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
 
-               
+
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
@@ -257,28 +257,59 @@ namespace TalentCoach.Data
                 _context.AddRange(specifiekeInfo);
                 _context.SaveChanges();
 
-                // Gebruikers
-                var gebruiker1 = new Gebruiker()
+                // === Gebruikers === 
+                // Leerlingen - hebben geen toegang tot de webapp
+                var gebruikerLeerling1 = new Gebruiker()
                 {
-                    Gebruikersnaam = "JonasDeVrient",
-                    Naam = "De Vrient",
-                    Voornaam = "Jonas",
+                    Gebruikersnaam = "Leerling",
+                    GebruikersRol = GebruikersRol.Leerling
                 };
-                const string gebruiker1wachtwoord = "jonasjonas";
+                const string gebruiker1wachtwoord = "leerling";
 
 
-                var gebruiker2 = new Gebruiker()
+                var gebruikerLeerling2 = new Gebruiker()
                 {
                     Gebruikersnaam = "BrunoStroobants",
-                    Naam = "Stroobants",
-                    Voornaam = "Bruno",
-
+                    GebruikersRol = GebruikersRol.Leerling,
+                    // dit is een tijdelijke link naar een leerling
+                    ConcreteGebruikerId = 1
                 };
                 const string gebruiker2wachtwoord = "brunobruno";
 
                 var gebruikersRepo = new GebruikersRepository(_context);
-                gebruikersRepo.CreateGebruiker(gebruiker1, gebruiker1wachtwoord);
-                gebruikersRepo.CreateGebruiker(gebruiker2, gebruiker2wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerling1, gebruiker1wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerling2, gebruiker2wachtwoord);
+
+                // Leerkrachten - hebben toegang tot het platform
+                var gebruikerLeerkracht1 = new Gebruiker()
+                {
+                    Gebruikersnaam = "SamDhondt",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht1wachtwoord = "samsam";
+
+
+                var gebruikerLeerkracht2 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Leerkracht",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht2wachtwoord = "leerkracht";
+
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht1, gebruikerLeerkracht1wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht2, gebruikerLeerkracht2wachtwoord);
+
+                var gebruikerWerkgever = new Gebruiker()
+                {
+                    Gebruikersnaam = "Werkgever",
+                    GebruikersRol = GebruikersRol.Werkgever,
+                    // dit is een tijdelijke link naar een werkgever
+                    ConcreteGebruikerId = 1
+                };
+                const string gebruikerWerkgeverWachtwoord = "werkgever";
+
+                gebruikersRepo.CreateGebruiker(gebruikerWerkgever, gebruikerWerkgeverWachtwoord);
+
             }
         }
     }

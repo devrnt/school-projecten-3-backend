@@ -89,8 +89,7 @@ namespace TalentCoach.Data.Repositories
             }
 
             // Update gebruiker attributen
-            gebruiker.Voornaam = gebruikerParam.Voornaam;
-            gebruiker.Naam = gebruikerParam.Naam;
+            gebruiker.ConcreteGebruikerId = gebruikerParam.ConcreteGebruikerId;
             gebruiker.Gebruikersnaam = gebruikerParam.Gebruikersnaam;
 
             // Update wachtwoord als het ingegeven is anders gebruik vorige
