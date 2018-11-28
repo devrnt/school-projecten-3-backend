@@ -7,7 +7,7 @@ using TalentCoach.Models.Domain;
 namespace TalentCoach.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize(Roles = "Leerkracht")]
+//    [Authorize(Roles = "Leerkracht")]
     [ApiController]
     public class LeerlingenController : ControllerBase
     {
