@@ -15,6 +15,7 @@ namespace TalentCoach.Tests.Controllers
     public class LeerlingenControllerTest
     {
         private readonly Mock<ILeerlingenRepository> _mockRepository;
+        private readonly Mock<ILeerlingCompetentieRepository> _mockRepositoryLlnComp;
         private readonly DummyApplicationDbContext _context;
         private readonly LeerlingenController _controller;
 
@@ -22,11 +23,12 @@ namespace TalentCoach.Tests.Controllers
         {
             _context = new DummyApplicationDbContext();
             _mockRepository = new Mock<ILeerlingenRepository>();
+            _mockRepositoryLlnComp = new Mock<ILeerlingCompetentieRepository>();
             _mockRepository.Setup(m => m.GetLeerling(1)).Returns(_context.Leerlingen[0]);
             _mockRepository.Setup(m => m.GetLeerling(2)).Returns(_context.Leerlingen[1]);
             _mockRepository.Setup(m => m.GetLeerling(6)).Returns(null as Leerling);
             _mockRepository.Setup(m => m.GetAll()).Returns(_context.Leerlingen);
-            _controller = new LeerlingenController(_mockRepository.Object);
+            _controller = new LeerlingenController(_mockRepository.Object, _mockRepositoryLlnComp.Object);
         }
 
         #region === GetAll ===
@@ -114,10 +116,9 @@ namespace TalentCoach.Tests.Controllers
             "Renaat",
             new DateTime(1994, 2, 2),
             Geslacht.Man,
-            "renaat.Haleydt@school.be",
-            "renaathaleydt");
+            "renaat.Haleydt@school.be");
             var result = _controller.Update(93393939, leerling);
-            Assert.IsType<NotFoundObjectResult>(result);
+            Assert.IsType<ActionResult<Leerling>>(result);
         }
 
         [Fact]
