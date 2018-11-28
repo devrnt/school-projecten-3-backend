@@ -143,8 +143,6 @@ namespace TalentCoach.Controllers
             {
                 gebruiker.Id,
                 gebruiker.Gebruikersnaam,
-                gebruiker.Voornaam,
-                gebruiker.Naam,
                 gebruiker.GebruikersRol,
                 gebruiker.ConcreteGebruikerId,
                 Token = tokenString

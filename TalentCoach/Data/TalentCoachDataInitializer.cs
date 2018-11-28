@@ -187,7 +187,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Leerlingen
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be", "samdhondt") { Interesses = "teamwork" };
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be") { Interesses = "teamwork" };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
@@ -262,8 +262,6 @@ namespace TalentCoach.Data
                 var gebruikerLeerling1 = new Gebruiker()
                 {
                     Gebruikersnaam = "Leerling",
-                    Naam = "De Vrient",
-                    Voornaam = "Jonas",
                     GebruikersRol = GebruikersRol.Leerling
                 };
                 const string gebruiker1wachtwoord = "leerling";
@@ -272,8 +270,6 @@ namespace TalentCoach.Data
                 var gebruikerLeerling2 = new Gebruiker()
                 {
                     Gebruikersnaam = "BrunoStroobants",
-                    Naam = "Stroobants",
-                    Voornaam = "Bruno",
                     GebruikersRol = GebruikersRol.Leerling,
                     // dit is een tijdelijke link naar een leerling
                     ConcreteGebruikerId = 1
@@ -288,8 +284,6 @@ namespace TalentCoach.Data
                 var gebruikerLeerkracht1 = new Gebruiker()
                 {
                     Gebruikersnaam = "SamDhondt",
-                    Naam = "Dhondt",
-                    Voornaam = "Sam",
                     GebruikersRol = GebruikersRol.Leerkracht
                 };
                 const string gebruikerLeerkracht1wachtwoord = "samsam";
@@ -298,8 +292,6 @@ namespace TalentCoach.Data
                 var gebruikerLeerkracht2 = new Gebruiker()
                 {
                     Gebruikersnaam = "Leerkracht",
-                    Naam = "De Meester",
-                    Voornaam = "Pieter",
                     GebruikersRol = GebruikersRol.Leerkracht
                 };
                 const string gebruikerLeerkracht2wachtwoord = "leerkracht";
@@ -310,8 +302,6 @@ namespace TalentCoach.Data
                 var gebruikerWerkgever = new Gebruiker()
                 {
                     Gebruikersnaam = "Werkgever",
-                    Naam = "Jan",
-                    Voornaam = "De Nul",
                     GebruikersRol = GebruikersRol.Werkgever,
                     // dit is een tijdelijke link naar een werkgever
                     ConcreteGebruikerId = 1

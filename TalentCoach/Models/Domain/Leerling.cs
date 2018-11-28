@@ -13,7 +13,6 @@ namespace TalentCoach.Models.Domain
         public DateTime Aangemaakt { get; set; }
         public Geslacht Geslacht { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
         public string Interesses { get; set; }
         public Richting Richting { get; set; }
         public IList<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
@@ -23,21 +22,20 @@ namespace TalentCoach.Models.Domain
         public IList<LeerlingHoofdCompetentie> HoofdCompetenties { get; set; }
         public IList<LeerlingHoofdCompetentie> Projecten { get; set; }
         // TODO: Add wergever and stage
-        public Werkgever Werkgever { get; set;}
+        public Werkgever Werkgever { get; set; }
 
-        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password) : this()
+        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email) : this()
         {
             Naam = naam;
             Voornaam = voornaam;
             GeboorteDatum = geboorteDatum;
             Geslacht = geslacht;
             Email = email;
-            Password = password;
             Aangemaakt = DateTime.Now;
         }
 
-        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string password, string interesses) :
-        this(naam, voornaam, geboorteDatum, geslacht, email, password)
+        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string interesses) :
+        this(naam, voornaam, geboorteDatum, geslacht, email)
         {
             Interesses = interesses;
         }

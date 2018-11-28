@@ -38,8 +38,6 @@ namespace TalentCoach.Data.Repositories
             var leerlingen = _leerlingen.Select(l => new Leerling()
             {
                 Id = l.Id,
-                Naam = l.Naam,
-                Voornaam = l.Voornaam,
                 Geslacht = l.Geslacht,
                 Email = l.Email,
                 Richting = new Richting(){ Naam = l.Richting.Naam, Id = l.Richting.Id },
@@ -143,7 +141,6 @@ namespace TalentCoach.Data.Repositories
                 leerling.Geslacht = item.Geslacht;
                 leerling.Email = item.Email;
                 leerling.Interesses = item.Interesses;
-                leerling.Password = item.Password;
                 if (leerling.Richting.Id != item.Richting.Id)
                 {
                     leerling.Richting = item.Richting;
