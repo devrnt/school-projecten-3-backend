@@ -161,8 +161,8 @@ namespace TalentCoach.Data.Repositories
 
         public Leerling Delete(int id)
         {
-            var leerling = _leerlingen.Find(id);
-            if (leerling == null)
+            var leerling = _leerlingen.Where(l => l.Id == id).FirstOrDefault();
+            if (leerling != null)
             {
                 _leerlingen.Remove(leerling);
                 SaveChanges();
