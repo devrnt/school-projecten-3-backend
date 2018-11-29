@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors", "blue");
+                var richting = new Richting("Haarzorg", "scissors", "blauw");
                 richting.AddHoofdCompetentie(activiteit1);
                 richting.AddHoofdCompetentie(activiteit2);
                 richting.AddHoofdCompetentie(activiteit3);
@@ -262,7 +262,8 @@ namespace TalentCoach.Data
                 var gebruikerLeerling1 = new Gebruiker()
                 {
                     Gebruikersnaam = "Leerling",
-                    GebruikersRol = GebruikersRol.Leerling
+                    GebruikersRol = GebruikersRol.Leerling,
+                    ConcreteGebruikerId = 2
                 };
                 const string gebruiker1wachtwoord = "leerling";
 
