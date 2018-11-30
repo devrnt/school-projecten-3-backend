@@ -156,7 +156,7 @@ namespace TalentCoach.Data
                 richtingHaarzorg.AddHoofdCompetentie(activiteit9);
 
                 // Voeg later competenties toe
-                var richtingInformatica = new Richting("Informatica", "laptop", "blauw");
+                var richtingInformatica = new Richting("Informatica", "laptop", "blue");
                 var richtingKantoor = new Richting("Kantoor", "computer", "purple");
                 var richtingVerkoop = new Richting("Verkoop", "sales", "green");
                 var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "orange");
