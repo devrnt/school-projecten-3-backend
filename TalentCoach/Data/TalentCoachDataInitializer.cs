@@ -144,19 +144,51 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richting = new Richting("Haarzorg", "scissors", "blauw");
-                richting.AddHoofdCompetentie(activiteit1);
-                richting.AddHoofdCompetentie(activiteit2);
-                richting.AddHoofdCompetentie(activiteit3);
-                richting.AddHoofdCompetentie(activiteit4);
-                richting.AddHoofdCompetentie(activiteit5);
-                richting.AddHoofdCompetentie(activiteit6);
-                richting.AddHoofdCompetentie(activiteit7);
-                richting.AddHoofdCompetentie(activiteit8);
-                richting.AddHoofdCompetentie(activiteit9);
+                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "blauw");
+                richtingHaarzorg.AddHoofdCompetentie(activiteit1);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit2);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit3);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit4);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit5);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit6);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit7);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit8);
+                richtingHaarzorg.AddHoofdCompetentie(activiteit9);
 
+                // Voeg later competenties toe
+                var richtingInformatica = new Richting("Informatica", "laptop", "blauw");
+                var richtingKantoor = new Richting("Kantoor", "computer", "purple");
+                var richtingVerkoop = new Richting("Verkoop", "sales", "green");
+                var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "orange");
+                var richtingHandel = new Richting("Handel", "weegschaal", "yellow");
+                var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "black");
+                var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blue");
+                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "green");
+                var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "yellow");
+                var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "orange");
+                var richtingVerzorging = new Richting("Verzorging", "doctor", "orange");
+                var richtingSociaalTechnischeWetenschappen = new Richting("Sociaal-technische Wetenschappen", "child", "red");
+                var richtingBuurtsportMedewerker = new Richting("Buurtsport medewerker", "sport", "purple");
+                var richtingMedewerkerSnackbarKeukenmedewerker = new Richting("Medewerker snackbar | Keukenmedewerker", "food", "blue");
+                var richtingMedewerkerGroenEnTuinbeheer = new Richting("Medewerker groen- en tuinbeheer", "plant", "green");
+                var richtingOnderhoudswerkerGebouwenTegelzetter = new Richting("Polyvalent onderhoudswerker gebouwen | Tegelzetter", "building", "yellow");
+                var richtingSchilderDecorateur = new Richting("Schilder-decorateur", "paint", "orange");
+                var richtingWinkelbediende = new Richting("Winkelbediende", "retail", "red");
+                var richtingPCTechnicus = new Richting("PC-technicus", "plug", "purple");
+                var richtingVerzorgende = new Richting("Verzorgende / zorgkundige", "doctor", "blue");
 
-                _context.Add(richting);
+                var richtingen = new List<Richting>()
+                {
+                    richtingInformatica, richtingKantoor, richtingVerkoop, richtingBasisMechanica,richtingHandel,
+                    richtingElektrischeInstallaties, richtingAutoTechnieken, richtingMechanischeTechnieken,
+                    richtingTechniekWetenschappen, richtingVoedingVerzorging, richtingVerzorging,
+                    richtingSociaalTechnischeWetenschappen, richtingBuurtsportMedewerker,
+                    richtingMedewerkerSnackbarKeukenmedewerker, richtingMedewerkerGroenEnTuinbeheer,
+                    richtingOnderhoudswerkerGebouwenTegelzetter, richtingSchilderDecorateur,
+                    richtingWinkelbediende, richtingPCTechnicus, richtingVerzorgende
+                };
+
+                _context.AddRange(richtingen);
                 _context.SaveChanges();
 
                 // Werkgevers
@@ -192,8 +224,8 @@ namespace TalentCoach.Data
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
-                leerling1.Richting = richting;
-                leerling2.Richting = richting;
+                leerling1.Richting = richtingHaarzorg;
+                leerling2.Richting = richtingHaarzorg;
 
                 //Leerling Competenties
 
