@@ -144,7 +144,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "blauw");
+                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "blue");
                 richtingHaarzorg.AddHoofdCompetentie(activiteit1);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit2);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit3);
@@ -179,7 +179,7 @@ namespace TalentCoach.Data
 
                 var richtingen = new List<Richting>()
                 {
-                    richtingInformatica, richtingKantoor, richtingVerkoop, richtingBasisMechanica,richtingHandel,
+                    richtingHaarzorg, richtingHaarzorg, richtingInformatica, richtingKantoor, richtingVerkoop, richtingBasisMechanica,richtingHandel,
                     richtingElektrischeInstallaties, richtingAutoTechnieken, richtingMechanischeTechnieken,
                     richtingTechniekWetenschappen, richtingVoedingVerzorging, richtingVerzorging,
                     richtingSociaalTechnischeWetenschappen, richtingBuurtsportMedewerker,
