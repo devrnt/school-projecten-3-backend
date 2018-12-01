@@ -224,9 +224,15 @@ namespace TalentCoach.Data
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
                 var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
+
+                var leerling3 = new Leerling("De Smet", "Eline", new DateTime(1998, 2, 1), Geslacht.Vrouw, "eline.desmet@school.be") { Interesses = "haarzorg verzorging" };
+
+                var leerling4 = new Leerling("Vervaert", "Piet", new DateTime(1996, 4, 16), Geslacht.Man, "piet.vervaert@school.be");
+
                 leerling1.Richting = richtingHaarzorg;
                 leerling2.Richting = richtingHaarzorg;
-
+                leerling3.Richting = richtingVerzorging;
+                leerling4.Richting = richtingAutoTechnieken;
                 //Leerling Competenties
 
                 var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
@@ -241,7 +247,13 @@ namespace TalentCoach.Data
                         new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
                     };
 
-                leerling1.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
+
+                var leerlingen = new List<Leerling>() { leerling1, leerling2, leerling3, leerling4 };
+
+                // TODO("Verangen door representatieve competenties")
+                foreach (var leerling in leerlingen)
+                {
+                    leerling.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
                     {
                         new LeerlingHoofdCompetentie()
                         {
@@ -249,7 +261,7 @@ namespace TalentCoach.Data
                             DeelCompetenties = leerlingCompetenties.GetRange(0,4)
                         }
                     };
-                var leerlingen = new List<Leerling>() { leerling1, leerling2 };
+                }
 
                 _context.AddRange(leerlingen);
                 _context.SaveChanges();
