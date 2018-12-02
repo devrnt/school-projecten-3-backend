@@ -24,6 +24,10 @@ namespace TalentCoach.Models
         #region === Constructor ===
 
     
+        public HoofdCompetentie(){
+
+        }
+        
         public HoofdCompetentie(string omschrijving)
         {
             Omschrijving = omschrijving;
