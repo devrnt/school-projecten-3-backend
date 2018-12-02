@@ -163,7 +163,7 @@ namespace TalentCoach.Data
                 var richtingHandel = new Richting("Handel", "weegschaal", "geel");
                 var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "zwart");
                 var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blauw");
-                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "green");
+                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "groen");
                 var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "geel");
                 var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "oranje");
                 var richtingVerzorging = new Richting("Verzorging", "doctor", "oranje");
