@@ -32,6 +32,7 @@ namespace TalentCoach.Models.Domain
             Geslacht = geslacht;
             Email = email;
             Aangemaakt = DateTime.Now;
+            HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
         }
 
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string interesses) :

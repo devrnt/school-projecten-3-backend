@@ -114,7 +114,7 @@ namespace TalentCoach.Data.Repositories
         {
             _leerlingen.Add(item);
             SaveChanges();
-            return this.MaakCompetentiesNieuweLeerling(this._leerlingen.ToList()[this._leerlingen.Count() - 1].Id);
+            return this.MaakCompetentiesVoorLeerling(item.Id);
         }
 
         public Leerling UpdateLeerling(int id, Leerling item)
@@ -171,23 +171,28 @@ namespace TalentCoach.Data.Repositories
             return leerling;
         }
 
-        private Leerling MaakCompetentiesNieuweLeerling(int leerlingId)
+        public Leerling MaakCompetentiesVoorLeerling(int leerlingId)
         {
+            // het volledige leerling object ophalen
             var leerling = this._leerlingen
                 .Include(l => l.Richting)
                     .ThenInclude(r => r.HoofdCompetenties)
                                .ThenInclude(hc => hc.DeelCompetenties)
                 .Where(l => l.Id == leerlingId).FirstOrDefault();
+            //over alle hoofd en deelcompetenties itereren en alles verwijderen dat ongewijzigd is.
             var hoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
+            //hoofcompetenties
             while (hoofdcompetenties.MoveNext())
             {
                 var lhc = hoofdcompetenties.Current;
+                //als hoofdcompetenties niet behaald is bekijken we deelcompetenties
                 if (!lhc.Behaald)
                 {
                     var deelcompetenties = lhc.DeelCompetenties.GetEnumerator();
                     while (deelcompetenties.MoveNext())
                     {
                         var ldc = deelcompetenties.Current;
+                        //als een deelcmpetentie gewijzigd is verwijderen we ze van de hoofdcompetentie
                         if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
                         {
                             leerling.HoofdCompetenties
@@ -195,27 +200,46 @@ namespace TalentCoach.Data.Repositories
                                     .DeelCompetenties.Remove(ldc);
                         }
                     }
-                    leerling.HoofdCompetenties.Remove(lhc);
+                    //als alle deelcompetenties ongewijzigd zijn (verwijderd) dan verwijderen we tenslotte ook de hoofdcompetentie
+                    if (lhc.DeelCompetenties.Count==0)
+                    {
+                        leerling.HoofdCompetenties.Remove(lhc);
+                    }
                 }
             }
+
+            //nieuwe competenties toevoegen op basis van richting
             var richting = leerling.Richting;
             richting.HoofdCompetenties.ForEach(hc =>
             {
-                leerling.HoofdCompetenties.Add(
-                    new LeerlingHoofdCompetentie()
-                    {
-                        HoofdCompetentie = hc,
-                        Behaald = false,
-                        DeelCompetenties = hc.DeelCompetenties.Select(dc => new LeerlingDeelCompetentie()
+
+                //als er een hoofcompetentie nog aanwezig is voegen we die niet opnieuw toe
+                if (!leerling.HoofdCompetenties.Any(l => l.HoofdCompetentie.Id == hc.Id)|| leerling.HoofdCompetenties.Count == 0)
+                {
+                    //anders voegen we hoofd en corresponderende deelcompetenties toe
+                    leerling.HoofdCompetenties.Add(
+                        new LeerlingHoofdCompetentie()
                         {
-                            DeelCompetentie = dc,
+                            HoofdCompetentie = hc,
                             Behaald = false,
-                            Beoordelingen = new List<BeoordelingDeelCompetentie>()
-                        }).ToList()
-                    }
-                );
+                            DeelCompetenties = hc.DeelCompetenties.Select(dc => new LeerlingDeelCompetentie()
+                            {
+                                DeelCompetentie = dc,
+                                Behaald = false,
+                                Beoordelingen = new List<BeoordelingDeelCompetentie>()
+                            }).ToList()
+                        }
+                    );
+                }
             });
+            //we zijn niet meer geintresseed in de competenties in het richting object
             leerling.Richting.HoofdCompetenties = new List<HoofdCompetentie>();
+
+            // persisteer 'update' het leerling object
+            this._leerlingen.Remove(this._leerlingen.Where(l => l.Id == leerling.Id).FirstOrDefault());
+            this.SaveChanges();
+            this._leerlingen.Add(leerling);
+            this.SaveChanges();
             return leerling;
         }
 

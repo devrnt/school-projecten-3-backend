@@ -14,7 +14,7 @@ using TalentCoach.Models.Domain;
 
 namespace TalentCoach.Controllers
 {
-    [Authorize] // Scherm deze controller af van buitenwereld, voeg [AllowAnonymous] toe waar nodig
+    //[Authorize] // Scherm deze controller af van buitenwereld, voeg [AllowAnonymous] toe waar nodig
     [Route("api/[controller]")]
     [ApiController]
     public class GebruikersController : ControllerBase

@@ -11,10 +11,12 @@ namespace TalentCoach.Data
     public class TalentCoachDataInitializer
     {
         private readonly ApplicationDbContext _context;
+        private ILeerlingenRepository _llnRepo;
 
-        public TalentCoachDataInitializer(ApplicationDbContext context)
+        public TalentCoachDataInitializer(ApplicationDbContext context, ILeerlingenRepository repo)
         {
             _context = context;
+            _llnRepo = repo;
         }
 
         public void InitializeData()
@@ -144,7 +146,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "blauw");
+                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "rood");
                 richtingHaarzorg.AddHoofdCompetentie(activiteit1);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit2);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit3);
@@ -234,44 +236,10 @@ namespace TalentCoach.Data
                 leerling3.Richting = richtingVerzorging;
                 leerling4.Richting = richtingAutoTechnieken;
                 //Leerling Competenties
-
-                var leerlingCompetenties = new List<LeerlingDeelCompetentie>()
-                    {
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie1, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie2, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie3, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie4, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie5, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie6, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie7, Behaald = false},
-                        new LeerlingDeelCompetentie(){DeelCompetentie = competentie8, Behaald = false}
-                    };
-
-
-                var leerlingen = new List<Leerling>() { leerling1, leerling2, leerling3, leerling4 };
-
-                // TODO("Verangen door representatieve competenties")
-                foreach (var leerling in leerlingen)
-                {
-                    leerling.HoofdCompetenties = new List<LeerlingHoofdCompetentie>()
-                    {
-                        new LeerlingHoofdCompetentie()
-                        {
-                            HoofdCompetentie = activiteit1 , Behaald = false,
-                            DeelCompetenties = leerlingCompetenties.GetRange(0,4)
-                        },
-                        new LeerlingHoofdCompetentie()
-                        {
-                            HoofdCompetentie = activiteit2, Behaald = true,
-                            DeelCompetenties = leerlingCompetenties.GetRange(0,4)
-                        }
-                    };
-                }
-
-                _context.AddRange(leerlingen);
-                _context.SaveChanges();
-
-
+                _llnRepo.AddLeerling(leerling1);
+                _llnRepo.AddLeerling(leerling2);
+                _llnRepo.AddLeerling(leerling3);
+                _llnRepo.AddLeerling(leerling4);
 
                 // Werkspreuken
                 var werkspreuken = new List<Werkspreuk> {
