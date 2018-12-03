@@ -186,7 +186,7 @@ namespace TalentCoach.Data.Repositories
             {
                 var lhc = hoofdcompetenties.Current;
                 //als hoofdcompetenties niet behaald is bekijken we deelcompetenties
-                if (!lhc.Behaald)
+                if (!lhc.Behaald )
                 {
                     var deelcompetenties = lhc.DeelCompetenties.GetEnumerator();
                     while (deelcompetenties.MoveNext())
@@ -195,15 +195,15 @@ namespace TalentCoach.Data.Repositories
                         //als een deelcmpetentie gewijzigd is verwijderen we ze van de hoofdcompetentie
                         if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
                         {
-                            leerling.HoofdCompetenties
-                                    .FirstOrDefault(l => l.Id == lhc.Id)
-                                    .DeelCompetenties.Remove(ldc);
+                            //leerling.HoofdCompetenties
+                                    //.FirstOrDefault(l => l.Id == lhc.Id)
+                                    //.DeelCompetenties.Remove(ldc);
                         }
                     }
                     //als alle deelcompetenties ongewijzigd zijn (verwijderd) dan verwijderen we tenslotte ook de hoofdcompetentie
                     if (lhc.DeelCompetenties.Count==0)
                     {
-                        leerling.HoofdCompetenties.Remove(lhc);
+                        //leerling.HoofdCompetenties.Remove(lhc);
                     }
                 }
             }
@@ -232,14 +232,12 @@ namespace TalentCoach.Data.Repositories
                     );
                 }
             });
-            //we zijn niet meer geintresseed in de competenties in het richting object
-            leerling.Richting.HoofdCompetenties = new List<HoofdCompetentie>();
-
             // persisteer 'update' het leerling object
             this._leerlingen.Remove(this._leerlingen.Where(l => l.Id == leerling.Id).FirstOrDefault());
             this.SaveChanges();
             this._leerlingen.Add(leerling);
             this.SaveChanges();
+
             return leerling;
         }
 

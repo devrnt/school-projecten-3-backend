@@ -237,7 +237,8 @@ namespace TalentCoach.Data
                 leerling4.Richting = richtingAutoTechnieken;
                 //Leerling Competenties
                 _llnRepo.AddLeerling(leerling1);
-                _llnRepo.AddLeerling(leerling2);
+                var l = richtingHaarzorg.HoofdCompetenties;
+                var ler = _llnRepo.AddLeerling(leerling2);
                 _llnRepo.AddLeerling(leerling3);
                 _llnRepo.AddLeerling(leerling4);
 
