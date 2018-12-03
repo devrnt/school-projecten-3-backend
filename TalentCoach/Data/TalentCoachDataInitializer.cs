@@ -259,6 +259,11 @@ namespace TalentCoach.Data
                         {
                             HoofdCompetentie = activiteit1 , Behaald = false,
                             DeelCompetenties = leerlingCompetenties.GetRange(0,4)
+                        },
+                        new LeerlingHoofdCompetentie()
+                        {
+                            HoofdCompetentie = activiteit2, Behaald = true,
+                            DeelCompetenties = leerlingCompetenties.GetRange(0,4)
                         }
                     };
                 }
