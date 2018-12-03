@@ -15,6 +15,8 @@ namespace TalentCoach.Models.Domain
         public string Email { get; set; }
         public string Interesses { get; set; }
         public Richting Richting { get; set; }
+        public int AantalCompetenties => HoofdCompetenties.Count;
+       
         public IList<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
         public IList<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
         [JsonIgnore]
