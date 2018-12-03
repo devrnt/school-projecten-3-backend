@@ -233,10 +233,7 @@ namespace TalentCoach.Data.Repositories
                 }
             });
             // persisteer 'update' het leerling object
-            this._leerlingen.Remove(this._leerlingen.Where(l => l.Id == leerling.Id).FirstOrDefault());
-            this.SaveChanges();
-            this._leerlingen.Add(leerling);
-            this.SaveChanges();
+             this.SaveChanges();
 
             return leerling;
         }
