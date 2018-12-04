@@ -14,6 +14,7 @@ namespace TalentCoach.Models.Domain
             get;
             set;
         }
+
         public string Test
         {
             get;
@@ -25,8 +26,10 @@ namespace TalentCoach.Models.Domain
             get;
             set;
         }
-        public BeoordelingDeelCompetentie()
+        public BeoordelingDeelCompetentie(BeoordelingScore score, string test) 
         {
+            Score = score;
+            Test = test; 
             Datum = DateTime.Now;
         }
     }
