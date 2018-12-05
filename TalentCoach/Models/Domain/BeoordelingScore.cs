@@ -7,12 +7,12 @@ namespace TalentCoach.Models
 {
     public enum BeoordelingScore
     {
-        // Zeer goed
-        // Goed
-        // Voldoende
-        // Onvoldoende
         // Ruim Onvoldoende
+        // Onvoldoende
+        // Voldoende
+        // Goed
+        // Zeer goed
         // Niet Aanwezig
-        ZG, G, V, O, RO, NA 
+        RO, O, V, G, ZG, NA 
     }
 }
