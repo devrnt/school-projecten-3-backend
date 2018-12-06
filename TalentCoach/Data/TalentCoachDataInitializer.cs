@@ -305,7 +305,7 @@ namespace TalentCoach.Data
                     Gebruikersnaam = "SamDhondt",
                     GebruikersRol = GebruikersRol.Leerkracht
                 };
-                const string gebruikerLeerkracht1wachtwoord = "samsam";
+                const string gebruikerLeerkracht1wachtwoord = "samsamsam";
 
 
                 var gebruikerLeerkracht2 = new Gebruiker()
