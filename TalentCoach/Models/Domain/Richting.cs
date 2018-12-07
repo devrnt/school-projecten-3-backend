@@ -11,6 +11,7 @@ namespace TalentCoach.Models.Domain
         public string Kleur{get; set;}
         public string Icon { get; set; }
         public string Diploma{get; set;}
+        public List<Gebruiker> Leerkrachten{get;set;}
         public int AantalCompetenties { get; set;}
         #endregion
 
@@ -22,6 +23,7 @@ namespace TalentCoach.Models.Domain
             Kleur = kleur;
             Diploma = diploma;
             HoofdCompetenties = new List<HoofdCompetentie>();
+            Leerkrachten = new List<Gebruiker>();
         }
 
         public Richting()
@@ -34,6 +36,12 @@ namespace TalentCoach.Models.Domain
         public void AddHoofdCompetentie(HoofdCompetentie hoofdCompetentie)
         {
             HoofdCompetenties.Add(hoofdCompetentie);
+        }
+
+        public void AddLeerkrachten(Gebruiker gebruiker){
+            if(gebruiker.GebruikersRol == GebruikersRol.Leerkracht){
+                Leerkrachten.Add(gebruiker);
+            }
         }
         #endregion
     }

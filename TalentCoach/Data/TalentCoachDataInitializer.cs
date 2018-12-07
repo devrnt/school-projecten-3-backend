@@ -329,6 +329,10 @@ namespace TalentCoach.Data
 
                 gebruikersRepo.CreateGebruiker(gebruikerWerkgever, gebruikerWerkgeverWachtwoord);
 
+                //Leerkrachten aan richting toevoegen
+                richtingHaarzorg.AddLeerkrachten(gebruikerLeerkracht1);
+                richtingHaarzorg.AddLeerkrachten(gebruikerLeerkracht2);
+
             }
         }
     }
