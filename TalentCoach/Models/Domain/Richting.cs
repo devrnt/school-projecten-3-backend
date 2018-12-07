@@ -10,15 +10,17 @@ namespace TalentCoach.Models.Domain
         public List<HoofdCompetentie> HoofdCompetenties { get; set; } // very important
         public string Kleur{get; set;}
         public string Icon { get; set; }
+        public string Diploma{get; set;}
         public int AantalCompetenties { get; set;}
         #endregion
 
         #region === Constructor ===
-        public Richting(string naam,string icon,string kleur)
+        public Richting(string naam,string icon,string kleur,string diploma)
         {
             Naam = naam;
             Icon = icon;
             Kleur = kleur;
+            Diploma = diploma;
             HoofdCompetenties = new List<HoofdCompetentie>();
         }
 

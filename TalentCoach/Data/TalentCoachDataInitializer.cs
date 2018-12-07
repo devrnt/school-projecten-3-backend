@@ -146,7 +146,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "rood");
+                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "rood","BSO");
                 richtingHaarzorg.AddHoofdCompetentie(activiteit1);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit2);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit3);
@@ -158,26 +158,26 @@ namespace TalentCoach.Data
                 richtingHaarzorg.AddHoofdCompetentie(activiteit9);
 
                 // Voeg later competenties toe
-                var richtingInformatica = new Richting("Informatica", "laptop", "blauw");
-                var richtingKantoor = new Richting("Kantoor", "computer", "paars");
-                var richtingVerkoop = new Richting("Verkoop", "sales", "groen");
-                var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "oranje");
-                var richtingHandel = new Richting("Handel", "weegschaal", "geel");
-                var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "zwart");
-                var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blauw");
-                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "groen");
-                var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "geel");
-                var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "oranje");
-                var richtingVerzorging = new Richting("Verzorging", "doctor", "oranje");
-                var richtingSociaalTechnischeWetenschappen = new Richting("Sociaal-technische Wetenschappen", "child", "rood");
-                var richtingBuurtsportMedewerker = new Richting("Buurtsport medewerker", "sport", "paars");
-                var richtingMedewerkerSnackbarKeukenmedewerker = new Richting("Medewerker snackbar | Keukenmedewerker", "food", "blauw");
-                var richtingMedewerkerGroenEnTuinbeheer = new Richting("Medewerker groen- en tuinbeheer", "plant", "groen");
-                var richtingOnderhoudswerkerGebouwenTegelzetter = new Richting("Polyvalent onderhoudswerker gebouwen | Tegelzetter", "building", "geel");
-                var richtingSchilderDecorateur = new Richting("Schilder-decorateur", "paint", "oranje");
-                var richtingWinkelbediende = new Richting("Winkelbediende", "retail", "rood");
-                var richtingPCTechnicus = new Richting("PC-technicus", "plug", "paars");
-                var richtingVerzorgende = new Richting("Verzorgende / zorgkundige", "doctor", "blauw");
+                var richtingInformatica = new Richting("Informatica", "laptop", "blauw","TSO");
+                var richtingKantoor = new Richting("Kantoor", "computer", "paars","TSO");
+                var richtingVerkoop = new Richting("Verkoop", "sales", "groen","TSO");
+                var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "oranje","TSO");
+                var richtingHandel = new Richting("Handel", "weegschaal", "geel","TSO");
+                var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "zwart","TSO");
+                var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blauw","TSO");
+                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "groen","TSO");
+                var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "geel","TSO");
+                var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "oranje","TSO");
+                var richtingVerzorging = new Richting("Verzorging", "doctor", "oranje","TSO");
+                var richtingSociaalTechnischeWetenschappen = new Richting("Sociaal-technische Wetenschappen", "child", "rood","TSO");
+                var richtingBuurtsportMedewerker = new Richting("Buurtsport medewerker", "sport", "paars","Leren en werken");
+                var richtingMedewerkerSnackbarKeukenmedewerker = new Richting("Medewerker snackbar | Keukenmedewerker", "food", "blauw","Leren en werken");
+                var richtingMedewerkerGroenEnTuinbeheer = new Richting("Medewerker groen- en tuinbeheer", "plant", "groen","Leren en werken");
+                var richtingOnderhoudswerkerGebouwenTegelzetter = new Richting("Polyvalent onderhoudswerker gebouwen | Tegelzetter", "building", "geel","TSO");
+                var richtingSchilderDecorateur = new Richting("Schilder-decorateur", "paint", "oranje","Leren en werken");
+                var richtingWinkelbediende = new Richting("Winkelbediende", "retail", "rood","Leren en werken");
+                var richtingPCTechnicus = new Richting("PC-technicus", "plug", "paars","BSO");
+                var richtingVerzorgende = new Richting("Verzorgende / zorgkundige", "doctor", "blauw","BSO");
 
                 var richtingen = new List<Richting>()
                 {
