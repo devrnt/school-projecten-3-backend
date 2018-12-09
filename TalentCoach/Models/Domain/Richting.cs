@@ -38,7 +38,7 @@ namespace TalentCoach.Models.Domain
             HoofdCompetenties.Add(hoofdCompetentie);
         }
 
-        public void AddLeerkrachten(Gebruiker gebruiker){
+        public void AddLeerkracht(Gebruiker gebruiker){
             if(gebruiker.GebruikersRol == GebruikersRol.Leerkracht){
                 Leerkrachten.Add(gebruiker);
             }
