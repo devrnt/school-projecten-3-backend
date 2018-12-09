@@ -23,6 +23,7 @@ namespace TalentCoach.Data.Repositories
         public List<Richting> GetAll()
         {
             return _richtingen
+                .Include(r => r.Leerkrachten)
                 .ToList();
         }
 
