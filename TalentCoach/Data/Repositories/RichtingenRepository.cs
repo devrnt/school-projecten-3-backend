@@ -30,6 +30,7 @@ namespace TalentCoach.Data.Repositories
         public Richting GetRichting(int id)
         {
             return _richtingen
+                .Include(r => r.Leerkrachten)
                 .Include(r => r.HoofdCompetenties)
                 .ThenInclude(a => a.DeelCompetenties)
                 .SingleOrDefault(r => r.Id == id);
@@ -54,6 +55,7 @@ namespace TalentCoach.Data.Repositories
             {
                 richting.Naam = item.Naam;
                 richting.HoofdCompetenties = item.HoofdCompetenties;
+                richting.Leerkrachten = item.Leerkrachten;
                 _richtingen.Update(richting);
                 SaveChanges();
             }
