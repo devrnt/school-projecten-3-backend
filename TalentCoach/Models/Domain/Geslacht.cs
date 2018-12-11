@@ -2,7 +2,8 @@
 {
     public enum Geslacht
     {
-        Man,    // 0
-        Vrouw   // 1
+        Man,     // 0
+        Vrouw,   // 1
+        Neutraal // 2
     }
 }
