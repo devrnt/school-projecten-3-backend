@@ -151,6 +151,7 @@ namespace TalentCoach
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()
+                .WithOrigins("http://localhost:4200")
             );
 
             app.UseHttpsRedirection();
