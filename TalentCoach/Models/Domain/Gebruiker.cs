@@ -10,5 +10,9 @@ namespace TalentCoach.Models.Domain
         public int ConcreteGebruikerId { get; set; }
         public byte[] WachtwoordHash { get; set; }
         public byte[] WachtwoordSalt { get; set; }
+
+        public Gebruiker(){
+            
+        }
     }
 }

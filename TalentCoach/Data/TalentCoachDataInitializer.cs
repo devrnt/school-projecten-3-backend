@@ -181,7 +181,7 @@ namespace TalentCoach.Data
 
                 var richtingen = new List<Richting>()
                 {
-                    richtingHaarzorg, richtingHaarzorg, richtingInformatica, richtingKantoor, richtingVerkoop, richtingBasisMechanica,richtingHandel,
+                    richtingHaarzorg, richtingInformatica, richtingKantoor, richtingVerkoop, richtingBasisMechanica,richtingHandel,
                     richtingElektrischeInstallaties, richtingAutoTechnieken, richtingMechanischeTechnieken,
                     richtingTechniekWetenschappen, richtingVoedingVerzorging, richtingVerzorging,
                     richtingSociaalTechnischeWetenschappen, richtingBuurtsportMedewerker,
@@ -328,6 +328,12 @@ namespace TalentCoach.Data
                 const string gebruikerWerkgeverWachtwoord = "werkgever";
 
                 gebruikersRepo.CreateGebruiker(gebruikerWerkgever, gebruikerWerkgeverWachtwoord);
+
+                //Leerkrachten aan richting toevoegen
+                richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht1);
+                richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht2);
+                _context.SaveChanges();
+             
 
             }
         }
