@@ -9,7 +9,7 @@ namespace TalentCoach.Models.Mappers
     {
         public void Configure(EntityTypeBuilder<LeerlingHoofdCompetentie> builder)
         {
-            builder.HasMany(lhc => lhc.DeelCompetenties);
+            builder.HasMany(lhc => lhc.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
             //builder.HasOne(lhc => lhc.Leerling).WithMany(l => l.HoofdCompetenties);
             builder.HasOne(lhc => lhc.HoofdCompetentie);
             //builder.Ignore(l => l.HoofdCompetenties);
