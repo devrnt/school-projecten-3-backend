@@ -37,6 +37,19 @@ namespace TalentCoach.Models.Domain
             HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
         }
 
+        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, Richting richting) : this()
+        {
+            Naam = naam;
+            Voornaam = voornaam;
+            GeboorteDatum = geboorteDatum;
+            Geslacht = geslacht;
+            Email = email;
+            Aangemaakt = DateTime.Now;
+            Richting = richting;
+            HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
+        }
+
+
         public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string interesses) :
         this(naam, voornaam, geboorteDatum, geslacht, email)
         {

@@ -11,6 +11,7 @@ namespace TalentCoach.Data.Repositories
         private readonly ApplicationDbContext _context;
         private readonly WerkaanbiedingenRepository _werkaanbiedingenRepository;
         private readonly LeerlingCompetentieRepository _leerlingCompetentiesRepository;
+        private readonly RichtingenRepository _richtingenRepository;
 
         private readonly DbSet<Leerling> _leerlingen;
 
@@ -20,6 +21,7 @@ namespace TalentCoach.Data.Repositories
             _leerlingen = _context.Leerlingen;
             _werkaanbiedingenRepository = new WerkaanbiedingenRepository(context);
             _leerlingCompetentiesRepository = new LeerlingCompetentieRepository(context);
+            _richtingenRepository = new RichtingenRepository(context);
         }
 
         public List<Leerling> GetAll()
@@ -40,9 +42,9 @@ namespace TalentCoach.Data.Repositories
                 Id = l.Id,
                 Geslacht = l.Geslacht,
                 Email = l.Email,
-                Richting = new Richting(){ Naam = l.Richting.Naam, Id = l.Richting.Id },
+                Richting = new Richting() { Naam = l.Richting.Naam, Id = l.Richting.Id },
                 Projecten = l.Projecten,
-                Werkgever = l.Werkgever!=null? new Werkgever(){Naam = l.Werkgever.Naam, Id = l.Werkgever.Id}: null
+                Werkgever = l.Werkgever != null ? new Werkgever() { Naam = l.Werkgever.Naam, Id = l.Werkgever.Id } : null
             });
             return leerlingen
                 .Include(l => l.Richting)
@@ -102,16 +104,20 @@ namespace TalentCoach.Data.Repositories
             }
             leerling.Richting.HoofdCompetenties = null;
             var leerlinghoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
-            while(leerlinghoofdcompetenties.MoveNext())
+            while (leerlinghoofdcompetenties.MoveNext())
             {
                 var hoofdcompentie = leerlinghoofdcompetenties.Current;
-                hoofdcompentie.HoofdCompetentie.DeelCompetenties  = new List<DeelCompetentie>();
+                hoofdcompentie.HoofdCompetentie.DeelCompetenties = new List<DeelCompetentie>();
             }
             return leerling;
         }
 
         public Leerling AddLeerling(Leerling item)
         {
+            var richting = _richtingenRepository.GetRichting(item.Richting.Id);
+            item.Richting = richting;
+            // nodig anders null pointer exception
+            item.HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
             _leerlingen.Add(item);
             SaveChanges();
             return this.MaakCompetentiesVoorLeerling(item.Id);
@@ -179,6 +185,7 @@ namespace TalentCoach.Data.Repositories
                     .ThenInclude(r => r.HoofdCompetenties)
                                .ThenInclude(hc => hc.DeelCompetenties)
                 .Where(l => l.Id == leerlingId).FirstOrDefault();
+
             //over alle hoofd en deelcompetenties itereren en alles verwijderen dat ongewijzigd is.
             var hoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
             //hoofcompetenties
@@ -186,22 +193,22 @@ namespace TalentCoach.Data.Repositories
             {
                 var lhc = hoofdcompetenties.Current;
                 //als hoofdcompetenties niet behaald is bekijken we deelcompetenties
-                if (!lhc.Behaald )
+                if (!lhc.Behaald)
                 {
                     var deelcompetenties = lhc.DeelCompetenties.GetEnumerator();
                     while (deelcompetenties.MoveNext())
                     {
                         var ldc = deelcompetenties.Current;
                         //als een deelcmpetentie gewijzigd is verwijderen we ze van de hoofdcompetentie
-                        if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
+                        if (!ldc.Behaald && ldc.Beoordelingen.Count == 0)
                         {
                             //leerling.HoofdCompetenties
-                                    //.FirstOrDefault(l => l.Id == lhc.Id)
-                                    //.DeelCompetenties.Remove(ldc);
+                            //.FirstOrDefault(l => l.Id == lhc.Id)
+                            //.DeelCompetenties.Remove(ldc);
                         }
                     }
                     //als alle deelcompetenties ongewijzigd zijn (verwijderd) dan verwijderen we tenslotte ook de hoofdcompetentie
-                    if (lhc.DeelCompetenties.Count==0)
+                    if (lhc.DeelCompetenties.Count == 0)
                     {
                         //leerling.HoofdCompetenties.Remove(lhc);
                     }
@@ -214,7 +221,7 @@ namespace TalentCoach.Data.Repositories
             {
 
                 //als er een hoofcompetentie nog aanwezig is voegen we die niet opnieuw toe
-                if (!leerling.HoofdCompetenties.Any(l => l.HoofdCompetentie.Id == hc.Id)|| leerling.HoofdCompetenties.Count == 0)
+                if (!leerling.HoofdCompetenties.Any(l => l.HoofdCompetentie.Id == hc.Id) || leerling.HoofdCompetenties.Count == 0)
                 {
                     //anders voegen we hoofd en corresponderende deelcompetenties toe
                     leerling.HoofdCompetenties.Add(
@@ -233,7 +240,7 @@ namespace TalentCoach.Data.Repositories
                 }
             });
             // persisteer 'update' het leerling object
-             this.SaveChanges();
+            this.SaveChanges();
 
             return leerling;
         }
