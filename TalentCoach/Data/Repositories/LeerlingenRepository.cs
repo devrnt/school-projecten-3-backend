@@ -149,17 +149,16 @@ namespace TalentCoach.Data.Repositories
                 leerling.Interesses = item.Interesses;
                 if (leerling.Richting.Id != item.Richting.Id)
                 {
-                    leerling.Richting = item.Richting;
+                    leerling.Richting = _richtingenRepository.GetRichting(item.Richting.Id);
                     //this._leerlingCompetentiesRepository.UpdateCompetentiesBijVeranderingRichting(leerling);
                 }
 
                 leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
                 leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
-                leerling.GereageerdeWerkaanbiedingen.Clear();
                 _leerlingen.Update(leerling);
+                leerling.GereageerdeWerkaanbiedingen.Clear();
                 SaveChanges();
                 leerling.GereageerdeWerkaanbiedingen = item.GereageerdeWerkaanbiedingen;
-                _leerlingen.Update(leerling);
                 SaveChanges();
             }
             return leerling;
