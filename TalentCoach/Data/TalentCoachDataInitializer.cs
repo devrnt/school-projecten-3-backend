@@ -289,9 +289,7 @@ namespace TalentCoach.Data
                     leerling1.AddInteresse(list_interesses[2]);
                     leerling1.AddInteresse(list_interesses[3]);
                 leerling2.Richting = richtingHaarzorg;
-                    leerling2.InteressesOpslag = "";
                 leerling3.Richting = richtingVerzorging;
-                    leerling1.InteressesOpslag = "";
                 leerling4.Richting = richtingAutoTechnieken;
                 //Leerling Competenties
                 _llnRepo.AddLeerling(leerling1);

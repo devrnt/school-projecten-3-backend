@@ -131,7 +131,6 @@ namespace TalentCoach
             }
             else
             {
-                app.UseDeveloperExceptionPage();
                 app.UseHsts();
             }
             app.UseSwagger();
