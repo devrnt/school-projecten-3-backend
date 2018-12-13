@@ -50,7 +50,6 @@ namespace TalentCoach.Data.Repositories
                 .ToList();
         }
 
-
         public List<LeerlingHoofdCompetentie> GetLeerlingCompetenties(int leerlingId)
         {
             var competenties = _leerlingen
@@ -79,6 +78,8 @@ namespace TalentCoach.Data.Repositories
                 .Include(l => l.GereageerdeWerkaanbiedingen)
                     .ThenInclude(bw => bw.Werkaanbieding)
                         .ThenInclude(wa => wa.Werkgever)
+                 .Include(l => l.GereageerdeWerkaanbiedingen)
+                    .ThenInclude(bw => bw.Werkaanbieding)
                 .Include(l => l.Projecten)
                      .ThenInclude(a => a.DeelCompetenties)
                 .Include(l => l.HoofdCompetenties)
@@ -91,15 +92,6 @@ namespace TalentCoach.Data.Repositories
                     .ThenInclude(hc => hc.HoofdCompetentie)
                 .SingleOrDefault(l => l.Id == id);
 
-            if (leerling != null)
-            {
-                leerling.BewaardeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen
-                    .Where(lw => lw.Like == Like.Yes)
-                    .Select(lw => lw.Werkaanbieding).ToList();
-                leerling.VerwijderdeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen
-                    .Where(lw => lw.Like == Like.No)
-                    .Select(lw => lw.Werkaanbieding).ToList();
-            }
             leerling.Richting.HoofdCompetenties = null;
             var leerlinghoofdcompetenties = leerling.HoofdCompetenties.GetEnumerator();
             while(leerlinghoofdcompetenties.MoveNext())
@@ -147,8 +139,6 @@ namespace TalentCoach.Data.Repositories
                     //this._leerlingCompetentiesRepository.UpdateCompetentiesBijVeranderingRichting(leerling);
                 }
 
-                leerling.BewaardeWerkaanbiedingen = item.BewaardeWerkaanbiedingen;
-                leerling.VerwijderdeWerkaanbiedingen = item.VerwijderdeWerkaanbiedingen;
                 leerling.GereageerdeWerkaanbiedingen.Clear();
                 _leerlingen.Update(leerling);
                 SaveChanges();
@@ -195,9 +185,9 @@ namespace TalentCoach.Data.Repositories
                         //als een deelcmpetentie gewijzigd is verwijderen we ze van de hoofdcompetentie
                         if (!ldc.Behaald&&ldc.Beoordelingen.Count==0)
                         {
-                            //leerling.HoofdCompetenties
-                                    //.FirstOrDefault(l => l.Id == lhc.Id)
-                                    //.DeelCompetenties.Remove(ldc);
+                            leerling.HoofdCompetenties
+                                    .FirstOrDefault(l => l.Id == lhc.Id)
+                                    .DeelCompetenties.Remove(ldc);
                         }
                     }
                     //als alle deelcompetenties ongewijzigd zijn (verwijderd) dan verwijderen we tenslotte ook de hoofdcompetentie
@@ -237,7 +227,6 @@ namespace TalentCoach.Data.Repositories
 
             return leerling;
         }
-
 
         public void SaveChanges()
         {

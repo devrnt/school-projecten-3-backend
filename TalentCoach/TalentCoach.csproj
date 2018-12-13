@@ -25,5 +25,6 @@
     <Compile Remove="Models\Domain\AlgemeneInfo %28copy%29.cs" />
     <Compile Remove="Models\Domain\CompetentieBeoordeling.cs" />
     <Compile Remove="Models\Domain\LeerlingDeelCompetenties.cs" />
+    <Compile Remove="Models\Domain\Intresse.cs" />
   </ItemGroup>
 </Project>

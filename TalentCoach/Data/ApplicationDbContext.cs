@@ -11,6 +11,7 @@ namespace TalentCoach.Data
         public DbSet<HoofdCompetentie> HoofdCompetenties { get; set; }
         public DbSet<LeerlingDeelCompetentie> LeerlingDeelCompetenties { get; set; }
         public DbSet<LeerlingHoofdCompetentie> LeerlingHoofdCompetenties { get; set; }
+        public DbSet<Interesse> Interesses { get; set; }
         public DbSet<Richting> Richtingen { get; set; }
         public DbSet<Leerling> Leerlingen { get; set; }
         public DbSet<Werkgever> Werkgevers { get; set; }

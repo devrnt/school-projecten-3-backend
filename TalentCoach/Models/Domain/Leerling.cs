@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace TalentCoach.Models.Domain
 {
@@ -13,14 +15,16 @@ namespace TalentCoach.Models.Domain
         public DateTime Aangemaakt { get; set; }
         public Geslacht Geslacht { get; set; }
         public string Email { get; set; }
-        public string Interesses { get; set; }
+        //[JsonIgnore]
+        public string InteressesOpslag { get; set; }
+        [NotMapped]
+        public List<string> Interesses { get; set; }
         public Richting Richting { get; set; }
-        public int AantalCompetenties => HoofdCompetenties==null? 0: HoofdCompetenties.Count;
-       
-        public IList<Werkaanbieding> BewaardeWerkaanbiedingen { get; set; }
-        public IList<Werkaanbieding> VerwijderdeWerkaanbiedingen { get; set; }
+        public int AantalCompetenties { get; set; }
+        public IList<Werkaanbieding> BewaardeWerkaanbiedingen => GereageerdeWerkaanbiedingen.Where(lwa => lwa.Like == Like.Yes).Select(lwa => lwa.Werkaanbieding).ToList();
+        public IList<Werkaanbieding> VerwijderdeWerkaanbiedingen => GereageerdeWerkaanbiedingen.Where(lwa => lwa.Like == Like.No).Select(lwa => lwa.Werkaanbieding).ToList();
         [JsonIgnore]
-        public List<LeerlingWerkaanbieding> GereageerdeWerkaanbiedingen { get; set; }
+        public IList<LeerlingWerkaanbieding> GereageerdeWerkaanbiedingen { get; set; }
         public IList<LeerlingHoofdCompetentie> HoofdCompetenties { get; set; }
         public IList<LeerlingHoofdCompetentie> Projecten { get; set; }
         // TODO: Add wergever and stage
@@ -35,26 +39,40 @@ namespace TalentCoach.Models.Domain
             Email = email;
             Aangemaakt = DateTime.Now;
             HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
-        }
-
-        public Leerling(string naam, string voornaam, DateTime geboorteDatum, Geslacht geslacht, string email, string interesses) :
-        this(naam, voornaam, geboorteDatum, geslacht, email)
-        {
-            Interesses = interesses;
+            AantalCompetenties = 0;
+            Interesses = new List<string>();
+           
         }
 
         [JsonConstructor]
         public Leerling()
         {
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
-            BewaardeWerkaanbiedingen = new List<Werkaanbieding>();
-            VerwijderdeWerkaanbiedingen = new List<Werkaanbieding>();
+            if (this.InteressesOpslag==null)
+            {
+                this.InteressesOpslag = "";
+            }
+            this.UpdateIntressesFromOpslag();
+
         }
 
         public void AddGereageerdeWerkaanbieding(Werkaanbieding werkaanbieding, Like like)
         {
             GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
+        }
 
+        private void UpdateIntressesFromOpslag(){
+            string[] array = InteressesOpslag.Split(';');
+            this.Interesses = new List<string>(array).Where(x => x != "").ToList();
+        }
+
+        public void AddInteresse(string interesse)
+        {
+            if (this.InteressesOpslag=="")
+            {
+                this.InteressesOpslag += interesse;
+            }
+            this.InteressesOpslag += ";"+interesse ;
         }
     }
 }

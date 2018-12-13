@@ -204,36 +204,94 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Werkaanbiedingen
-                var werkaanbiedingen = new List<Werkaanbieding>
+                var list_interesses = new List<string>();
+                list_interesses.Add("haar");
+
+                list_interesses.Add("teamwork");
+                list_interesses.Add("kindersnit");
+                list_interesses.Add("salon");
+
+                list_interesses.Add("zelfstandig");
+                list_interesses.Add("ervaring");
+                list_interesses.Add("kapper");
+
+                list_interesses.Add("trendy");
+                list_interesses.Add("fashion");
+                list_interesses.Add("chanel");
+
+                list_interesses.Add("hair coloring");
+                list_interesses.Add("artistiek");
+                list_interesses.Add("experimenteel");
+
+                list_interesses.Add("bagger");
+                list_interesses.Add("boot");
+                list_interesses.Add("techniek");
+
+                list_interesses.Add("administratief");
+                list_interesses.Add("office");
+                list_interesses.Add("kantoor");
+
+                list_interesses.Add("boekhouding");
+                list_interesses.Add("management");
+                list_interesses.Add("economie");
+
+                var werkaanbiedingen = new List<Werkaanbieding> ()
                 {
-                    new Werkaanbieding("Loodgieter op een boot") { Tags = "zelfstandig arbeider loodgieter", Werkgever = werkgevers[0] },
-                    new Werkaanbieding("Stage in kapsalon Dina") { Tags = "teamwork bediende kapper", Werkgever = werkgevers[1] },
-                    new Werkaanbieding("Assistent boekhouder") { Tags = "zelfstandig bediende boekhouden", Werkgever = werkgevers[2] },
-                    new Werkaanbieding("Baggerwerk") { Tags = "teamwork bagger", Werkgever = werkgevers[0] },
-                    new Werkaanbieding("Administratief bediende") { Tags = "zelfstandig administratief bediende", Werkgever = werkgevers[2] }
+                    new Werkaanbieding("assistent hairdresser voor acteur Bert Pritt") 
+                    { 
+                        Tags = new List<string>(){list_interesses[0],list_interesses[8],list_interesses[2],list_interesses[9]}, 
+                        Werkgever = werkgevers[0]
+                    },
+                    new Werkaanbieding("Stage in kapsalon Dina") 
+                    {
+                        Tags = new List<string>(){list_interesses[0],list_interesses[1],list_interesses[2],list_interesses[3]},
+                        Werkgever = werkgevers[1]
+                    },
+                     new Werkaanbieding("Stage bij experimentele kapper Alfredo")
+                    {
+                        Tags = new List<string>(){list_interesses[0],list_interesses[10],list_interesses[11],list_interesses[12]},
+                        Werkgever = werkgevers[1]
+                    },
+                    new Werkaanbieding("Assistent boekhouder") 
+                    {
+                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
+                        Werkgever = werkgevers[2]
+                    },
+                    new Werkaanbieding("Baggerwerk") 
+                    {
+                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
+                        Werkgever = werkgevers[0]
+                    },
+                    new Werkaanbieding("Administratief bediende") 
+                    {
+                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
+                        Werkgever = werkgevers[2]
+                    }
                 };
-
-                //werkaanbiedingen[0].AddProject(activiteit1);
-                //werkaanbiedingen[1].AddProject(activiteit2);
-
 
                 _context.AddRange(werkaanbiedingen);
                 _context.SaveChanges();
 
                 // Leerlingen
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be") { Interesses = "teamwork" };
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be");
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
-                var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be", "renaathaleydt");
+                var leerling2 = new Leerling("Haleydt", "Renaat", new DateTime(1994, 2, 2), Geslacht.Man, "renaat.Haleydt@school.be");
 
-                var leerling3 = new Leerling("De Smet", "Eline", new DateTime(1998, 2, 1), Geslacht.Vrouw, "eline.desmet@school.be") { Interesses = "haarzorg verzorging" };
+                var leerling3 = new Leerling("De Smet", "Eline", new DateTime(1998, 2, 1), Geslacht.Vrouw, "eline.desmet@school.be");
 
                 var leerling4 = new Leerling("Vervaert", "Piet", new DateTime(1996, 4, 16), Geslacht.Man, "piet.vervaert@school.be");
 
                 leerling1.Richting = richtingHaarzorg;
+                    leerling1.AddInteresse(list_interesses[0]);
+                    leerling1.AddInteresse(list_interesses[1]);
+                    leerling1.AddInteresse(list_interesses[2]);
+                    leerling1.AddInteresse(list_interesses[3]);
                 leerling2.Richting = richtingHaarzorg;
+                    leerling2.InteressesOpslag = "";
                 leerling3.Richting = richtingVerzorging;
+                    leerling1.InteressesOpslag = "";
                 leerling4.Richting = richtingAutoTechnieken;
                 //Leerling Competenties
                 _llnRepo.AddLeerling(leerling1);

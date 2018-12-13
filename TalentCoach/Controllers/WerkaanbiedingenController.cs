@@ -60,9 +60,10 @@ namespace TalentCoach.Controllers
         [HttpGet("{interesses}", Name = "GetWerkaanbiedingByInteresses")]
         public ActionResult<Werkaanbieding> GetWerkaanbiedingByInteresses(string interesses)
         {
-            var interessesList = interesses.Split(" ").ToList();
-            var result = _repository.GetAll().FirstOrDefault(wa => interessesList.Any(i => i == wa.Tags));
-            return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"Werkaanbieding with tags: {interesses} not found" } });
+            //var interessesList = interesses.Split(" ").ToList();
+            //var result = _repository.GetAll().FirstOrDefault(wa => interessesList.Any(i => i == wa.Tags));
+            //return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"Werkaanbieding with tags: {interesses} not found" } });
+            return null;
         }
 
         /// <summary>
