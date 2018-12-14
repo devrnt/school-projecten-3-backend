@@ -44,7 +44,6 @@ namespace TalentCoach.Data.Repositories
         public List<Werkaanbieding> GetAll()
         {
             var werkaanbiedingen = _werkaanbiedingen
-                 .Include(wa => wa.Tags)
                  //.Include(w => w.Projecten)
                  //.ThenInclude(p => p.Competenties)
                  .Include(w => w.Werkgever)
@@ -61,7 +60,6 @@ namespace TalentCoach.Data.Repositories
         public Werkaanbieding GetWerkaanbieding(int id)
         {
             var werkaanbieding = _werkaanbiedingen
-                .Include(wa => wa.Tags)
             //.Include(w => w.Projecten)
             //.ThenInclude(p => p.Competenties)
             .Include(w => w.Werkgever)
