@@ -146,7 +146,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Richting
-                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "rood","BSO");
+                var richtingHaarzorg = new Richting("Haarzorg", "scissors", "rood", "BSO");
                 richtingHaarzorg.AddHoofdCompetentie(activiteit1);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit2);
                 richtingHaarzorg.AddHoofdCompetentie(activiteit3);
@@ -158,26 +158,26 @@ namespace TalentCoach.Data
                 richtingHaarzorg.AddHoofdCompetentie(activiteit9);
 
                 // Voeg later competenties toe
-                var richtingInformatica = new Richting("Informatica", "laptop", "blauw","TSO");
-                var richtingKantoor = new Richting("Kantoor", "computer", "paars","TSO");
-                var richtingVerkoop = new Richting("Verkoop", "sales", "groen","TSO");
-                var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "oranje","TSO");
-                var richtingHandel = new Richting("Handel", "weegschaal", "geel","TSO");
-                var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "zwart","TSO");
-                var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blauw","TSO");
-                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "groen","TSO");
-                var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "geel","TSO");
-                var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "oranje","TSO");
-                var richtingVerzorging = new Richting("Verzorging", "doctor", "oranje","TSO");
-                var richtingSociaalTechnischeWetenschappen = new Richting("Sociaal-technische Wetenschappen", "child", "rood","TSO");
-                var richtingBuurtsportMedewerker = new Richting("Buurtsport medewerker", "sport", "paars","Leren en werken");
-                var richtingMedewerkerSnackbarKeukenmedewerker = new Richting("Medewerker snackbar | Keukenmedewerker", "food", "blauw","Leren en werken");
-                var richtingMedewerkerGroenEnTuinbeheer = new Richting("Medewerker groen- en tuinbeheer", "plant", "groen","Leren en werken");
-                var richtingOnderhoudswerkerGebouwenTegelzetter = new Richting("Polyvalent onderhoudswerker gebouwen | Tegelzetter", "building", "geel","TSO");
-                var richtingSchilderDecorateur = new Richting("Schilder-decorateur", "paint", "oranje","Leren en werken");
-                var richtingWinkelbediende = new Richting("Winkelbediende", "retail", "rood","Leren en werken");
-                var richtingPCTechnicus = new Richting("PC-technicus", "plug", "paars","BSO");
-                var richtingVerzorgende = new Richting("Verzorgende / zorgkundige", "doctor", "blauw","BSO");
+                var richtingInformatica = new Richting("Informatica", "laptop", "blauw", "TSO");
+                var richtingKantoor = new Richting("Kantoor", "computer", "paars", "TSO");
+                var richtingVerkoop = new Richting("Verkoop", "sales", "groen", "TSO");
+                var richtingBasisMechanica = new Richting("Basismechanica carrosserie", "wrench", "oranje", "TSO");
+                var richtingHandel = new Richting("Handel", "weegschaal", "geel", "TSO");
+                var richtingElektrischeInstallaties = new Richting("Elektrische installaties Elektrotechnicus duaal (7de jaar)", "bliksem", "zwart", "TSO");
+                var richtingAutoTechnieken = new Richting("Auto technieken", "car", "blauw", "TSO");
+                var richtingMechanischeTechnieken = new Richting("Mechanische technieken", "cogs", "groen", "TSO");
+                var richtingTechniekWetenschappen = new Richting("Techniek-wetenschappen", "flask", "geel", "TSO");
+                var richtingVoedingVerzorging = new Richting("Voeding-verzorging", "medkit", "oranje", "TSO");
+                var richtingVerzorging = new Richting("Verzorging", "doctor", "oranje", "TSO");
+                var richtingSociaalTechnischeWetenschappen = new Richting("Sociaal-technische Wetenschappen", "child", "rood", "TSO");
+                var richtingBuurtsportMedewerker = new Richting("Buurtsport medewerker", "sport", "paars", "Leren en werken");
+                var richtingMedewerkerSnackbarKeukenmedewerker = new Richting("Medewerker snackbar | Keukenmedewerker", "food", "blauw", "Leren en werken");
+                var richtingMedewerkerGroenEnTuinbeheer = new Richting("Medewerker groen- en tuinbeheer", "plant", "groen", "Leren en werken");
+                var richtingOnderhoudswerkerGebouwenTegelzetter = new Richting("Polyvalent onderhoudswerker gebouwen | Tegelzetter", "building", "geel", "TSO");
+                var richtingSchilderDecorateur = new Richting("Schilder-decorateur", "paint", "oranje", "Leren en werken");
+                var richtingWinkelbediende = new Richting("Winkelbediende", "retail", "rood", "Leren en werken");
+                var richtingPCTechnicus = new Richting("PC-technicus", "plug", "paars", "BSO");
+                var richtingVerzorgende = new Richting("Verzorgende / zorgkundige", "doctor", "blauw", "BSO");
 
                 var richtingen = new List<Richting>()
                 {
@@ -235,13 +235,13 @@ namespace TalentCoach.Data
                 list_interesses.Add("management");
                 list_interesses.Add("economie");
 
-                var werkaanbiedingen = new List<Werkaanbieding> ()
+                var werkaanbiedingen = new List<Werkaanbieding>()
                 {
-                    new Werkaanbieding("assistent hairdresser voor acteur Bert Pritt") 
-                    { 
+                    new Werkaanbieding("assistent hairdresser voor acteur Bert Pritt")
+                    {
                         Werkgever = werkgevers[0]
                     },
-                    new Werkaanbieding("Stage in kapsalon Dina") 
+                    new Werkaanbieding("Stage in kapsalon Dina")
                     {
                         Werkgever = werkgevers[1]
                     },
@@ -249,15 +249,15 @@ namespace TalentCoach.Data
                     {
                         Werkgever = werkgevers[1]
                     },
-                    new Werkaanbieding("Assistent boekhouder") 
+                    new Werkaanbieding("Assistent boekhouder")
                     {
                         Werkgever = werkgevers[2]
                     },
-                    new Werkaanbieding("Baggerwerk") 
+                    new Werkaanbieding("Baggerwerk")
                     {
                         Werkgever = werkgevers[0]
                     },
-                    new Werkaanbieding("Administratief bediende") 
+                    new Werkaanbieding("Administratief bediende")
                     {
                         Werkgever = werkgevers[2]
                     }
@@ -304,7 +304,7 @@ namespace TalentCoach.Data
                 _context.SaveChanges();
 
                 // Leerlingen
-                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be");
+                var leerling1 = new Leerling("Dhondt", "Sam", new DateTime(1993, 7, 5), Geslacht.Man, "sam.dhondt@school.be") { Werkgever = werkgevers[0] };
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[0], Like.Yes);
                 leerling1.AddGereageerdeWerkaanbieding(werkaanbiedingen[3], Like.No);
 
@@ -428,7 +428,7 @@ namespace TalentCoach.Data
                 richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht1);
                 richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht2);
                 _context.SaveChanges();
-             
+
 
             }
         }
