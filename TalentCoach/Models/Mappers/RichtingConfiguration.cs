@@ -14,7 +14,6 @@ namespace TalentCoach.Models.Mappers
         {
             // builder.HasMany(lhc => lhc.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
             builder.HasMany(r => r.HoofdCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }
