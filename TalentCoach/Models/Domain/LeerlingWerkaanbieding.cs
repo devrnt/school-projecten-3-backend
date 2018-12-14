@@ -14,7 +14,7 @@ namespace TalentCoach.Models.Domain
         public LeerlingWerkaanbieding(Leerling leerling, Werkaanbieding werkaanbieding, Like like)
         {
             LeerlingId = leerling.Id;
-            Leerling = leerling;
+            //Leerling = leerling;
             WerkaanbiedingId = werkaanbieding.Id;
             Werkaanbieding = werkaanbieding;
             Like = like;

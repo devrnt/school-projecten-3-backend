@@ -193,5 +193,34 @@ namespace TalentCoach.Controllers
             var result = this._werkaanbiedingRepository.DislikeWerkaanbiedingLeerling(leerlingId, werkaanbiedingId);
             return result ?? (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} or werkaanbieding with id: {werkaanbiedingId} not found" } });
         }
+
+        /// <summary>
+        ///   Geeft de meest interessante werkaanbieding terug op basis van de leerling zijn interesses
+        /// </summary>
+        /// <param name="leerlingId">Het id van de leerling</param>
+        /// <returns>
+        /// ActionResult LeerlingWerkaanbieding
+        /// </returns>  
+        // POST api/leerlingen/1/werkaanbiedingen/1/like
+        [HttpGet("{leerlingId}/werkaanbiedingen/interessant")]
+        public ActionResult<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId, int werkaanbiedingId)
+        {
+
+            var result = this._werkaanbiedingRepository.GeefInteressantsteWerkaanbieding(leerlingId);
+            if (result!=null)
+            {
+                return result;
+            }
+            else
+            {
+                if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
+                {
+                    return (ActionResult<Werkaanbieding>)Ok(new Dictionary<string, string>() { { "message", $"Geen matching werkaanbiedingen gevonden" } });
+
+                }
+                return (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+
+            }
+        }
     }
 }
