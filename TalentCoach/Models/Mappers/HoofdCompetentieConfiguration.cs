@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace TalentCoach.Models.Mappers
 {
-    public class DeelCompetentieConfiguration : IEntityTypeConfiguration<HoofdCompetentie>
+    public class HoofdCompetentieConfiguration : IEntityTypeConfiguration<HoofdCompetentie>
     {
         public void Configure(EntityTypeBuilder<HoofdCompetentie> builder)
         {
-            builder.HasMany(r => r.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(h => h.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
 
         }
     }
