@@ -30,6 +30,7 @@ namespace TalentCoach.Data.Repositories
             // enkel Richting nodig?
             return _leerlingen
                 .Include(l => l.Richting)
+                .Include(l => l.Werkgever)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
