@@ -203,9 +203,8 @@ namespace TalentCoach.Controllers
         /// </returns>  
         // POST api/leerlingen/1/werkaanbiedingen/1/like
         [HttpGet("{leerlingId}/werkaanbiedingen/interessant")]
-        public ActionResult<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId, int werkaanbiedingId)
+        public ActionResult<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId)
         {
-
             var result = this._werkaanbiedingRepository.GeefInteressantsteWerkaanbieding(leerlingId);
             if (result!=null)
             {

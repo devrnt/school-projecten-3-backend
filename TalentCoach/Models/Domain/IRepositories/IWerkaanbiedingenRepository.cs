@@ -12,6 +12,7 @@ namespace TalentCoach.Models.Domain
         Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding);
         Werkaanbieding UpdateWerkaanbieding(int id, Werkaanbieding werkaanbieding);
         Werkaanbieding Delete(int id);
+        List<string> GetAlleTags();
         void SaveChanges();
     }
 }

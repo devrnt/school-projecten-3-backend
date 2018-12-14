@@ -53,6 +53,7 @@ namespace TalentCoach.Data.Repositories
 
         public Werkaanbieding GeefInteressantsteWerkaanbieding(int leerlingId)
         {
+            //NOTA: hou structuur aub met variabelen = makkelijker debuggen
             var leerling = this._leerlingen
                                .Include(l => l.GereageerdeWerkaanbiedingen)
                                     .ThenInclude(lwa => lwa.Werkaanbieding)

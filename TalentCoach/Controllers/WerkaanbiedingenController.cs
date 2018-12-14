@@ -116,5 +116,19 @@ namespace TalentCoach.Controllers
             var result = _repository.Delete(id);
             return result ?? (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {id} not found" } });
         }
+
+
+        /// <summary>
+        ///     Geeft een lijst met alle unieke tags/interesses terug die voorkomen in de werkaanbiedingen
+        /// </summary>
+        /// <returns>
+        ///     Een werkaanbieding
+        /// </returns>
+        // GET api/werkaanbiedingen/tags
+        [HttpGet("tags")]
+        public ActionResult<List<string>> GetAlleTags()
+        {
+            return this._repository.GetAlleTags();
+        }
     }
 }

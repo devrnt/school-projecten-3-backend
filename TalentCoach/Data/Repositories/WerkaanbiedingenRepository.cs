@@ -86,5 +86,16 @@ namespace TalentCoach.Data.Repositories
 
             return wa;
         }
+
+        public List<string> GetAlleTags()
+        {
+            var werkaanbiedingen = this._werkaanbiedingen.ToList();
+            var werkaanbiedingenEnum = werkaanbiedingen.GetEnumerator();
+            while (werkaanbiedingenEnum.MoveNext())
+            {
+                werkaanbiedingenEnum.Current.UpdateIntressesFromOpslag();
+            }
+            return werkaanbiedingen.SelectMany(wa => wa.Tags).Distinct().ToList();
+        }
     }
 }
