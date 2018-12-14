@@ -1,8 +1,11 @@
-﻿namespace TalentCoach.Models.Domain
+﻿using Newtonsoft.Json;
+
+namespace TalentCoach.Models.Domain
 {
     public class LeerlingWerkaanbieding
     {
         public int LeerlingId { get; set; }
+        [JsonIgnore]
         public Leerling Leerling { get; set; }
         public int WerkaanbiedingId { get; set; }
         public Werkaanbieding Werkaanbieding { get; set; }

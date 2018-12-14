@@ -9,7 +9,7 @@ namespace TalentCoach.Models.Domain
     {
         List<LeerlingWerkaanbieding> GetAll(int leerlingid);
         LeerlingWerkaanbieding LikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId);
-        LeerlingWerkaanbieding RemoveWerkAanbiedingLeerling(int id);
+        LeerlingWerkaanbieding DislikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId);
         void SaveChanges();
     }
 }

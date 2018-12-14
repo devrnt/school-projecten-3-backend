@@ -161,12 +161,37 @@ namespace TalentCoach.Controllers
             return result ?? (ActionResult<LeerlingDeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"deelcompetentie with id: {competentieId} not found" } });
         }
 
+        /// <summary>
+        ///   like een werkaanbieding. Voegt een leerlingwerkaanbieding toe aan de bewaarde lijst
+        /// </summary>
+        /// <param name="leerlingId">Het id van de leerling</param>
+        /// <param name="werkaanbiedingId">Het id van de te bewaren werkaanbieding</param>
+        /// <returns>
+        /// ActionResult LeerlingWerkaanbieding
+        /// </returns>  
         // POST api/leerlingen/1/werkaanbiedingen/1/like
-        [HttpPost("leerlingen/{leerlingid}/werkaanbiedingen/{werkaanbiedingid}/like")]
-        public ActionResult<LeerlingWerkaanbieding> BehaalDeelCompetentie(int leerlingId,int werkaanbiedingId)
+        [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/like")]
+        public ActionResult<LeerlingWerkaanbieding> LikeWerkAanbieding(int leerlingId,int werkaanbiedingId)
         {
             var result = this._werkaanbiedingRepository.LikeWerkaanbiedingLeerling(leerlingId,werkaanbiedingId);
-            return result ?? (ActionResult<LeerlingWerkaanbieding>) NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+            return result ?? (ActionResult<LeerlingWerkaanbieding>) NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} or werkaanbieding with id: {werkaanbiedingId} not found" } });
+        }
+
+
+        /// <summary>
+        ///   dislike een werkaanbieding. Voegt een leerlingwerkaanbieding toe aan de verwijderde lijst
+        /// </summary>
+        /// <param name="leerlingId">Het id van de leerling</param>
+        /// <param name="werkaanbiedingId">Het id van de te verwijderen werkaanbieding</param>
+        /// <returns>
+        /// ActionResult LeerlingWerkaanbieding
+        /// </returns>  
+        // POST api/leerlingen/1/werkaanbiedingen/1/like
+        [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/dislike")]
+        public ActionResult<LeerlingWerkaanbieding> DislikeWerkAanbieding(int leerlingId, int werkaanbiedingId)
+        {
+            var result = this._werkaanbiedingRepository.DislikeWerkaanbiedingLeerling(leerlingId, werkaanbiedingId);
+            return result ?? (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} or werkaanbieding with id: {werkaanbiedingId} not found" } });
         }
     }
 }

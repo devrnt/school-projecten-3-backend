@@ -33,14 +33,18 @@ namespace TalentCoach.Data.Repositories
         {
             var leerling = this._leerlingen.Where(l => leerlingId == l.Id).FirstOrDefault();
             var werkaanbieding = this._werkaanbiedingen.Where(wa => wa.Id == werkaanbiedingId).FirstOrDefault();
-            var leerlingwerkaanbieding = new LeerlingWerkaanbieding() { Werkaanbieding = werkaanbieding, Like = Like.Yes };
+            var leerlingwerkaanbieding = new LeerlingWerkaanbieding(leerling,werkaanbieding,Like.Yes);
             leerling.GereageerdeWerkaanbiedingen.Add(leerlingwerkaanbieding);
             return leerlingwerkaanbieding;
         }
 
-        public LeerlingWerkaanbieding RemoveWerkAanbiedingLeerling(int id)
+        public LeerlingWerkaanbieding DislikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId)
         {
-            throw new NotImplementedException();
+            var leerling = this._leerlingen.Where(l => leerlingId == l.Id).FirstOrDefault();
+            var werkaanbieding = this._werkaanbiedingen.Where(wa => wa.Id == werkaanbiedingId).FirstOrDefault();
+            var leerlingwerkaanbieding = new LeerlingWerkaanbieding(leerling,werkaanbieding,Like.No);
+            leerling.GereageerdeWerkaanbiedingen.Add(leerlingwerkaanbieding);
+            return leerlingwerkaanbieding;
         }
 
         public void SaveChanges()
