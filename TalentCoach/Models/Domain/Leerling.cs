@@ -44,6 +44,7 @@ namespace TalentCoach.Models.Domain
 
         }
 
+        [JsonConstructor]
         public Leerling()
         {
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
@@ -52,12 +53,6 @@ namespace TalentCoach.Models.Domain
                 this.InteressesOpslag = "";
             }
             this.UpdateIntressesFromOpslag();
-
-        }
-
-        [JsonConstructor]
-        public Leerling(bool forJson)
-        {
 
         }
 

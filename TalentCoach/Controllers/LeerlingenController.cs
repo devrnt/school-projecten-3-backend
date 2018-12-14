@@ -7,19 +7,21 @@ using TalentCoach.Models.Domain;
 namespace TalentCoach.Controllers
 {
     [Route("api/[controller]")]
-//    [Authorize(Roles = "Leerkracht")]
+    //    [Authorize(Roles = "Leerkracht")]
     [ApiController]
     public class LeerlingenController : ControllerBase
     {
         private readonly ILeerlingenRepository _leerlingRepository;
         private readonly ILeerlingCompetentieRepository _competentieRepository;
         private readonly ILeerlingWerkaanbiedingenRepository _werkaanbiedingRepository;
+        private readonly IWerkgeversRepository _werkgeversRepository;
 
-        public LeerlingenController(ILeerlingenRepository leerlingrepository, ILeerlingCompetentieRepository competentieRepository, ILeerlingWerkaanbiedingenRepository werkaanbiedingenRepository)
+        public LeerlingenController(ILeerlingenRepository leerlingrepository, ILeerlingCompetentieRepository competentieRepository, ILeerlingWerkaanbiedingenRepository werkaanbiedingenRepository, IWerkgeversRepository werkgeversRepository)
         {
             _leerlingRepository = leerlingrepository;
             _competentieRepository = competentieRepository;
             _werkaanbiedingRepository = werkaanbiedingenRepository;
+            _werkgeversRepository = werkgeversRepository;
         }
 
         /// <summary>
@@ -171,10 +173,10 @@ namespace TalentCoach.Controllers
         /// </returns>  
         // POST api/leerlingen/1/werkaanbiedingen/1/like
         [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/like")]
-        public ActionResult<LeerlingWerkaanbieding> LikeWerkAanbieding(int leerlingId,int werkaanbiedingId)
+        public ActionResult<LeerlingWerkaanbieding> LikeWerkAanbieding(int leerlingId, int werkaanbiedingId)
         {
-            var result = this._werkaanbiedingRepository.LikeWerkaanbiedingLeerling(leerlingId,werkaanbiedingId);
-            return result ?? (ActionResult<LeerlingWerkaanbieding>) NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} or werkaanbieding with id: {werkaanbiedingId} not found" } });
+            var result = this._werkaanbiedingRepository.LikeWerkaanbiedingLeerling(leerlingId, werkaanbiedingId);
+            return result ?? (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} or werkaanbieding with id: {werkaanbiedingId} not found" } });
         }
 
 
@@ -206,7 +208,7 @@ namespace TalentCoach.Controllers
         public ActionResult<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId)
         {
             var result = this._werkaanbiedingRepository.GeefInteressantsteWerkaanbieding(leerlingId);
-            if (result!=null)
+            if (result != null)
             {
                 return result;
             }
@@ -220,6 +222,36 @@ namespace TalentCoach.Controllers
                 return (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
 
             }
+        }
+
+        /// <summary>
+        /// Kent een werkgever toe aan een leerling.
+        /// </summary>
+        /// <returns>De toegekende werkgever.</returns>
+        /// <param name="id">Leerling id</param>
+        /// <param name="werkgever">Werkgever object</param>
+        /// <response code="200">Toegekende werkgever</response>
+        /// <response code="404">Not Found object met message field</response>
+        // POST api/leerlingen/1/werkgever
+        [HttpPost("{id}/werkgever")]
+        public ActionResult<Werkgever> WerkgeverToekennen(int id, Werkgever werkgever)
+        {
+            var leerling = _leerlingRepository.GetLeerling(id);
+            if (leerling == null)
+            {
+                return NotFound(new { message = $"Geen leerling gevonden met id {id}" });
+            }
+
+            var toeTeKennenWerkgever = _werkgeversRepository.GetWerkgever(werkgever.Id);
+            if (werkgever == null)
+            {
+                return NotFound(new { message = $"Geen werkgever gevonden met id {id}" });
+            }
+
+            leerling.Werkgever = toeTeKennenWerkgever;
+            _leerlingRepository.SaveChanges();
+
+            return werkgever;
         }
     }
 }
