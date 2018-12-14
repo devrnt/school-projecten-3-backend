@@ -13,10 +13,12 @@ namespace TalentCoach.Controllers
     public class WerkgeversController : ControllerBase
     {
         private readonly IWerkgeversRepository _repository;
+        private readonly ILeerlingenRepository _leerlingenRepository;
 
-        public WerkgeversController(IWerkgeversRepository repository)
+        public WerkgeversController(IWerkgeversRepository repository, ILeerlingenRepository leerlingenRepository)
         {
             _repository = repository;
+            _leerlingenRepository = leerlingenRepository;
         }
 
         /// <summary>
@@ -95,6 +97,24 @@ namespace TalentCoach.Controllers
         {
             var result = _repository.Delete(id);
             return result == null ? NotFound(new Dictionary<string, string>() { { "message", $"werkgever with id: {id} not found" } }) : (IActionResult)NoContent();
+        }
+
+        /// <summary>
+        /// Gets the leerlingen of a werkgever
+        /// </summary>
+        /// <returns>The leerlingen of a werkgever.</returns>
+        /// <param name="id">Leerling id</param>
+        /// <response code="200">The leerlingen of a werkgever</response>
+        /// <response code="404">Not Found: no such werkgever with specified id</response>
+        // GET api/werkgevers/1/leerlingen
+        [HttpGet("{id}/leerlingen")]
+        public ActionResult<List<Leerling>> GetLeerlingen(int id)
+        {
+            var werkgever = _repository.GetWerkgever(id);
+
+            return werkgever == null
+                ? (ActionResult<List<Leerling>>)NotFound()
+                    : _leerlingenRepository.GetByWerkgever(werkgever);
         }
 
     }
