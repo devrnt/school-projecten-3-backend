@@ -315,14 +315,22 @@ namespace TalentCoach.Data
                 var leerling4 = new Leerling("Vervaert", "Piet", new DateTime(1996, 4, 16), Geslacht.Man, "piet.vervaert@school.be");
 
                 leerling1.Richting = richtingHaarzorg;
-                    leerling1.AddInteresse(list_interesses[0]);
-                    leerling1.AddInteresse(list_interesses[1]);
-                    leerling1.AddInteresse(list_interesses[2]);
-                    leerling1.AddInteresse(list_interesses[3]);
+                foreach (var item in tags2)
+                {
+                    leerling1.AddInteresse(item);
+                }
                 leerling2.Richting = richtingHaarzorg;
+                foreach (var item in tags3)
+                {
+                    leerling2.AddInteresse(item);
+                }
                 leerling3.Richting = richtingVerzorging;
+                //nog geen passende interesses
                 leerling4.Richting = richtingAutoTechnieken;
-                //Leerling Competenties
+                foreach (var item in tags5)
+                {
+                    leerling4.AddInteresse(item);
+                }
                 _llnRepo.AddLeerling(leerling1);
                 var l = richtingHaarzorg.HoofdCompetenties;
                 var ler = _llnRepo.AddLeerling(leerling2);
