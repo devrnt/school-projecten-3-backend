@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using TalentCoach.Models.Domain;
 namespace TalentCoach.Data.Repositories
 {
-    public class LeerlingWerkAanbiedingRepository: ILeerlingWerkaanbiedingenRepository
+    public class LeerlingWerkAanbiedingenRepository: ILeerlingWerkaanbiedingenRepository
     {
         private readonly ApplicationDbContext _context;
         private readonly DbSet<Werkaanbieding> _werkaanbiedingen;
         private readonly DbSet<Leerling> _leerlingen;
 
-        public LeerlingWerkAanbiedingRepository(ApplicationDbContext context)
+        public LeerlingWerkAanbiedingenRepository(ApplicationDbContext context)
         {
             this._context = context;
             _werkaanbiedingen = context.Werkaanbiedingen;
@@ -31,7 +31,11 @@ namespace TalentCoach.Data.Repositories
 
         public LeerlingWerkaanbieding LikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId)
         {
-            throw new NotImplementedException();
+            var leerling = this._leerlingen.Where(l => leerlingId == l.Id).FirstOrDefault();
+            var werkaanbieding = this._werkaanbiedingen.Where(wa => wa.Id == werkaanbiedingId).FirstOrDefault();
+            var leerlingwerkaanbieding = new LeerlingWerkaanbieding() { Werkaanbieding = werkaanbieding, Like = Like.Yes };
+            leerling.GereageerdeWerkaanbiedingen.Add(leerlingwerkaanbieding);
+            return leerlingwerkaanbieding;
         }
 
         public LeerlingWerkaanbieding RemoveWerkAanbiedingLeerling(int id)
@@ -41,7 +45,12 @@ namespace TalentCoach.Data.Repositories
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this._context.SaveChanges();
+        }
+
+        public LeerlingWerkAanbiedingenRepository()
+        {
+
         }
     }
 }

@@ -239,35 +239,66 @@ namespace TalentCoach.Data
                 {
                     new Werkaanbieding("assistent hairdresser voor acteur Bert Pritt") 
                     { 
-                        Tags = new List<string>(){list_interesses[0],list_interesses[8],list_interesses[2],list_interesses[9]}, 
                         Werkgever = werkgevers[0]
                     },
                     new Werkaanbieding("Stage in kapsalon Dina") 
                     {
-                        Tags = new List<string>(){list_interesses[0],list_interesses[1],list_interesses[2],list_interesses[3]},
                         Werkgever = werkgevers[1]
                     },
                      new Werkaanbieding("Stage bij experimentele kapper Alfredo")
                     {
-                        Tags = new List<string>(){list_interesses[0],list_interesses[10],list_interesses[11],list_interesses[12]},
                         Werkgever = werkgevers[1]
                     },
                     new Werkaanbieding("Assistent boekhouder") 
                     {
-                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
                         Werkgever = werkgevers[2]
                     },
                     new Werkaanbieding("Baggerwerk") 
                     {
-                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
                         Werkgever = werkgevers[0]
                     },
                     new Werkaanbieding("Administratief bediende") 
                     {
-                        Tags = new List<string>(){list_interesses[7],list_interesses[8],list_interesses[9]},
                         Werkgever = werkgevers[2]
                     }
                 };
+                var tags1 = new List<string>() { list_interesses[0], list_interesses[8], list_interesses[2], list_interesses[9] };
+                var tags2 = new List<string>() { list_interesses[0], list_interesses[1], list_interesses[2], list_interesses[3] };
+                var tags3 = new List<string>() { list_interesses[0], list_interesses[10], list_interesses[11], list_interesses[12] };
+                var tags4 = new List<string>() { list_interesses[16], list_interesses[17], list_interesses[18] };
+                var tags5 = new List<string>() { list_interesses[13], list_interesses[14], list_interesses[15] };
+                var tags6 = new List<string>() { list_interesses[16], list_interesses[19], list_interesses[20], list_interesses[21] };
+
+
+                foreach (var item in tags1)
+                {
+                    werkaanbiedingen[0].AddInteresse(item);
+                }
+
+                foreach (var item in tags2)
+                {
+                    werkaanbiedingen[1].AddInteresse(item);
+                }
+
+                foreach (var item in tags3)
+                {
+                    werkaanbiedingen[2].AddInteresse(item);
+                }
+
+                foreach (var item in tags4)
+                {
+                    werkaanbiedingen[3].AddInteresse(item);
+                }
+
+                foreach (var item in tags5)
+                {
+                    werkaanbiedingen[4].AddInteresse(item);
+                }
+
+                foreach (var item in tags6)
+                {
+                    werkaanbiedingen[5].AddInteresse(item);
+                }
 
                 _context.AddRange(werkaanbiedingen);
                 _context.SaveChanges();

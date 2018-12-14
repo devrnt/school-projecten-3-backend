@@ -13,11 +13,13 @@ namespace TalentCoach.Controllers
     {
         private readonly ILeerlingenRepository _leerlingRepository;
         private readonly ILeerlingCompetentieRepository _competentieRepository;
+        private readonly ILeerlingWerkaanbiedingenRepository _werkaanbiedingRepository;
 
-        public LeerlingenController(ILeerlingenRepository leerlingrepository, ILeerlingCompetentieRepository competentieRepository)
+        public LeerlingenController(ILeerlingenRepository leerlingrepository, ILeerlingCompetentieRepository competentieRepository, ILeerlingWerkaanbiedingenRepository werkaanbiedingenRepository)
         {
             _leerlingRepository = leerlingrepository;
             _competentieRepository = competentieRepository;
+            _werkaanbiedingRepository = werkaanbiedingenRepository;
         }
 
         /// <summary>
@@ -157,6 +159,14 @@ namespace TalentCoach.Controllers
             this._competentieRepository.BehaalDeelCompetentie(competentieId);
             var result = this._competentieRepository.GetDeelCompetentie(competentieId);
             return result ?? (ActionResult<LeerlingDeelCompetentie>)NotFound(new Dictionary<string, string>() { { "message", $"deelcompetentie with id: {competentieId} not found" } });
+        }
+
+        // POST api/leerlingen/1/werkaanbiedingen/1/like
+        [HttpPost("leerlingen/{leerlingid}/werkaanbiedingen/{werkaanbiedingid}/like")]
+        public ActionResult<LeerlingWerkaanbieding> BehaalDeelCompetentie(int leerlingId,int werkaanbiedingId)
+        {
+            var result = this._werkaanbiedingRepository.LikeWerkaanbiedingLeerling(leerlingId,werkaanbiedingId);
+            return result ?? (ActionResult<LeerlingWerkaanbieding>) NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
         }
     }
 }

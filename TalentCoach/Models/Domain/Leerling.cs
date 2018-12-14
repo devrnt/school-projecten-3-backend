@@ -15,7 +15,7 @@ namespace TalentCoach.Models.Domain
         public DateTime Aangemaakt { get; set; }
         public Geslacht Geslacht { get; set; }
         public string Email { get; set; }
-        //[JsonIgnore]
+        [JsonIgnore]
         public string InteressesOpslag { get; set; }
         [NotMapped]
         public List<string> Interesses { get; set; }
@@ -61,7 +61,7 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
         }
 
-        private void UpdateIntressesFromOpslag(){
+        public void UpdateIntressesFromOpslag(){
             string[] array = InteressesOpslag.Split(';');
             this.Interesses = new List<string>(array).Where(x => x != "").ToList();
         }
@@ -72,7 +72,9 @@ namespace TalentCoach.Models.Domain
             {
                 this.InteressesOpslag += interesse;
             }
-            this.InteressesOpslag += ";"+interesse ;
+            else {
+                this.InteressesOpslag += ";" + interesse;
+            }
         }
     }
 }

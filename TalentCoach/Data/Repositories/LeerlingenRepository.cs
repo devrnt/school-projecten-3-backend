@@ -102,6 +102,11 @@ namespace TalentCoach.Data.Repositories
                 hoofdcompentie.HoofdCompetentie.DeelCompetenties = new List<DeelCompetentie>();
             }
             leerling.UpdateIntressesFromOpslag();
+            var leerlingenEnum = leerling.GereageerdeWerkaanbiedingen.GetEnumerator();
+            while (leerlingenEnum.MoveNext())
+            {
+                leerlingenEnum.Current.Werkaanbieding.UpdateIntressesFromOpslag();
+            }
             return leerling;
         }
 

@@ -41,18 +41,32 @@ namespace TalentCoach.Data.Repositories
             return waCopy;
         }
 
-        public List<Werkaanbieding> GetAll() => _werkaanbiedingen
+        public List<Werkaanbieding> GetAll() 
+        {
+           var werkaanbiedingen = _werkaanbiedingen
                 //.Include(w => w.Projecten)
                 //.ThenInclude(p => p.Competenties)
                 .Include(w => w.Werkgever)
                 .OrderBy(wa => wa.Id)
                 .ToList();
+            var werkaanbiedingenEnum = werkaanbiedingen.GetEnumerator();
+            while (werkaanbiedingenEnum.MoveNext())
+            {
+                werkaanbiedingenEnum.Current.UpdateIntressesFromOpslag();
+            }
+            return werkaanbiedingen;
+        } 
 
-        public Werkaanbieding GetWerkaanbieding(int id) => _werkaanbiedingen
-                //.Include(w => w.Projecten)
-                //.ThenInclude(p => p.Competenties)
-                .Include(w => w.Werkgever)
-                .FirstOrDefault(w => w.Id == id);
+        public Werkaanbieding GetWerkaanbieding(int id)
+        {
+            var werkaanbieding = _werkaanbiedingen
+            //.Include(w => w.Projecten)
+            //.ThenInclude(p => p.Competenties)
+            .Include(w => w.Werkgever)
+            .FirstOrDefault(w => w.Id == id);
+            werkaanbieding.UpdateIntressesFromOpslag();
+            return werkaanbieding;
+        }
 
         public void SaveChanges()
         {

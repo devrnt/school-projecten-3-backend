@@ -14,16 +14,22 @@ namespace TalentCoach.Models.Domain
         public Werkgever Werkgever { get; set; }
         public string Omschrijving { get; set; }
         [NotMapped]
-        public List<string> Tags { get; set; } = new List<string>();
+        public List<string> Tags { get; set; }
         [JsonIgnore]
         public string TagsStorage { get; set; }
         //public List<Activiteit> Projecten { get; set; }
         #endregion
 
         #region === Constructor ===
+        [JsonConstructor]
         public Werkaanbieding(string omschrijving)
         {
             Omschrijving = omschrijving;
+            if (TagsStorage==null)
+            {
+                TagsStorage = "";
+            }
+            this.UpdateIntressesFromOpslag();
             //Projecten = new List<Activiteit>();
         }
         #endregion
@@ -33,10 +39,20 @@ namespace TalentCoach.Models.Domain
 
         //public void RemoveProject(Activiteit project) => Projecten.Remove(project);
 
-        public void UpdateTags()
+        public void UpdateIntressesFromOpslag()
         {
+            string[] array = TagsStorage.Split(';');
+            this.Tags = new List<string>(array).Where(x => x != "").ToList();
+        }
 
-            this.Tags = new List<string>(TagsStorage.Split());
+        public void AddInteresse(string interesse)
+        {
+            if (this.TagsStorage == "")
+            {
+                this.TagsStorage += interesse;
+            } else {
+                this.TagsStorage += ";" + interesse;
+            }
         }
         #endregion
 
