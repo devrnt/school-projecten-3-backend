@@ -23,6 +23,7 @@ namespace TalentCoach.Data.Repositories
         public Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding)
         {
             aanbieding.Werkgever = _werkgeversRepository.GetWerkgever(aanbieding.Werkgever.Id);
+            aanbieding.TagsStorage = String.Join(";", aanbieding.Tags);
             _werkaanbiedingen.Add(aanbieding);
             SaveChanges();
             return aanbieding;
