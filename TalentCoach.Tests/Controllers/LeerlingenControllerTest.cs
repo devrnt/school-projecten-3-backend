@@ -16,6 +16,8 @@ namespace TalentCoach.Tests.Controllers
     {
         private readonly Mock<ILeerlingenRepository> _mockRepository;
         private readonly Mock<ILeerlingCompetentieRepository> _mockRepositoryLlnComp;
+        private readonly Mock<ILeerlingWerkaanbiedingenRepository> _mockRepositoryLWaB;
+        private readonly Mock<IWerkgeversRepository> _mockRepositoryLWg;
         private readonly DummyApplicationDbContext _context;
         private readonly LeerlingenController _controller;
 
@@ -24,11 +26,13 @@ namespace TalentCoach.Tests.Controllers
             _context = new DummyApplicationDbContext();
             _mockRepository = new Mock<ILeerlingenRepository>();
             _mockRepositoryLlnComp = new Mock<ILeerlingCompetentieRepository>();
+            _mockRepositoryLWaB = new Mock<ILeerlingWerkaanbiedingenRepository>();
+            _mockRepositoryLWg = new Mock<IWerkgeversRepository>();
             _mockRepository.Setup(m => m.GetLeerling(1)).Returns(_context.Leerlingen[0]);
             _mockRepository.Setup(m => m.GetLeerling(2)).Returns(_context.Leerlingen[1]);
             _mockRepository.Setup(m => m.GetLeerling(6)).Returns(null as Leerling);
             _mockRepository.Setup(m => m.GetAll()).Returns(_context.Leerlingen);
-            _controller = new LeerlingenController(_mockRepository.Object, _mockRepositoryLlnComp.Object);
+            _controller = new LeerlingenController(_mockRepository.Object, _mockRepositoryLlnComp.Object,_mockRepositoryLWaB.Object,_mockRepositoryLWg.Object);
         }
 
         #region === GetAll ===
@@ -79,8 +83,8 @@ namespace TalentCoach.Tests.Controllers
                 "Renaat",
                 new DateTime(1994, 2, 2),
                 Geslacht.Man,
-                "renaat.Haleydt@school.be",
-                "renaathaleydt");
+                "renaat.Haleydt@school.be"
+               );
 
             var result = _controller.Create(newLeerling);
 
@@ -96,8 +100,8 @@ namespace TalentCoach.Tests.Controllers
             "Renaat",
             new DateTime(1994, 2, 2),
             Geslacht.Man,
-            "renaat.Haleydt@school.be",
-            "renaathaleydt");
+            "renaat.Haleydt@school.be"
+            );
 
             var result = _controller.Create(newLeerling) as CreatedAtRouteResult;
             var item = result.Value as Leerling;
@@ -129,8 +133,8 @@ namespace TalentCoach.Tests.Controllers
             "Renaat",
             new DateTime(1994, 2, 2),
             Geslacht.Man,
-            "renaat.Haleydt@school.be",
-            "renaathaleydt");
+            "renaat.Haleydt@school.be"
+            );
             _mockRepository.Setup(m => m.UpdateLeerling(1, It.IsAny<Leerling>())).Returns(leerling);
             var result = _controller.Update(1, leerling);
             Assert.Equal("Renaat", result?.Value.Voornaam);
