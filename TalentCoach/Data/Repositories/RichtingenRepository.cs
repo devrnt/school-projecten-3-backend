@@ -67,6 +67,7 @@ namespace TalentCoach.Data.Repositories
 
         public Richting Delete(int id)
         {
+            Richting richting2 = new Richting();
             Richting richting = _richtingen.Find(id);
             if (richting == null)
             {
@@ -74,7 +75,7 @@ namespace TalentCoach.Data.Repositories
             }
             _richtingen.Remove(richting);
             SaveChanges();
-            return richting;
+            return richting2;
         }
 
         public void SaveChanges()

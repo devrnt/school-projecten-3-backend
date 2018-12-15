@@ -41,14 +41,14 @@ namespace TalentCoach.Models.Domain
             HoofdCompetenties = new List<LeerlingHoofdCompetentie>();
             AantalCompetenties = 0;
             Interesses = new List<string>();
-           
+
         }
 
         [JsonConstructor]
         public Leerling()
         {
             GereageerdeWerkaanbiedingen = new List<LeerlingWerkaanbieding>();
-            if (this.InteressesOpslag==null)
+            if (this.InteressesOpslag == null)
             {
                 this.InteressesOpslag = "";
             }
@@ -61,18 +61,20 @@ namespace TalentCoach.Models.Domain
             GereageerdeWerkaanbiedingen.Add(new LeerlingWerkaanbieding(this, werkaanbieding, like));
         }
 
-        public void UpdateIntressesFromOpslag(){
+        public void UpdateIntressesFromOpslag()
+        {
             string[] array = InteressesOpslag.Split(';');
             this.Interesses = new List<string>(array).Where(x => x != "").ToList();
         }
 
         public void AddInteresse(string interesse)
         {
-            if (this.InteressesOpslag=="")
+            if (this.InteressesOpslag == "")
             {
                 this.InteressesOpslag += interesse;
             }
-            else {
+            else
+            {
                 this.InteressesOpslag += ";" + interesse;
             }
         }

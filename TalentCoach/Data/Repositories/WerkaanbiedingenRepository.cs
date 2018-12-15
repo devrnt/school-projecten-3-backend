@@ -23,6 +23,7 @@ namespace TalentCoach.Data.Repositories
         public Werkaanbieding AddWerkaanbieding(Werkaanbieding aanbieding)
         {
             aanbieding.Werkgever = _werkgeversRepository.GetWerkgever(aanbieding.Werkgever.Id);
+            aanbieding.TagsStorage = String.Join(";", aanbieding.Tags);
             _werkaanbiedingen.Add(aanbieding);
             SaveChanges();
             return aanbieding;
@@ -41,21 +42,21 @@ namespace TalentCoach.Data.Repositories
             return waCopy;
         }
 
-        public List<Werkaanbieding> GetAll() 
+        public List<Werkaanbieding> GetAll()
         {
-           var werkaanbiedingen = _werkaanbiedingen
-                //.Include(w => w.Projecten)
-                //.ThenInclude(p => p.Competenties)
-                .Include(w => w.Werkgever)
-                .OrderBy(wa => wa.Id)
-                .ToList();
+            var werkaanbiedingen = _werkaanbiedingen
+                 //.Include(w => w.Projecten)
+                 //.ThenInclude(p => p.Competenties)
+                 .Include(w => w.Werkgever)
+                 .OrderBy(wa => wa.Id)
+                 .ToList();
             var werkaanbiedingenEnum = werkaanbiedingen.GetEnumerator();
             while (werkaanbiedingenEnum.MoveNext())
             {
                 werkaanbiedingenEnum.Current.UpdateIntressesFromOpslag();
             }
             return werkaanbiedingen;
-        } 
+        }
 
         public Werkaanbieding GetWerkaanbieding(int id)
         {

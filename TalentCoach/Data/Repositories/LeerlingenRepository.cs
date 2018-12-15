@@ -26,10 +26,9 @@ namespace TalentCoach.Data.Repositories
 
         public List<Leerling> GetAll()
         {
-            // will need change lmao
-            // enkel Richting nodig?
             return _leerlingen
                 .Include(l => l.Richting)
+                .Include(l => l.Werkgever)
                 .OrderBy(l => l.Id)
                 .ToList();
         }
@@ -246,6 +245,12 @@ namespace TalentCoach.Data.Repositories
             _context.SaveChanges();
         }
 
-
+        public List<Leerling> GetByWerkgever(Werkgever werkgever)
+        {
+            return _leerlingen.Where(leerling => leerling.Werkgever.Id == werkgever.Id)
+                .Include(l => l.Richting)
+                .Include(l => l.Werkgever)
+                .OrderBy(l => l.Id).ToList();
+        }
     }
 }
