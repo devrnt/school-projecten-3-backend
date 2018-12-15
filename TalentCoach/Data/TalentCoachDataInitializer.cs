@@ -412,8 +412,42 @@ namespace TalentCoach.Data
                 };
                 const string gebruikerLeerkracht2wachtwoord = "leerkracht";
 
+                var gebruikerLeerkracht3 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Sofie_DeJuf",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht3wachtwoord = "leerkracht";
+
+                var gebruikerLeerkracht4 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Tom_Barman",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht4wachtwoord = "leerkracht";
+
+                var gebruikerLeerkracht5 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Felix_Steels",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht5wachtwoord = "leerkracht";
+
+                var gebruikerLeerkracht6 = new Gebruiker()
+                {
+                    Gebruikersnaam = "Jan_Demeester",
+                    GebruikersRol = GebruikersRol.Leerkracht
+                };
+                const string gebruikerLeerkracht6wachtwoord = "leerkracht";
+
+
                 gebruikersRepo.CreateGebruiker(gebruikerLeerkracht1, gebruikerLeerkracht1wachtwoord);
                 gebruikersRepo.CreateGebruiker(gebruikerLeerkracht2, gebruikerLeerkracht2wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht3, gebruikerLeerkracht3wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht4, gebruikerLeerkracht4wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht5, gebruikerLeerkracht5wachtwoord);
+                gebruikersRepo.CreateGebruiker(gebruikerLeerkracht6, gebruikerLeerkracht6wachtwoord);
+
 
                 var gebruikerWerkgever = new Gebruiker()
                 {
@@ -428,7 +462,14 @@ namespace TalentCoach.Data
 
                 //Leerkrachten aan richting toevoegen
                 richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht1);
-                richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht2);
+                richtingHaarzorg.AddLeerkracht(gebruikerLeerkracht3);
+
+                richtingInformatica.AddLeerkracht(gebruikerLeerkracht5);
+
+                richtingKantoor.AddLeerkracht(gebruikerLeerkracht6);
+
+                richtingVerkoop.AddLeerkracht(gebruikerLeerkracht4);
+
                 _context.SaveChanges();
 
 
