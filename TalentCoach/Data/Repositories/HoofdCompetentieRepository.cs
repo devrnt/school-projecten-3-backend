@@ -67,6 +67,7 @@ namespace TalentCoach.Data.Repositories
             else
             {
                 activiteit.Omschrijving = item.Omschrijving;
+                activiteit.Graad = item.Graad;
                 _hoofdCompetenties.Update(activiteit);
                 SaveChanges();
             }
