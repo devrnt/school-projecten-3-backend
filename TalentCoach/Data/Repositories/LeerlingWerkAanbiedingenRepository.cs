@@ -51,7 +51,7 @@ namespace TalentCoach.Data.Repositories
             return leerlingwerkaanbieding;
         }
 
-        public Werkaanbieding GeefInteressantsteWerkaanbieding(int leerlingId)
+        public List<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId)
         {
             //NOTA: hou structuur aub met variabelen = makkelijker debuggen
             var leerling = this._leerlingen
@@ -82,8 +82,12 @@ namespace TalentCoach.Data.Repositories
                                        //Geef de werkaanbieding die de meeste overeenkomstige tags / interesses heeft met de leerling
                                        .OrderByDescending(
                                            wa => wa.Tags.Count(t => leerling.Interesses.Any(i => i.Equals(t))))
-                                       .FirstOrDefault();
-            werkaanbieding2?.UpdateIntressesFromOpslag();
+                                        .ToList();
+            var iterator = werkaanbieding2.GetEnumerator();
+            while (iterator.MoveNext())
+            {
+                iterator.Current.UpdateIntressesFromOpslag();
+            }
             return werkaanbieding2;
         }
 
