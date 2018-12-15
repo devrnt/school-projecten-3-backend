@@ -56,6 +56,8 @@ namespace TalentCoach.Data.Repositories
                 richting.Naam = item.Naam;
                 richting.HoofdCompetenties = item.HoofdCompetenties;
                 richting.Leerkrachten = item.Leerkrachten;
+                richting.Icon = item.Icon;
+                richting.Kleur = item.Kleur;
                 _richtingen.Update(richting);
                 SaveChanges();
             }

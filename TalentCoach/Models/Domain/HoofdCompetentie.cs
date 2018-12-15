@@ -11,6 +11,17 @@ namespace TalentCoach.Models
         public string Graad { get; set; }
         public IList<DeelCompetentie> DeelCompetenties { get; set; }
 
+        public string Icon
+        {
+            get;
+            set;
+        }
+
+        public string Kleur
+        {
+            get;
+            set;
+        }
 
         public int AantalCompetenties
         {
