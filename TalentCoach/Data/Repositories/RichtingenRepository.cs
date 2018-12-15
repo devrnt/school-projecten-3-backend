@@ -39,6 +39,7 @@ namespace TalentCoach.Data.Repositories
 
         public Richting AddRichting(Richting item)
         {
+            UpdateKleurIconRichtingCompetenties(item);
             _richtingen.Add(item);
             SaveChanges();
             return item;
@@ -55,6 +56,8 @@ namespace TalentCoach.Data.Repositories
             {
                 richting.Naam = item.Naam;
                 richting.HoofdCompetenties = item.HoofdCompetenties;
+                var hoofdcompetenties = richting.HoofdCompetenties.GetEnumerator();
+                UpdateKleurIconRichtingCompetenties(richting);
                 richting.Leerkrachten = item.Leerkrachten;
                 richting.Icon = item.Icon;
                 richting.Kleur = item.Kleur;
@@ -83,5 +86,20 @@ namespace TalentCoach.Data.Repositories
             _context.SaveChanges();
         }
 
+        private void UpdateKleurIconRichtingCompetenties(Richting richting)
+        {
+            var hoofdcompetenties = richting.HoofdCompetenties.GetEnumerator();
+            while (hoofdcompetenties.MoveNext())
+            {
+                if (hoofdcompetenties.Current.Kleur == null)
+                {
+                    hoofdcompetenties.Current.Kleur = richting.Kleur;
+                }
+                if (hoofdcompetenties.Current.Icon == null)
+                {
+                    hoofdcompetenties.Current.Icon = richting.Icon;
+                }
+            }
+        }
     }
 }

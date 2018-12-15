@@ -12,11 +12,13 @@ namespace TalentCoach.Data
     {
         private readonly ApplicationDbContext _context;
         private ILeerlingenRepository _llnRepo;
+        private IRichtingenRepository _richtingRepo;
 
-        public TalentCoachDataInitializer(ApplicationDbContext context, ILeerlingenRepository repo)
+        public TalentCoachDataInitializer(ApplicationDbContext context, ILeerlingenRepository repo1, IRichtingenRepository repo2)
         {
             _context = context;
-            _llnRepo = repo;
+            _llnRepo = repo1;
+            _richtingRepo = repo2;
         }
 
         public void InitializeData()
@@ -190,8 +192,8 @@ namespace TalentCoach.Data
                     richtingWinkelbediende, richtingPCTechnicus, richtingVerzorgende
                 };
 
-                _context.AddRange(richtingen);
-                _context.SaveChanges();
+                richtingen.ForEach(richting => _richtingRepo.AddRichting(richting));
+                _richtingRepo.SaveChanges();
 
                 // Werkgevers
                 var werkgevers = new List<Werkgever>
