@@ -264,7 +264,7 @@ namespace TalentCoach.Controllers
         /// <response code="200">Toegekende werkgever</response>
         /// <response code="404">Not Found object met message field</response>
         // POST api/leerlingen/1/werkgever
-        [HttpPost("{id}/werkgever")]
+        [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/undo")]
         public ActionResult<Werkaanbieding> VerwijderOfVoegToeWerkAanbieding(int leerlingId, int werkaanbiedingId)
         {
             var leerling = _leerlingRepository.GetLeerling(leerlingId);
