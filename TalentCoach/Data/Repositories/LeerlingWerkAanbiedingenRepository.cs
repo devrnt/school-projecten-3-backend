@@ -31,6 +31,16 @@ namespace TalentCoach.Data.Repositories
                        .ToList();
         }
 
+        public LeerlingWerkaanbieding GetLeerlingWerkaanbieding(int leerlingId, int waId)
+        {
+            return this._leerlingen
+                       .Where(l => l.Id == leerlingId)
+                       .Include(lwa => lwa.GereageerdeWerkaanbiedingen)
+                       .FirstOrDefault()
+                       .GereageerdeWerkaanbiedingen
+                       .FirstOrDefault(lwa => lwa.Werkaanbieding.Id == waId);
+        }
+
         public LeerlingWerkaanbieding LikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId)
         {
             var leerling = this._leerlingen.Where(l => leerlingId == l.Id).FirstOrDefault();

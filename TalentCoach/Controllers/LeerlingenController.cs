@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TalentCoach.Models.Domain;
@@ -252,6 +253,38 @@ namespace TalentCoach.Controllers
             _leerlingRepository.SaveChanges();
 
             return werkgever;
+        }
+
+        /// <summary>
+        /// Zet een reeds verwijderde werkaanbieding in de bewaarde, of omgekeerd.
+        /// </summary>
+        /// <returns>De toegekende werkgever.</returns>
+        /// <param name="leerlingId">Leerling Id</param>
+        /// <param name="werkaanbiedingId">Werkaanbieding Id</param>
+        /// <response code="200">Toegekende werkgever</response>
+        /// <response code="404">Not Found object met message field</response>
+        // POST api/leerlingen/1/werkgever
+        [HttpPost("{id}/werkgever")]
+        public ActionResult<Werkaanbieding> VerwijderOfVoegToeWerkAanbieding(int leerlingId, int werkaanbiedingId)
+        {
+            var leerling = _leerlingRepository.GetLeerling(leerlingId);
+            if (leerling == null)
+            {
+                return NotFound(new { message = $"Geen leerling gevonden met id {leerlingId}" });
+            }
+
+            var werkaanbieding = leerling
+                .GereageerdeWerkaanbiedingen
+                .Select(lwa => lwa.Werkaanbieding)
+                .FirstOrDefault(wa => wa.Id == werkaanbiedingId);
+            if (werkaanbieding == null)
+            {
+                return NotFound(new { message = $"Geen werkgever gevonden met id {werkaanbiedingId}" });
+            }
+
+            _leerlingRepository.SaveChanges();
+            _werkaanbiedingRepository.SaveChanges();
+            return werkaanbieding;
         }
     }
 }
