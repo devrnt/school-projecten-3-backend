@@ -11,6 +11,7 @@ namespace TalentCoach.Data.Repositories
     public class RichtingenRepository : IRichtingenRepository
     {
         private readonly ApplicationDbContext _context;
+        private readonly GebruikersRepository _gebruikersRepository;
 
         private readonly DbSet<Richting> _richtingen;
 
@@ -40,6 +41,20 @@ namespace TalentCoach.Data.Repositories
         public Richting AddRichting(Richting item)
         {
             UpdateKleurIconRichtingCompetenties(item);
+
+            var leerkrachten = item.Leerkrachten.ToArray();
+
+            for (int i=0; i < leerkrachten.Length; i++)
+            {
+                var leerkracht = _gebruikersRepository.GetById(leerkrachten[i].Id);
+
+                if(leerkracht != null)
+                {
+                    item.Leerkrachten.Add(leerkracht);
+                }
+
+            }
+
             _richtingen.Add(item);
             SaveChanges();
             return item;
