@@ -102,6 +102,7 @@ namespace TalentCoach.Data.Repositories
             var leerling = this._leerlingen
                                      .Include(l => l.GereageerdeWerkaanbiedingen)
                                         .ThenInclude(lwa => lwa.Werkaanbieding)
+                                            .ThenInclude(wa => wa.Werkgever)
                                      .Where(l => l.Id == leerlingId)
                                      .FirstOrDefault();
             if(leerling == null)
@@ -127,12 +128,35 @@ namespace TalentCoach.Data.Repositories
                 }
             }
             this.SaveChanges();
+            werkaanbieding.Werkaanbieding.UpdateIntressesFromOpslag();
             return werkaanbieding;
         }
 
         public void SaveChanges()
         {
             this._context.SaveChanges();
+        }
+
+        public List<Werkaanbieding> ClearVerwijderdeWerkaanbiedingen(int leerlingid)
+        {
+            var leerling = this._leerlingen
+                .Include(l => l.GereageerdeWerkaanbiedingen)
+                    .ThenInclude(lwa => lwa.Werkaanbieding)
+                               .ThenInclude(wa => wa.Werkgever)
+                .FirstOrDefault(l => l.Id == leerlingid);
+            var result = leerling.GereageerdeWerkaanbiedingen
+                                 .Where(lwa => lwa.Like == Like.No)
+                                 .Select(lwa => lwa.Werkaanbieding)
+                                 .ToList();
+            leerling.GereageerdeWerkaanbiedingen = leerling.GereageerdeWerkaanbiedingen
+                .Where(lwa => lwa.Like == Like.Yes).ToList();
+            this.SaveChanges();
+            var iterator = result.GetEnumerator();
+            while (iterator.MoveNext())
+            {
+                iterator.Current.UpdateIntressesFromOpslag();
+            }
+            return result;
         }
 
         public LeerlingWerkAanbiedingenRepository()

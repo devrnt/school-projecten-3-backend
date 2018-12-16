@@ -290,7 +290,7 @@ namespace TalentCoach.Controllers
         /// <returns>De nieuwe lijst van intresses van de leerling</returns>
         /// <param name="leerlingId">Leerling Id</param>
         /// <param name="interesse">De </param>
-        /// <response code="200">Veranderde lijst van interesses</response>
+        /// <response code="200">meest interssante werkaanbieding op basis van de interesses</response>
         /// <response code="404">Not Found object met message field</response>
         // POST api/leerlingen/1/interesse/add
         [HttpPost("{leerlingId}/interesses/add")]
@@ -312,8 +312,10 @@ namespace TalentCoach.Controllers
             }
         }
 
+
+
         /// <summary>
-        /// Verwijdert een intresseuit een leerling
+        /// Verwijdert een intresse uit een leerling
         /// </summary>
         /// <returns>De nieuwe lijst van intresses van de leerling</returns>
         /// <param name="leerlingId">Leerling Id</param>
@@ -337,6 +339,29 @@ namespace TalentCoach.Controllers
 
                 }
                 return (ActionResult<List<String>>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+            }
+        }
+
+
+        /// <summary>
+        /// Maakt alle verwijderde werkaanbiedingen weer zichtbaar
+        /// </summary>
+        /// <returns>De nieuwe lijst van werkaanbiedingen</returns>
+        /// <param name="leerlingId">Leerling Id</param>
+        /// <response code="200">Veranderde lijst van interesses</response>
+        /// <response code="404">Not Found object met message field</response>
+        // POST api/leerlingen/1/interesse/add
+        [HttpPost("{leerlingId}/werkaanbiedingen/redo")]
+        public ActionResult<List<Werkaanbieding>> MaakWerkAanbiedingWeerZichtbaar(int leerlingId)
+        {
+            var result = this._werkaanbiedingRepository.ClearVerwijderdeWerkaanbiedingen(leerlingId);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return (ActionResult< List<Werkaanbieding>>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
             }
         }
     }
