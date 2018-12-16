@@ -11,7 +11,7 @@ namespace TalentCoach.Models.Mappers
     {
         public void Configure(EntityTypeBuilder<HoofdCompetentie> builder)
         {
-            builder.HasMany(h => h.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(h => h.DeelCompetenties).WithOne().OnDelete(DeleteBehavior.cascade);
 
         }
     }
