@@ -11,7 +11,7 @@ namespace TalentCoach.Models.Domain
         LeerlingWerkaanbieding LikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId);
         LeerlingWerkaanbieding DislikeWerkaanbiedingLeerling(int leerlingId, int werkaanbiedingId);
         LeerlingWerkaanbieding UndoLikeDislikeWerkaanbieding(int leerlingId, int werkaanbiedingId);
-        List<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId);
+        Werkaanbieding GeefInteressantsteWerkaanbieding(int leerlingId);
         void SaveChanges();
     }
 }

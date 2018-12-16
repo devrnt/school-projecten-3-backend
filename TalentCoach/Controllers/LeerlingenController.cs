@@ -206,7 +206,7 @@ namespace TalentCoach.Controllers
         /// </returns>  
         // POST api/leerlingen/1/werkaanbiedingen/1/like
         [HttpGet("{leerlingId}/werkaanbiedingen/interessant")]
-        public ActionResult<List<Werkaanbieding>> GeefInteressantsteWerkaanbieding(int leerlingId)
+        public ActionResult<Werkaanbieding> GeefInteressantsteWerkaanbieding(int leerlingId)
         {
             var result = this._werkaanbiedingRepository.GeefInteressantsteWerkaanbieding(leerlingId);
             if (result != null)
@@ -217,10 +217,10 @@ namespace TalentCoach.Controllers
             {
                 if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
                 {
-                    return (ActionResult<List<Werkaanbieding>>)Ok(new Dictionary<string, string>() { { "message", $"Geen matching werkaanbiedingen gevonden" } });
+                    return (ActionResult<Werkaanbieding>)Ok(new Dictionary<string, string>() { { "message", $"Geen matching werkaanbiedingen gevonden" } });
 
                 }
-                return (ActionResult<List<Werkaanbieding>>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+                return (ActionResult<Werkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
 
             }
         }
