@@ -19,6 +19,7 @@ namespace TalentCoach.Data.Repositories
         {
             _context = context;
             _richtingen = context.Richtingen;
+            _gebruikersRepository = new GebruikersRepository(context);
         }
 
         public List<Richting> GetAll()
