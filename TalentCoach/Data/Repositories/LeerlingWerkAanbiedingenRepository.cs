@@ -101,6 +101,39 @@ namespace TalentCoach.Data.Repositories
             return werkaanbieding2;
         }
 
+        public LeerlingWerkaanbieding UndoLikeDislikeWerkaanbieding(int leerlingId, int werkaanbiedingId)
+        {
+            var leerling = this._leerlingen
+                                     .Include(l => l.GereageerdeWerkaanbiedingen)
+                                        .ThenInclude(lwa => lwa.Werkaanbieding)
+                                     .Where(l => l.Id == leerlingId)
+                                     .FirstOrDefault();
+            if(leerling == null)
+            {
+                return null;
+            }
+            var werkaanbieding = leerling
+                                     .GereageerdeWerkaanbiedingen
+                                     .FirstOrDefault(wa => werkaanbiedingId == wa.Werkaanbieding.Id);
+            if (werkaanbieding == null)
+            {
+                return null;
+            }
+            else
+            {
+                if (werkaanbieding.Like == Like.Yes)
+                {
+                    werkaanbieding.Like = Like.No;
+                }
+                else
+                {
+                    werkaanbieding.Like = Like.Yes;
+                }
+            }
+            this.SaveChanges();
+            return werkaanbieding;
+        }
+
         public void SaveChanges()
         {
             this._context.SaveChanges();

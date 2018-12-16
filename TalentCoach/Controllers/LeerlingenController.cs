@@ -258,33 +258,29 @@ namespace TalentCoach.Controllers
         /// <summary>
         /// Zet een reeds verwijderde werkaanbieding in de bewaarde, of omgekeerd.
         /// </summary>
-        /// <returns>De toegekende werkgever.</returns>
+        /// <returns>De gewijzigde leerlingWerkaanbieding</returns>
         /// <param name="leerlingId">Leerling Id</param>
         /// <param name="werkaanbiedingId">Werkaanbieding Id</param>
         /// <response code="200">Toegekende werkgever</response>
         /// <response code="404">Not Found object met message field</response>
-        // POST api/leerlingen/1/werkgever
+        // POST api/leerlingen/1/werkaanbiedingen/2/undo
         [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/undo")]
-        public ActionResult<Werkaanbieding> VerwijderOfVoegToeWerkAanbieding(int leerlingId, int werkaanbiedingId)
+        public ActionResult<LeerlingWerkaanbieding> VerwijderOfVoegToeWerkAanbieding(int leerlingId, int werkaanbiedingId)
         {
-            var leerling = _leerlingRepository.GetLeerling(leerlingId);
-            if (leerling == null)
+            var result = this._werkaanbiedingRepository.UndoLikeDislikeWerkaanbieding(leerlingId,werkaanbiedingId);
+            if (result != null)
             {
-                return NotFound(new { message = $"Geen leerling gevonden met id {leerlingId}" });
+                return result;
             }
-
-            var werkaanbieding = leerling
-                .GereageerdeWerkaanbiedingen
-                .Select(lwa => lwa.Werkaanbieding)
-                .FirstOrDefault(wa => wa.Id == werkaanbiedingId);
-            if (werkaanbieding == null)
+            else
             {
-                return NotFound(new { message = $"Geen werkgever gevonden met id {werkaanbiedingId}" });
-            }
+                if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
+                {
+                    return (ActionResult<LeerlingWerkaanbieding>)Ok(new Dictionary<string, string>() { { "message", $"Geen matching werkaanbiedingen gevonden" } });
 
-            _leerlingRepository.SaveChanges();
-            _werkaanbiedingRepository.SaveChanges();
-            return werkaanbieding;
+                }
+                return (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+            }
         }
     }
 }

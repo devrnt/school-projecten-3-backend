@@ -15,7 +15,6 @@ namespace TalentCoach.Models.Domain
         Leerling MaakCompetentiesVoorLeerling(int id);
         List<LeerlingHoofdCompetentie> GetLeerlingCompetenties(int leerlingId);
         List<Leerling> GetByWerkgever(Werkgever werkgever);
-        LeerlingWerkaanbieding VerwijderdOrAddOpgeslagenWerkaanbieding(int leerlingId, int werkaanbiedingId);
         void SaveChanges();
     }
 }

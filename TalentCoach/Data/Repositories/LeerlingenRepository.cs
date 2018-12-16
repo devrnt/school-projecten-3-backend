@@ -255,23 +255,5 @@ namespace TalentCoach.Data.Repositories
                 .OrderBy(l => l.Id).ToList();
         }
 
-        public LeerlingWerkaanbieding VerwijderdOrAddOpgeslagenWerkaanbieding(int leerlingId, int werkaanbiedingId)
-        {
-            var werkaanbieding = this._leerlingen.Include(l => l.GereageerdeWerkaanbiedingen)
-                                     .Where(l => l.Id == leerlingId)
-                                     .FirstOrDefault()?
-                                     .GereageerdeWerkaanbiedingen
-                                     .FirstOrDefault(wa => werkaanbiedingId == wa.Werkaanbieding.Id);
-            if (werkaanbieding.Like == Like.Yes)
-            {
-                werkaanbieding.Like = Like.No;
-            }
-            else
-            {
-                werkaanbieding.Like = Like.Yes;
-            }
-            this.SaveChanges();
-            return werkaanbieding;
-        }
     }
 }
