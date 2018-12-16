@@ -261,9 +261,9 @@ namespace TalentCoach.Controllers
         /// <returns>De gewijzigde leerlingWerkaanbieding</returns>
         /// <param name="leerlingId">Leerling Id</param>
         /// <param name="werkaanbiedingId">Werkaanbieding Id</param>
-        /// <response code="200">Toegekende werkgever</response>
+        /// <response code="200">Veranderde Werkaanbieding</response>
         /// <response code="404">Not Found object met message field</response>
-        // POST api/leerlingen/1/werkaanbiedingen/2/undo
+        // POST api/leerlingen/1/werkaanbiedingen/1/undo
         [HttpPost("{leerlingId}/werkaanbiedingen/{werkaanbiedingId}/undo")]
         public ActionResult<LeerlingWerkaanbieding> VerwijderOfVoegToeWerkAanbieding(int leerlingId, int werkaanbiedingId)
         {
@@ -276,10 +276,67 @@ namespace TalentCoach.Controllers
             {
                 if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
                 {
-                    return (ActionResult<LeerlingWerkaanbieding>)Ok(new Dictionary<string, string>() { { "message", $"Geen matching werkaanbiedingen gevonden" } });
+                    return (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"werkaanbieding with id: {werkaanbiedingId} not found" } });
 
                 }
                 return (ActionResult<LeerlingWerkaanbieding>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+            }
+        }
+
+
+        /// <summary>
+        /// Voegt een intresse toe aan een leerling
+        /// </summary>
+        /// <returns>De nieuwe lijst van intresses van de leerling</returns>
+        /// <param name="leerlingId">Leerling Id</param>
+        /// <param name="interesse">De </param>
+        /// <response code="200">Veranderde lijst van interesses</response>
+        /// <response code="404">Not Found object met message field</response>
+        // POST api/leerlingen/1/interesse/add
+        [HttpPost("{leerlingId}/interesses/add")]
+        public ActionResult<List<String>> AddInteresseLeerling(int leerlingId, Interesse interesse)
+        {
+            var result = this._leerlingRepository.AddIntresseToLeerling(leerlingId, interesse);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
+                {
+                    return (ActionResult<List<String>>)NotFound(new Dictionary<string, string>() { { "message", $"Geen matching interesse gevonden: {interesse}" } });
+
+                }
+                return (ActionResult<List<String>>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
+            }
+        }
+
+        /// <summary>
+        /// Verwijdert een intresseuit een leerling
+        /// </summary>
+        /// <returns>De nieuwe lijst van intresses van de leerling</returns>
+        /// <param name="leerlingId">Leerling Id</param>
+        /// <param name="interesse">De </param>
+        /// <response code="200">Veranderde lijst van interesses</response>
+        /// <response code="404">Not Found object met message field</response>
+        // POST api/leerlingen/1/interesse/add
+        [HttpPost("{leerlingId}/interesses/delete")]
+        public ActionResult<List<String>> RemoveInteresseLeerling(int leerlingId, Interesse interesse)
+        {
+            var result = this._leerlingRepository.VerwijderIntresseFromLeerling(leerlingId, interesse);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                if (_leerlingRepository.GetAll().Exists(l => l.Id == leerlingId))
+                {
+                    return (ActionResult<List<String>>)NotFound(new Dictionary<string, string>() { { "message", $"Geen matching interesse gevonden: {interesse}" } });
+
+                }
+                return (ActionResult<List<String>>)NotFound(new Dictionary<string, string>() { { "message", $"leerling with id: {leerlingId} not found" } });
             }
         }
     }

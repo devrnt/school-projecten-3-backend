@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text;
 
 namespace TalentCoach.Models.Domain
 {
@@ -69,13 +70,37 @@ namespace TalentCoach.Models.Domain
 
         public void AddInteresse(string interesse)
         {
-            if (this.InteressesOpslag == "")
+            if (!InteressesOpslag.Split(';').Contains(interesse))
             {
-                this.InteressesOpslag += interesse;
+                if (this.InteressesOpslag == "")
+                {
+                    this.InteressesOpslag += interesse;
+                }
+                else
+                {
+                    this.InteressesOpslag += ";" + interesse;
+                }
             }
-            else
+
+        }
+
+        public void VerwijderInteresse(string interesse)
+        {
+            if (this.InteressesOpslag.Contains(interesse))
             {
-                this.InteressesOpslag += ";" + interesse;
+                //"sdsdf;sdfs;jsdjfsd"
+                string replace;
+                if (interesse.Equals(this.InteressesOpslag.Split(';')[0]))
+                {
+                    replace = interesse + ";" ;
+                }
+                else 
+                {
+                    replace = ";" + interesse;
+                }
+                StringBuilder sb = new StringBuilder(this.InteressesOpslag);
+                sb.Replace(replace, "");
+                InteressesOpslag = sb.ToString();
             }
         }
     }

@@ -15,6 +15,8 @@ namespace TalentCoach.Models.Domain
         Leerling MaakCompetentiesVoorLeerling(int id);
         List<LeerlingHoofdCompetentie> GetLeerlingCompetenties(int leerlingId);
         List<Leerling> GetByWerkgever(Werkgever werkgever);
+        List<String> AddIntresseToLeerling(int leerling, Interesse interesse);
+        List<String> VerwijderIntresseFromLeerling(int leerling, Interesse interesse);
         void SaveChanges();
     }
 }

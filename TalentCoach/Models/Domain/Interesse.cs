@@ -1,4 +1,6 @@
 ﻿using System;
+using Newtonsoft.Json;
+
 namespace TalentCoach.Models.Domain
 {
     public class Interesse
@@ -15,7 +17,8 @@ namespace TalentCoach.Models.Domain
             set;
         }
 
-		public Interesse()
+        [JsonConstructor]
+        public Interesse()
         {
         }
     }

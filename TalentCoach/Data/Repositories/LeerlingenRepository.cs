@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TalentCoach.Models;
@@ -255,5 +256,22 @@ namespace TalentCoach.Data.Repositories
                 .OrderBy(l => l.Id).ToList();
         }
 
+        public List<string> AddIntresseToLeerling(int leerlingId, Interesse interesse)
+        {
+            var leerling = this._leerlingen.FirstOrDefault(l => l.Id == leerlingId);
+            leerling.AddInteresse(interesse.InteresseTekst);
+            this.SaveChanges();
+            leerling.UpdateIntressesFromOpslag();
+            return leerling.Interesses;
+        }
+
+        public List<string> VerwijderIntresseFromLeerling(int leerlingId, Interesse interesse)
+        {
+            var leerling = this._leerlingen.FirstOrDefault(l => l.Id == leerlingId);
+            leerling.VerwijderInteresse(interesse.InteresseTekst);
+            this.SaveChanges();
+            leerling.UpdateIntressesFromOpslag();
+            return leerling.Interesses;
+        }
     }
 }
