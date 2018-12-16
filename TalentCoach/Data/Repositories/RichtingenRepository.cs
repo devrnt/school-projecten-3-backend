@@ -47,14 +47,19 @@ namespace TalentCoach.Data.Repositories
 
             for (int i=0; i < leerkrachten.Length; i++)
             {
-                var leerkracht = _context.Gebruikers.AsNoTracking().Where(l => l.Id == leerkrachten[i].Id).FirstOrDefault();
+                var leerkracht = _gebruikersRepository.GetById(leerkrachten[i].Id);
 
                 if(leerkracht != null)
                 {
+                    _context.Entry(item).State = EntityState.Detached;
                     item.Leerkrachten.Add(leerkracht);
+                   
                 }
 
+                _context.Entry(item).State = EntityState.Modified;
+
             }
+
 
             _richtingen.Add(item);
             SaveChanges();
