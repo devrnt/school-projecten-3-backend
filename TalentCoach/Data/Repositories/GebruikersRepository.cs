@@ -47,7 +47,7 @@ namespace TalentCoach.Data.Repositories
 
         public Gebruiker GetById(int id)
         {
-            return _gebruikers.Find(id);
+            return _gebruikers.SingleOrDefault(l => l.Id == id);
         }
 
         public Gebruiker CreateGebruiker(Gebruiker gebruiker, string wachtwoord)
