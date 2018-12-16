@@ -47,7 +47,7 @@ namespace TalentCoach.Data.Repositories
 
             for (int i=0; i < leerkrachten.Length; i++)
             {
-                var leerkracht = _gebruikersRepository.GetByIdNoTracking(leerkrachten[i].Id);
+                var leerkracht = _context.Gebruikers.AsNoTracking().Where(l => l.Id == leerkrachten[i].Id).FirstOrDefault();
 
                 if(leerkracht != null)
                 {

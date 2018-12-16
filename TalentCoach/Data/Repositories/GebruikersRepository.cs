@@ -51,11 +51,6 @@ namespace TalentCoach.Data.Repositories
         }
 
 
-        public Gebruiker GetByIdNoTracking(int id)
-        {
-            return _gebruikers.AsNoTracking().SingleOrDefault(l => l.Id == id);
-        }
-
         public Gebruiker CreateGebruiker(Gebruiker gebruiker, string wachtwoord)
         {
             // Validatie

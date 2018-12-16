@@ -7,7 +7,6 @@ namespace TalentCoach.Models.Domain
         Gebruiker Authenticate(string gebruikersnaam, string wachtwoord);
         IEnumerable<Gebruiker> GetAll();
         Gebruiker GetById(int id);
-        Gebruiker GetByIdNoTracking(int id);
         Gebruiker CreateGebruiker(Gebruiker gebruiker, string wachtwoord);
         void UpdateGebruiker(Gebruiker gebruikerParam, string wachtwoord = null);
         void Delete(int id);
