@@ -1,6 +1,6 @@
 # School Project 3 - Talentcoach - Backend
 
-Our second school project was seperated in a backend, frontend and a mobile application part. The frontend is made in `Angular`.
+Our second school project was seperated in a backend, frontend and a mobile application part. The backend is made with `.NET Core` framework in `C#`.
 This project was our final project and was very advanced. We had to keep contact with our customer by ourself.
 
 In Belgium we have a school platform called `Smartschool` in the Flanders, this platform is used by teachers to publish their school grades, upload tasks, keep in touch by email...
