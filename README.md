@@ -1,41 +1,10 @@
-# projecten3-1819-backend-groep-11-ideaalduaal
-projecten3-1819-backend-groep-11-ideaalduaal created by GitHub Classroom
+# School Project 3 - Talentcoach - Backend
 
-#### Sidenotes
-* Connect to Ubuntu VM: ssh student@projecten3studserver11.westeurope.cloudapp.azure.com
-* Bij wijzigingen : bash ~/publish.sh, script doet een git pull, publish dotnet app en restart daemon talentcoach.service
+Our second school project was seperated in a backend, frontend and a mobile application part. The frontend is made in `Angular`.
+This project was our final project and was very advanced. We had to keep contact with our customer by ourself.
 
-##### Ubuntu VM opstarten met azure cli
-```az resource invoke-action --action start --ids "/subscriptions/89639668-734e-4437-bd58-91a44a206676/resourceGroups/rg_dfit_testlab_04/providers/Microsoft.DevTestLab/labs/TL_FBO_TESTLAB_04/virtualMachines/Projecten3StudServer11"```
+In Belgium we have a school platform called `Smartschool` in the Flanders, this platform is used by teachers to publish their school grades, upload tasks, keep in touch by email...
 
-#### Endpoints
-All endpoints do have the following http requests: 
-  
-##### Url
-* https://localhost:44392/api/competenties
-* https://localhost:44392/api/activiteiten
-* https://localhost:44392/api/richtingen
-* https://localhost:44392/api/leerlingen
-* https://localhost:44392/api/werkaanbiedingen
-* https://localhost:44392/api/werkgevers
-* https://localhost:44392/api/werkspreuken
+This project was to create an alternative for Smartschool, it was more focused on giving ratings and set a capability to 'accomplished'.
 
-#### Gebruikers 
-##### Leerlingen
-| Gebruikersnaam | Wachtwoord |
-| ------ | ----------- |
-| Leerling | leerling |
-| BrunoStroobants | brunobruno |
-
-##### Leerkrachten
-| Gebruikersnaam | Wachtwoord |
-| ------ | ----------- |
-| Leerkracht | leerkracht |
-| SamDhondt | samsam |
-
-##### Werkgevers
-| Gebruikersnaam | Wachtwoord |
-| ------ | ----------- |
-| Werkgever | werkgever |
-
-
+This repo contains all the code that was used for the backend. Both the Android and Angular application were in communincation with this backend.
